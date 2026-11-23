@@ -189,7 +189,7 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .sc-act--pinned { position: relative; }
 .sc-stage {
   position: sticky; top: 0;
-  height: 100vh; height: 100svh;
+  height: 100vh; height: 100svh;height: 100dvh;
   overflow: clip;
   z-index: var(--sc-z-stage);
 }
@@ -429,7 +429,7 @@ video[data-sc-scrub].sc-has-clip { opacity: 1; }
 @media (max-width: 860px) {
   .sc-copy { inset-inline: var(--sc-gutter); max-width: none; }
   .sc-copy--trail { text-align: left; }
-  .sc-stage { height: 100svh; }
+  .sc-stage { height: 100svh;height: 100dvh; }
   /* .sc-copy--trail re-anchors to the left and spans the full width here, so a
      bottom-RIGHT corner gradient darkens the one corner the copy just left and
      guarantees a contrast failure over any bright clip. Point the density at
@@ -1397,7 +1397,7 @@ video[data-sc-scrub].sc-has-clip { opacity: 1; }
 
           <div class="booking-ok" id="bookingOk" role="status" aria-live="polite">
             <h3>Черновик заявки готов</h3>
-            <p id="okSummary"></p><a href="tel:+79135107505">Позвонить в сервис ↗</a>
+            <p id="okSummary"></p><a href="tel:+79135107505">Позвонить в сервис →</a>
             <button type="button" class="hud-cta" id="resetBtn">Новая заявка</button>
           </div>
         </div>

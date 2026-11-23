@@ -225,7 +225,7 @@
 
     .hero {
       position: relative;
-      min-height: 100svh;
+      min-height: 100svh;min-height: 100dvh;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -736,7 +736,7 @@
       </nav>
 
       <div class="nav-right">
-        <a class="nav-phone nowrap-num" href="tel:+79960550609">+7&nbsp;(996)&nbsp;055-06-09 <span aria-hidden="true">↗</span></a>
+        <a class="nav-phone nowrap-num" href="tel:+79960550609">+7&nbsp;(996)&nbsp;055-06-09 <span aria-hidden="true">→</span></a>
         <button type="button" class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="mobileDrawer" aria-label="Меню">
           <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
             <path d="M2 5H16M2 9H16M2 13H16" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
@@ -771,7 +771,7 @@
         <div class="hero-actions">
           <a class="btn-sand" href="#contacts">
             <span>Записаться в сервис</span>
-            <span class="arr" aria-hidden="true">↗</span>
+            <span class="arr" aria-hidden="true">→</span>
           </a>
           <div class="hero-rating-note nowrap-num">
             <strong>4,9 на 2ГИС</strong> · 261 оценка<br>Автомойка до 23:00
@@ -783,7 +783,7 @@
         <div class="wrap hero-foot-row">
           <div class="foot-loc">
             <span>Красноярск · Октябрьский район</span>
-            <a href="#contacts">ул. Крупской, 1в ↗</a>
+            <a href="#contacts">ул. Крупской, 1в →</a>
           </div>
           <a class="foot-scroll" href="#services">Услуги ↓</a>
         </div>
@@ -961,7 +961,7 @@
             <div class="form-foot">
               <button type="submit" class="btn-sand">
                 <span>Подготовить заявку</span>
-                <span class="arr" aria-hidden="true">↗</span>
+                <span class="arr" aria-hidden="true">→</span>
               </button>
               <p class="form-note">Данные остаются на этой странице. Для записи позвоните в сервис.</p>
             </div>
@@ -969,7 +969,7 @@
 
           <div class="booking-success" id="bookingSuccess" role="status" aria-live="polite">
             <h3>Черновик заявки готов</h3>
-            <p id="successSummary"></p><a href="tel:+79960550609">Позвонить в сервис ↗</a>
+            <p id="successSummary"></p><a href="tel:+79960550609">Позвонить в сервис →</a>
             <button type="button" class="btn-sand" id="resetBookingBtn"><span>Новая заявка</span><span class="arr" aria-hidden="true">↺</span></button>
           </div>
         </div>
@@ -1132,7 +1132,7 @@
               '<td><span class="p-name">' + s.title + '</span><span class="p-desc">' + s.desc + '</span></td>' +
               '<td class="p-time nowrap-num" data-label="Время">' + s.time + '</td>' +
               '<td class="p-cost nowrap-num" data-label="Цена">' + s.price + '</td>' +
-              '<td class="p-act"><button type="button" class="row-pick" data-pick="' + s.val + '">Записаться ↗</button></td>' +
+              '<td class="p-act"><button type="button" class="row-pick" data-pick="' + s.val + '">Записаться →</button></td>' +
             '</tr>'
           );
         }).join('');
