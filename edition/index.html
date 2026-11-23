@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="ru" data-type="place" data-radius="sharp" data-buttons="solid" data-motion="on">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="page-type" content="place">
+  <meta name="page-kind" content="place">
+  <meta name="site-kind" content="other">
+  <meta name="description" content="АвтоВэлт в Красноярске. Обслуживание и ремонт автомобилей, цены на популярные работы и маршрут до сервиса на Красномосковской, 76.">
+  <meta name="theme-color" content="#f7f7f4">
+  <meta property="og:title" content="АвтоВэлт — автосервис в Красноярске">
+  <meta property="og:description" content="Обслуживание и ремонт автомобилей на Красномосковской, 76.">
+  <meta property="og:image" content="assets/taillight.webp">
+  <meta property="og:type" content="website">
+  <title>АвтоВэлт — автосервис в Красноярске</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="edition.css">
+  <script src="app.js" defer></script>
+<style>@media(max-width:740px){img,video{max-width:100%}input,select,textarea{max-width:100%;font-size:16px!important}.form-grid>*{min-width:0}.hero-h1,.hero-title{overflow-wrap:break-word}.booking-form{min-width:0}}</style></head>
+<body id="top">
+  <a class="skip" href="#main">К содержанию</a>
+  <svg class="definitions" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <symbol id="i-pin" viewBox="0 0 24 24"><path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></symbol><symbol id="i-phone" viewBox="0 0 24 24"><path d="M8 3H5a2 2 0 0 0-2 2 16 16 0 0 0 16 16 2 2 0 0 0 2-2v-3l-5-2-2 2a12 12 0 0 1-6-6l2-2-2-5Z"/></symbol>
+    <symbol id="i-out" viewBox="0 0 24 24"><path d="M6 18 18 6M7 6h11v11"/></symbol>
+    <symbol id="i-right" viewBox="0 0 24 24"><path d="M4 12h15m-6-6 6 6-6 6"/></symbol>
+  </svg>
+  <header class="site-header">
+    <div class="wrap header-grid">
+      <a class="brand" href="#top" aria-label="АвтоВэлт, главная">
+        <span class="brand-mark" aria-hidden="true"></span><span class="brand-name">АвтоВэлт</span>
+      </a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav" hidden>Меню</button>
+      <nav id="site-nav" class="site-nav" aria-label="Главное меню">
+        <a href="#services">Услуги и цены</a><a href="#workshop">Мастерская</a><a href="#reviews">Отзывы</a><a href="#visit">Контакты</a>
+      </nav>
+      <a class="header-phone" aria-label="Позвонить по номеру +7 913 160-09-46" href="tel:+79131600946"><svg class="icon"><use href="#i-phone"/></svg><span>+7 (913) 160-09-46</span></a>
+    </div>
+  </header>
+  <main id="main">
+    <section class="hero kinetic" data-enter aria-labelledby="hero-title">
+      <div class="wrap">
+        <div class="poster">
+          <h1 id="hero-title">Ремонт и ТО<br><span class="soft">автомобилей</span></h1>
+          <div class="poster-aside">
+            <p>Автосервис в Красноярске.<br> От замены масла до ремонта двигателя и коробки передач.</p>
+            <div class="hero-actions"><a class="button call" href="tel:+79131600946">Позвонить в сервис <span class="arrow-disc" aria-hidden="true">↗</span></a></div>
+          </div>
+        </div>
+        <div class="road">
+          <picture><source media="(max-width:730px)" srcset="assets/taillight-small.webp"><img src="assets/taillight.webp" width="1942" height="809" alt="Серебристый автомобиль в движении с ярким следом заднего фонаря, иллюстрация" fetchpriority="high"></picture>
+          <a class="route" href="https://yandex.ru/maps/org/24278253050"><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg><span>Красномосковская, 76<small>Пн–пт 09:00–19:00 · Сб 09:00–15:00</small></span><span class="route-arrow" aria-hidden="true">↗</span></a>
+          <a class="jump" href="#services">Услуги и цены <span aria-hidden="true">↓</span></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="services section" id="services" aria-labelledby="services-title">
+      <div class="wrap">
+        <div class="section-head"><h2 id="services-title">Услуги и цены</h2><a class="text-link" href="https://autowelt-auto.ru/price/">Полный прайс <svg class="icon"><use href="#i-out"/></svg></a></div>
+        <div class="filters" role="group" aria-label="Фильтр услуг" hidden>
+          <button type="button" data-filter="all" aria-pressed="true">Все работы</button>
+          <button type="button" data-filter="maintenance" aria-pressed="false">Обслуживание</button>
+          <button type="button" data-filter="engine" aria-pressed="false">Двигатель и КПП</button>
+          <button type="button" data-filter="chassis" aria-pressed="false">Ходовая и тормоза</button>
+          <button type="button" data-filter="bodywork" aria-pressed="false">Кузов и свет</button>
+        </div>
+        <div class="service-layout">
+          <div>
+            <table class="price-table" aria-label="Цены на популярные работы">
+              <thead><tr><th scope="col">Работа</th><th scope="col">Стоимость</th></tr></thead>
+              <tbody>
+                <tr data-category="maintenance"><th scope="row"><a href="https://autowelt-auto.ru/services/">Замена масла</a></th><td>По запросу</td></tr>
+                <tr data-category="maintenance"><th scope="row"><a href="https://autowelt-auto.ru/service/zapravka_konditsionera/">Заправка кондиционера</a></th><td>По запросу</td></tr>
+                <tr data-category="engine"><th scope="row"><a href="https://autowelt-auto.ru/service/remont_dvigatelya/">Ремонт двигателя</a></th><td>5 000 ₽</td></tr>
+                <tr data-category="engine"><th scope="row"><a href="https://autowelt-auto.ru/service/remont_akpp/">Ремонт АКПП</a></th><td>По запросу</td></tr>
+                <tr data-category="chassis"><th scope="row"><a href="https://autowelt-auto.ru/service/zamena_tormoznyh_kolodok/">Замена тормозных колодок</a></th><td>от 800 ₽</td></tr>
+                <tr data-category="chassis"><th scope="row"><a href="https://autowelt-auto.ru/service/zamena_tormoznyh_diskov/">Замена тормозных дисков</a></th><td>от 800 ₽</td></tr>
+                <tr data-category="chassis"><th scope="row"><a href="https://autowelt-auto.ru/service/remont_rulevoj_rejki/">Ремонт рулевой рейки</a></th><td>По запросу</td></tr>
+                <tr data-category="bodywork"><th scope="row"><a href="https://autowelt-auto.ru/service/antikor/">Антикоррозийная обработка</a></th><td>По запросу</td></tr>
+                <tr data-category="bodywork"><th scope="row"><a href="https://autowelt-auto.ru/service/regulirovka_far/">Регулировка фар</a></th><td>По запросу</td></tr>
+              </tbody>
+            </table>
+            <span id="result-count" class="sr-only" role="status"></span>
+            <p class="price-note">Цены справочные. Стоимость работ для вашего автомобиля уточняйте по телефону.</p>
+          </div>
+          <img class="service-image" id="service-image" src="assets/maintenance.jpg" srcset="assets/maintenance-640.jpg 640w, assets/maintenance.jpg 1200w" sizes="(max-width: 730px) 89vw, 40vw" width="1200" height="800" decoding="sync" alt="Автомобиль с открытым капотом в ремонтном цехе" data-source="https://autowelt-auto.ru/#photos" data-subject="service bay">
+        </div>
+      </div>
+    </section>
+
+    <section class="workshop section" id="workshop" aria-labelledby="workshop-title">
+      <div class="wrap">
+        <div class="section-head"><h2 id="workshop-title">В мастерской</h2><a class="text-link" href="https://autowelt-auto.ru/#photos">Все фотографии <svg class="icon"><use href="#i-out"/></svg></a></div>
+        <div class="gallery">
+          <img src="assets/lift.jpg" srcset="assets/lift-640.jpg 640w, assets/lift.jpg 1200w" sizes="(max-width: 730px) 89vw, 56vw" width="1200" height="800" decoding="sync" alt="Автомобиль на подъёмнике рядом с верстаком" data-source="https://autowelt-auto.ru/#photos" data-subject="lift">
+          <img src="assets/equipment.jpg" srcset="assets/equipment-320.jpg 320w, assets/equipment-640.jpg 640w, assets/equipment.jpg 1200w" sizes="(max-width: 730px) 44vw, 34vw" width="1200" height="800" decoding="sync" alt="Станок и инструменты в мастерской" data-source="https://autowelt-auto.ru/#photos" data-subject="equipment">
+          <img src="assets/waiting.jpg" srcset="assets/waiting-320.jpg 320w, assets/waiting-640.jpg 640w, assets/waiting.jpg 1200w" sizes="(max-width: 730px) 44vw, 34vw" width="1200" height="800" decoding="sync" alt="Диван в зоне ожидания сервиса" data-source="https://autowelt-auto.ru/#photos" data-subject="waiting room">
+        </div>
+        <div data-moment="word-highlight"><p class="mo-wh__text">Даём <strong>гарантию на работы</strong>. Срок зависит от вида ремонта и материалов.</p></div>
+        <a class="text-link" href="https://autowelt-auto.ru/#specialists">Специалисты сервиса <svg class="icon"><use href="#i-out"/></svg></a>
+        <a class="text-link offers-link" href="https://autowelt-auto.ru/#offers">Акции сервиса <svg class="icon"><use href="#i-out"/></svg></a>
+      </div>
+    </section>
+
+    <section class="reviews section" id="reviews" aria-labelledby="reviews-title">
+      <div class="wrap">
+        <h2 id="reviews-title">Отзывы об АвтоВэлт</h2>
+        <div class="review-grid">
+          <div class="review-summary"><p class="score">5,0<span> / 5 на Zoon</span></p><a class="text-link" href="https://zoon.ru/krasnoyarsk/autoservice/avtoservis_avtovelt/">Читать отзывы на Zoon <svg class="icon"><use href="#i-out"/></svg></a><a class="text-link" href="https://yandex.ru/maps/org/24278253050/reviews/">Отзывы на Яндекс Картах <svg class="icon"><use href="#i-out"/></svg></a></div>
+          <div class="review-quotes">
+            <figure><blockquote>«Сначала мне провели диагностику, а затем выполнили ремонт по ходовой части».</blockquote><figcaption>Ксения · Zoon · 20 июля 2026</figcaption></figure>
+            <figure><blockquote>«Работу выполнили оперативно и аккуратно, сразу выявили неисправность».</blockquote><figcaption>Андрей · Zoon · 11 июля 2026</figcaption></figure>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="visit section" id="visit" data-place="visit" aria-labelledby="visit-title">
+      <div class="wrap">
+        <h2 id="visit-title">Как нас найти</h2>
+        <div class="visit-grid">
+          <div class="visit-info">
+            <address>Красномосковская, 76<span>Красноярск · Железнодорожный район</span></address>
+            <dl class="hours">
+              <div><dt>Понедельник — пятница</dt><dd>09:00–19:00</dd></div>
+              <div><dt>Суббота</dt><dd>09:00–15:00</dd></div>
+            </dl>
+            <a class="visit-phone" href="tel:+79131600946">+7 (913) 160-09-46</a>
+            <a class="button" href="https://yandex.ru/maps/org/24278253050">Построить маршрут <svg class="icon"><use href="#i-out"/></svg></a>
+          </div>
+          <img src="assets/entrance.jpg" srcset="assets/entrance-640.jpg 640w, assets/entrance.jpg 1067w" sizes="(max-width: 730px) 89vw, 50vw" width="1067" height="800" decoding="sync" alt="Въезд в АвтоВэлт, серые ворота в кирпичном здании" data-source="https://autowelt-auto.ru/#photos" data-subject="entrance">
+        </div>
+      </div>
+    </section>
+
+  </main>
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-grid">
+        <a class="brand" href="#top"><span class="brand-mark" aria-hidden="true"></span><span class="brand-name">АвтоВэлт</span></a>
+        <a class="text-link" href="https://autowelt-auto.ru/policy/">Политика обработки данных</a>
+        <a class="text-link" href="https://autowelt-auto.ru/#photos">Фотографии АвтоВэлт на Zoon</a>
+      </div>
+    </div>
+  </footer>
+  <nav class="actionbar" aria-label="Связь с сервисом"><a class="button" href="tel:+79131600946"><svg class="icon"><use href="#i-phone"/></svg>Позвонить</a><a class="button secondary" href="https://yandex.ru/maps/org/24278253050">Маршрут <svg class="icon"><use href="#i-out"/></svg></a></nav>
+<aside style="background:#182323;color:#fff;padding:18px max(18px,5vw) calc(18px + env(safe-area-inset-bottom));font:600 14px system-ui"><a style="color:inherit;text-decoration:underline" href="../index.html">← Все шесть версий</a></aside></body>
+</html>
+

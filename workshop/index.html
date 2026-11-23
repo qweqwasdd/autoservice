@@ -1,0 +1,3031 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0D0D0E">
+  <title>АВТОВЭЛТ · Автосервис и цех ГБЦ · Красноярск</title>
+  <meta name="description" content="Автосервис АвтоВэлт в Красноярске на Красномосковской, 76: честная диагностика на подъёмнике при владельце, сложная автоэлектрика (Zoon 5,0 · №2), собственный цех ГБЦ (1,5–24 ч), ремонт двигателей от 5 000 ₽.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&family=Unbounded:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+/* ============================================================================
+   scrollcraft.css: the taste floor
+   ----------------------------------------------------------------------------
+   Two layers, and the split matters:
+
+     TOKENS   what you override per brand. Colour roles, the type ramp, the
+              spacing scale, elevation, motion. A brand is ~12 values.
+     DEVICES  what the engine drives. Do not restyle these to taste; they are
+              the mechanism. Style your own markup instead.
+
+   Nothing here draws a "component". There are no card, badge, or pill classes,
+   because a stylesheet that ships those is how every page built on it ends up
+   with the same shapes. You get a floor and a vocabulary; the composition is
+   yours.
+   ========================================================================== */
+
+/* ---------------------------------------------------------------- tokens -- */
+:root {
+  /* --- colour roles. Override these six and the page is rebranded. -------- */
+  --sc-canvas:      #08090b;   /* the page ground. Drift interpolates this.   */
+  --sc-surface:     #101217;   /* anything raised off the ground             */
+  --sc-ink:         #f4f2ef;   /* primary text                               */
+  --sc-ink-soft:    #9a9ba1;   /* secondary text. Tinted, never flat gray.   */
+  --sc-accent:      #d8ff3e;   /* ONE accent. It owns a region, not confetti. */
+  --sc-accent-ink:  #08090b;   /* text that sits on the accent               */
+
+  --sc-hairline:    color-mix(in oklab, var(--sc-ink) 12%, transparent);
+  --sc-hairline-strong: color-mix(in oklab, var(--sc-ink) 22%, transparent);
+
+  /* --- type. Two families max. Display carries voice, text carries prose. - */
+  --sc-font-display: "Instrument Sans", "Geist", system-ui, sans-serif;
+  --sc-font-text:    "Geist", system-ui, sans-serif;
+  --sc-font-mono:    "Geist Mono", ui-monospace, monospace;
+
+  /* Fluid ramp. Tracking tightens as size grows because a face set at 6rem
+     with 0 tracking reads loose; this is optical correction, not decoration. */
+  --sc-t-xs:   clamp(0.75rem, 0.72rem + 0.15vw, 0.82rem);
+  --sc-t-sm:   clamp(0.875rem, 0.84rem + 0.18vw, 0.95rem);
+  --sc-t-base: clamp(1rem, 0.96rem + 0.22vw, 1.125rem);
+  --sc-t-lg:   clamp(1.2rem, 1.1rem + 0.5vw, 1.5rem);
+  --sc-t-xl:   clamp(1.6rem, 1.35rem + 1.2vw, 2.25rem);
+  --sc-t-2xl:  clamp(2.1rem, 1.6rem + 2.4vw, 3.4rem);
+  --sc-t-3xl:  clamp(2.8rem, 1.9rem + 4.2vw, 5rem);
+  --sc-t-4xl:  clamp(3.4rem, 1.9rem + 6.6vw, 7.5rem);
+
+  --sc-track-tight:  -0.035em;
+  --sc-track-snug:   -0.02em;
+  --sc-track-normal: -0.005em;
+  --sc-track-wide:    0.08em;
+
+  --sc-leading-none: 0.94;
+  --sc-leading-tight: 1.06;
+  --sc-leading-body: 1.62;
+
+  --sc-measure: 62ch;
+
+  /* --- space. 4px base: the useful middle steps an 8-only scale misses. --- */
+  --sc-1: 0.25rem;  --sc-2: 0.5rem;   --sc-3: 0.75rem;  --sc-4: 1rem;
+  --sc-5: 1.5rem;   --sc-6: 2rem;     --sc-7: 3rem;     --sc-8: 4rem;
+  --sc-9: 6rem;     --sc-10: 8rem;    --sc-11: 12rem;
+
+  /* Section rhythm is fluid so a phone doesn't inherit desktop air. */
+  --sc-section: clamp(4.5rem, 9vw, 11rem);
+  --sc-gutter:  clamp(1.25rem, 5vw, 5.5rem);
+  --sc-maxw:    82rem;
+
+  /* --- radius. Pick one scale for the page and hold it. ------------------- */
+  --sc-r-sm: 6px;  --sc-r-md: 12px;  --sc-r-lg: 20px;  --sc-r-pill: 999px;
+
+  /* --- elevation. Every shadow has an offset AND a soft blur, and is tinted
+         to the canvas hue. A zero-offset coloured halo is decoration, not
+         depth, so there isn't one here. ---------------------------------- */
+  --sc-shadow-color: 220 40% 2%;
+  --sc-e1: 0 1px 2px hsl(var(--sc-shadow-color) / 0.28),
+           0 2px 6px -1px hsl(var(--sc-shadow-color) / 0.20);
+  --sc-e2: 0 2px 4px hsl(var(--sc-shadow-color) / 0.24),
+           0 8px 18px -4px hsl(var(--sc-shadow-color) / 0.30);
+  --sc-e3: 0 4px 8px hsl(var(--sc-shadow-color) / 0.22),
+           0 18px 40px -8px hsl(var(--sc-shadow-color) / 0.38),
+           0 48px 90px -24px hsl(var(--sc-shadow-color) / 0.30);
+
+  /* Edge light: a 1px top highlight sells a raised surface better than any
+     amount of blur, because real raised things catch light on their lip. */
+  --sc-edge: inset 0 1px 0 color-mix(in oklab, var(--sc-ink) 10%, transparent);
+
+  /* --- motion. Built-in CSS easings are too weak for UI. ------------------ */
+  --sc-ease-out:    cubic-bezier(0.23, 1, 0.32, 1);
+  --sc-ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --sc-ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+  --sc-d-fast: 160ms;  --sc-d-base: 240ms;  --sc-d-slow: 420ms;
+
+  --sc-z-stage: 1; --sc-z-copy: 20; --sc-z-chrome: 60;
+}
+
+/* --------------------------------------------------------------- reset -- */
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+body {
+  margin: 0;
+  background: var(--sc-canvas);
+  color: var(--sc-ink);
+  font-family: var(--sc-font-text);
+  font-size: var(--sc-t-base);
+  line-height: var(--sc-leading-body);
+  letter-spacing: var(--sc-track-normal);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  font-synthesis-weight: none;
+  overflow-x: clip;
+}
+img, video, canvas, svg { display: block; max-width: 100%; }
+button, input, select, textarea { font: inherit; color: inherit; }
+
+/* ------------------------------------------------- the browser surfaces --
+   The parts you did not draw still carry the design. Selection, caret, focus
+   ring, scrollbar and tabular numerals all ship with defaults that belong to no
+   design system. Theming them is the cheapest signal that a page was built
+   rather than assembled, and it is the step that gets skipped most reliably. */
+::selection { background: var(--sc-accent); color: var(--sc-accent-ink); }
+:root { caret-color: var(--sc-accent); accent-color: var(--sc-accent); }
+:focus-visible {
+  outline: 2px solid var(--sc-accent);
+  outline-offset: 3px;
+  border-radius: var(--sc-r-sm);
+}
+:where(a) { color: inherit; text-decoration-thickness: 1px; text-underline-offset: 0.22em; }
+@supports (scrollbar-color: auto) {
+  html { scrollbar-color: color-mix(in oklab, var(--sc-ink) 26%, transparent) transparent; scrollbar-width: thin; }
+}
+:where(table, .sc-nums, [data-sc-count]) { font-variant-numeric: tabular-nums; }
+
+/* ----------------------------------------------------------- typography -- */
+.sc-display {
+  font-family: var(--sc-font-display);
+  font-weight: 500;
+  line-height: var(--sc-leading-none);
+  letter-spacing: var(--sc-track-tight);
+  text-wrap: balance;
+  margin: 0;
+}
+.sc-display--xl { font-size: var(--sc-t-4xl); }
+.sc-display--lg { font-size: var(--sc-t-3xl); }
+.sc-display--md { font-size: var(--sc-t-2xl); letter-spacing: var(--sc-track-snug); }
+.sc-lede {
+  font-size: var(--sc-t-lg);
+  line-height: 1.44;
+  letter-spacing: var(--sc-track-snug);
+  color: var(--sc-ink);
+  max-width: 46ch;
+  text-wrap: pretty;
+  margin: 0;
+}
+.sc-body { max-width: var(--sc-measure); color: var(--sc-ink-soft); text-wrap: pretty; margin: 0; }
+.sc-label {
+  font-family: var(--sc-font-mono);
+  font-size: var(--sc-t-xs);
+  letter-spacing: var(--sc-track-wide);
+  text-transform: uppercase;
+  color: var(--sc-ink-soft);
+}
+
+/* ---------------------------------------------------------------- layout -- */
+.sc-wrap { width: 100%; max-width: var(--sc-maxw); margin-inline: auto; padding-inline: var(--sc-gutter); }
+.sc-section { padding-block: var(--sc-section); }
+/* More space above a heading than below it: the gap belongs to the boundary,
+   not to the pair. */
+.sc-stack > * + * { margin-top: var(--sc-4); }
+.sc-stack > :is(h1,h2,h3) { margin-top: var(--sc-7); }
+.sc-stack > :is(h1,h2,h3):first-child { margin-top: 0; }
+.sc-rule { height: 1px; border: 0; background: var(--sc-hairline); margin: 0; }
+
+/* =============================================================== DEVICES ==
+   Driven by the engine. Restyle your own markup, not these.                */
+
+.sc-act--pinned { position: relative; }
+.sc-stage {
+  position: sticky; top: 0;
+  height: 100vh; height: 100svh;
+  overflow: clip;
+  z-index: var(--sc-z-stage);
+}
+
+/* scrub / sequence media */
+.sc-stage :is(video[data-sc-scrub], canvas[data-sc-sequence], .sc-stage__poster) {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+}
+video[data-sc-scrub] { opacity: 0; transition: opacity 380ms var(--sc-ease-out); }
+.sc-has-clip video[data-sc-scrub] { opacity: 1; }
+/* The poster is a live frame-holder, not a placeholder: it stays up until a
+   real video frame has painted, which is what stops the blank-stage flash. */
+.sc-stage__poster { z-index: 0; transition: opacity 380ms var(--sc-ease-out); }
+.sc-has-clip .sc-stage__poster { opacity: 0; }
+
+/* A scrim only where text sits. A full-frame darkening layer flattens the
+   image everywhere to fix contrast in one corner. */
+.sc-scrim {
+  position: absolute; inset: 0; pointer-events: none; z-index: 1;
+  background: linear-gradient(
+    var(--sc-scrim-angle, 180deg),
+    color-mix(in oklab, var(--sc-canvas) var(--sc-scrim-a, 78%), transparent) 0%,
+    color-mix(in oklab, var(--sc-canvas) 30%, transparent) 42%,
+    transparent 68%);
+}
+/* Point the scrim at the copy. A scrim gradient that darkens the top while the
+   copy sits at the bottom fixes contrast nowhere and flattens the image
+   everywhere, which is the most common way text-over-video goes wrong. */
+.sc-scrim--bottom { --sc-scrim-angle: 0deg; }
+.sc-scrim--left   { --sc-scrim-angle: 90deg; }
+.sc-scrim--right  { --sc-scrim-angle: 270deg; }
+
+/* Corner scrims, for copy anchored to a corner. An edge gradient has to darken
+   a whole band across the frame to cover one corner; a corner gradient puts the
+   density where the text is and leaves the rest of the image alone. Pair with
+   .sc-copy--lead / .sc-copy--trail. */
+.sc-scrim--lead {
+  background: linear-gradient(to top right,
+    color-mix(in oklab, var(--sc-canvas) 94%, transparent) 0%,
+    color-mix(in oklab, var(--sc-canvas) 72%, transparent) 30%,
+    color-mix(in oklab, var(--sc-canvas) 30%, transparent) 52%,
+    transparent 72%);
+}
+.sc-scrim--trail {
+  background: linear-gradient(to top left,
+    color-mix(in oklab, var(--sc-canvas) 94%, transparent) 0%,
+    color-mix(in oklab, var(--sc-canvas) 72%, transparent) 30%,
+    color-mix(in oklab, var(--sc-canvas) 30%, transparent) 52%,
+    transparent 72%);
+}
+/* A band across the bottom, for copy that spans the full width of the frame.
+   That is what both corner anchors become below 860px, and it is also the right
+   shape whenever the copy block is wider than a corner. */
+.sc-scrim--band {
+  background: linear-gradient(to top,
+    color-mix(in oklab, var(--sc-canvas) 94%, transparent) 0%,
+    color-mix(in oklab, var(--sc-canvas) 74%, transparent) 22%,
+    color-mix(in oklab, var(--sc-canvas) 30%, transparent) 42%,
+    transparent 58%);
+}
+.sc-scrim--vignette {
+  background: radial-gradient(120% 90% at 50% 45%, transparent 40%,
+              color-mix(in oklab, var(--sc-canvas) 70%, transparent) 100%);
+}
+
+/* copy over a stage.
+   max-width is in rem, never ch. A `ch` on this container resolves against the
+   CONTAINER's font-size (body size), not the display size of the heading inside
+   it, so `max-width: 20ch` here silently produces a ~180px column and wraps a
+   hero headline to six lines. Set a ch measure on the text element itself. */
+.sc-copy {
+  position: absolute; z-index: var(--sc-z-copy);
+  inset-inline: var(--sc-gutter);
+  max-width: min(46rem, 76vw);
+  will-change: opacity, transform;
+}
+.sc-copy--lead   { left: var(--sc-gutter); bottom: clamp(3rem, 12vh, 9rem); }
+/* inset-inline FIRST. It is the shorthand for left+right, so declaring it after
+   `left: 50%` resets left to auto and the block drifts off the left edge. */
+.sc-copy--center { inset-inline: auto; left: 50%; top: 50%; translate: -50% -50%; text-align: center; }
+.sc-copy--trail  { inset-inline: auto; right: var(--sc-gutter); bottom: clamp(3rem, 12vh, 9rem); text-align: right; }
+
+/* cue defaults: the engine writes opacity/transform inline, these are the
+   pre-paint state so nothing flashes before the first read() */
+[data-sc-cue] { opacity: 0; will-change: opacity, transform; }
+.sc-ready [data-sc-cue] { transition: none; }
+
+/* kinetic split */
+.sc-split { display: inline-block; overflow: hidden; vertical-align: top; }
+/* Descenders live below the baseline; a line mask clipped to the line box eats
+   the tails off g, y, p, j. The padding buys them room back. */
+.sc-split--line { display: block; padding-bottom: 0.14em; margin-bottom: -0.14em; }
+.sc-split__i { display: inline-block; will-change: transform, opacity; }
+.sc-is-split { opacity: 1 !important; }
+
+/* horizontal rail */
+[data-sc-pan] { display: flex; will-change: transform; }
+
+/* reveal + parallax */
+[data-sc-reveal] { will-change: clip-path; }
+[data-sc-parallax] { will-change: transform; }
+
+/* flow reveal (fires once) */
+[data-sc-in], [data-sc-stagger] > * {
+  opacity: 0;
+  transform: translate3d(0, 14px, 0);
+  transition: opacity 620ms var(--sc-ease-out), transform 620ms var(--sc-ease-out);
+}
+[data-sc-in].sc-in, [data-sc-stagger] > .sc-in { opacity: 1; transform: none; }
+
+/* pointer devices */
+[data-sc-tilt] { transform-style: preserve-3d; will-change: transform; }
+[data-sc-magnet] { will-change: transform; }
+/* isolation always; position only if nothing more specific already set it.
+   Written with :where() (zero specificity) on purpose: a plain `position:
+   relative` here has the same weight as `.sc-stage` and, being later in the
+   file, silently wins. A stage carrying both attributes then stops being
+   sticky and the whole act scrolls away instead of pinning. */
+[data-sc-spotlight] { isolation: isolate; }
+:where([data-sc-spotlight]) { position: relative; }
+[data-sc-spotlight]::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 2;
+  background: radial-gradient(
+    28rem 28rem at calc(var(--sc-mx, 0.5) * 100%) calc(var(--sc-my, 0.5) * 100%),
+    color-mix(in oklab, var(--sc-accent) 16%, transparent), transparent 70%);
+  opacity: 0; transition: opacity var(--sc-d-slow) var(--sc-ease-out);
+}
+[data-sc-spotlight]:hover::after { opacity: 1; }
+
+/* =========================================================== WORLDFLIGHT ==
+   One fixed stage for the whole page. The only thing in document flow is the
+   spacer, and it is empty. If you find yourself adding a section here, you want
+   act mode instead: the moment a real block scrolls past the fixed stage, the
+   page has a seam again and the whole point is gone.                        */
+
+[data-sc-mode="worldflight"] { position: relative; }
+
+.sc-world {
+  position: fixed; inset: 0;
+  overflow: clip;
+  z-index: var(--sc-z-stage);
+  background: var(--sc-canvas);
+}
+
+/* Every leg is mounted for the life of the page and stacked in the same box.
+   The engine owns opacity, visibility and z-index here; do not set them. */
+.sc-world__seg {
+  position: absolute; inset: 0;
+  opacity: 0;
+  will-change: opacity;
+}
+.sc-world__seg > :is(video, img, canvas) {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+}
+/* The poster is the frame-holder AND the first camera move: the engine pushes
+   it in slowly until a real decoded frame is available to replace it. */
+.sc-world__poster {
+  z-index: 0;
+  transform-origin: 50% 50%;
+  transition: opacity 420ms var(--sc-ease-out);
+}
+.sc-world__seg > video { z-index: 1; }
+.sc-world__seg.sc-has-clip .sc-world__poster { opacity: 0; }
+/* The act stylesheet lights a clip through its ancestor act. A worldflight leg
+   has no act, so match the class the engine also writes on the clip itself. */
+video[data-sc-scrub].sc-has-clip { opacity: 1; }
+
+/* The copy layer is fixed too, and inert by default: the engine hands
+   pointer-events back to a block only while it is actually legible. */
+.sc-world__copy {
+  position: fixed; inset: 0;
+  z-index: var(--sc-z-copy);
+  pointer-events: none;
+}
+.sc-world__scrim { position: absolute; inset: 0; pointer-events: none; z-index: 0; }
+[data-sc-copy] {
+  opacity: 0;
+  pointer-events: none;
+  will-change: opacity, transform;
+}
+.sc-ready [data-sc-copy] { transition: none; }
+
+/* The track. Empty on purpose. */
+.sc-world__spacer { pointer-events: none; }
+
+/* scroll progress */
+[data-sc-progress] {
+  position: fixed; inset: 0 0 auto 0; height: 2px; z-index: var(--sc-z-chrome);
+  background: var(--sc-accent); transform-origin: 0 50%; transform: scaleX(0);
+  will-change: transform;
+}
+
+/* ----------------------------------------------------------- atmosphere --
+   Depth is not only shadow. Grain keeps a flat dark ground from banding, and
+   it is the difference between "a dark page" and "a lit room". */
+.sc-grain { position: fixed; inset: 0; pointer-events: none; z-index: 3; opacity: 0.045; }
+.sc-grain::before {
+  content: ""; position: absolute; inset: -50%;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/></filter><rect width='140' height='140' filter='url(%23n)'/></svg>");
+}
+
+/* -------------------------------------------------------- reduced motion -- */
+@media (prefers-reduced-motion: reduce) {
+  /* Fewer and gentler, not zero. Opacity still carries the reveal so the page
+     is comprehensible; every position change is dropped. */
+  [data-sc-in], [data-sc-stagger] > * { transform: none; transition-duration: 220ms; }
+  [data-sc-parallax], [data-sc-pan], .sc-split__i { transform: none !important; }
+  /* A wipe is a position change too. Show reveal content settled. */
+  [data-sc-reveal] { clip-path: none !important; }
+  /* A rail's transform IS its navigation, not decoration. Zeroing it the way
+     parallax and kinetic type are zeroed parks the act on its first screenful
+     and makes everything past the fold unreachable: a device degrading into
+     missing content. Hand the travel back to the reader as an ordinary scroll
+     region instead, so the same items are all still gettable without motion.
+     A build that would rather re-lay the rail out as a grid can still do that;
+     this is the floor, not the ceiling. */
+  [data-sc-act="pan"] .sc-stage,
+  [data-sc-act="pan"] [data-sc-stage] {
+    overflow-x: auto; overflow-y: hidden;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x proximity;
+  }
+  [data-sc-pan] > * { scroll-snap-align: center; }
+  [data-sc-spotlight]::after { display: none; }
+  /* A worldflight keeps its whole story here. No clip is ever fetched, so the
+     posters are the film, and they cross-dissolve through exactly the same
+     seams at exactly the same scroll positions. The push-in and the copy drift
+     are the only things that go. */
+  .sc-world__poster, [data-sc-copy] { transform: none !important; }
+}
+
+/* --------------------------------------------------------------- mobile -- */
+@media (max-width: 860px) {
+  .sc-copy { inset-inline: var(--sc-gutter); max-width: none; }
+  .sc-copy--trail { text-align: left; }
+  .sc-stage { height: 100svh; }
+  /* .sc-copy--trail re-anchors to the left and spans the full width here, so a
+     bottom-RIGHT corner gradient darkens the one corner the copy just left and
+     guarantees a contrast failure over any bright clip. Point the density at
+     the copy: the same band .sc-scrim--band paints. */
+  .sc-scrim--trail {
+    background: linear-gradient(to top,
+      color-mix(in oklab, var(--sc-canvas) 94%, transparent) 0%,
+      color-mix(in oklab, var(--sc-canvas) 74%, transparent) 22%,
+      color-mix(in oklab, var(--sc-canvas) 30%, transparent) 42%,
+      transparent 58%);
+  }
+}
+
+
+    :root {
+      --sc-canvas: #0D0D0E;
+      --sc-surface: #151517;
+      --sc-ink: #F3EFE9;
+      --sc-ink-soft: #A39D95;
+      --sc-accent: #E26324;
+      --sc-accent-ink: #0D0D0E;
+      --sc-brass: #D4A564;
+      --sc-font-display: 'Unbounded', sans-serif;
+      --sc-font-text: 'Golos Text', -apple-system, BlinkMacSystemFont, sans-serif;
+      --sc-font-mono: 'JetBrains Mono', ui-monospace, monospace;
+      --ease: cubic-bezier(0.22, 1, 0.36, 1);
+      --ease-silky: cubic-bezier(0.16, 1, 0.3, 1);
+      --mx: 0.5;
+      --my: 0.5;
+      --sp: 0;
+    }
+
+    body {
+      background: var(--sc-canvas);
+      color: var(--sc-ink);
+      transition: background-color 0.35s linear;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    .nowrap-num { white-space: nowrap; font-variant-numeric: tabular-nums; }
+    .mono { font-family: var(--sc-font-mono); }
+
+    /* SILKY INERTIAL VECTOR MECHANICAL BLUEPRINT LAYER */
+    .mech-bg {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .mech-svg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0.14;
+      transform: translate3d(calc((var(--mx) - 0.5) * -14px), calc((var(--my) - 0.5) * -10px), 0);
+      transition: transform 0.55s var(--ease-silky);
+    }
+
+    .mech-rotor,
+    .mech-gear-a,
+    .mech-gear-b {
+      transform-box: fill-box;
+      transform-origin: center;
+      will-change: transform;
+    }
+
+    /* RIGHT-EDGE VERNIER TELEMETRY RAIL */
+    .vernier-rail {
+      position: fixed;
+      right: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 65;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 6px;
+      pointer-events: none;
+      font-family: var(--sc-font-mono);
+      font-size: 10px;
+      color: var(--sc-ink-soft);
+    }
+    .vernier-track {
+      width: 2px;
+      height: 140px;
+      background: rgba(243, 239, 233, 0.14);
+      position: relative;
+      border-radius: 2px;
+    }
+    .vernier-needle {
+      position: absolute;
+      left: -3px;
+      width: 8px;
+      height: 2px;
+      background: var(--sc-accent);
+      top: calc(var(--sp) * 100%);
+    }
+
+    main { position: relative; z-index: 2; }
+
+    /* FLOATING ARCHITECTURAL PILL NAV */
+    .hud-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 70;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 18px var(--sc-gutter);
+      background: linear-gradient(180deg, rgba(13, 13, 14, 0.90) 0%, rgba(13, 13, 14, 0) 100%);
+      pointer-events: none;
+    }
+    .hud-nav > * { pointer-events: auto; }
+
+    .hud-brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--sc-font-display);
+      font-size: 14.5px;
+      font-weight: 700;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+    }
+    .hud-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--sc-accent);
+    }
+
+    .hud-links {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      padding: 9px 22px;
+      border-radius: var(--sc-r-pill);
+      background: rgba(21, 21, 23, 0.84);
+      border: 1px solid rgba(243, 239, 233, 0.11);
+    }
+    .hud-links a {
+      font-family: var(--sc-font-mono);
+      font-size: 11.5px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--sc-ink-soft);
+      transition: color 0.25s var(--ease);
+    }
+    .hud-links a:hover { color: var(--sc-accent); }
+
+    .hud-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      min-height: 44px;
+      padding: 0 22px;
+      border-radius: var(--sc-r-pill);
+      background: var(--sc-accent);
+      color: var(--sc-ink);
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      border: 0;
+      transition: transform 0.25s var(--ease-silky), background-color 0.25s var(--ease);
+    }
+    .hud-cta:hover { background: #ef7437; }
+
+    .hud-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      min-height: 44px;
+      padding: 0 20px;
+      border-radius: var(--sc-r-pill);
+      border: 1px solid rgba(243, 239, 233, 0.24);
+      background: rgba(13, 13, 14, 0.62);
+      color: var(--sc-ink);
+      font-size: 13px;
+      font-weight: 600;
+      transition: border-color 0.25s var(--ease), color 0.25s var(--ease);
+    }
+    .hud-ghost:hover { border-color: var(--sc-accent); color: var(--sc-accent); }
+
+    /* ACT 1: DIMENSIONAL LAYERED AUTO SERVICE HERO (REAL LIFT BAY) */
+    .hero-stage { background: transparent; }
+
+    .hero-plate {
+      position: absolute;
+      inset: -4%;
+      z-index: 1;
+      overflow: hidden;
+      transform: translate3d(calc((var(--mx) - 0.5) * -16px), calc((var(--my) - 0.5) * -10px), 0);
+      transition: transform 0.55s var(--ease-silky);
+    }
+    .hero-plate img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: 62% 48%;
+      filter: brightness(0.68) contrast(1.06) saturate(0.88);
+    }
+
+    .hero-scrim-service {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      pointer-events: none;
+      background:
+        linear-gradient(90deg, rgba(13, 13, 14, 0.94) 0%, rgba(13, 13, 14, 0.78) 44%, rgba(13, 13, 14, 0.28) 76%, rgba(13, 13, 14, 0.14) 100%),
+        linear-gradient(180deg, rgba(13, 13, 14, 0.45) 0%, transparent 24%, rgba(13, 13, 14, 0.86) 100%);
+    }
+
+    .hero-hud-copy {
+      top: 50%;
+      bottom: auto;
+      transform: translateY(-48%);
+      max-width: min(50rem, 86vw);
+    }
+
+    .hud-coord {
+      font-family: var(--sc-font-mono);
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--sc-brass);
+      margin-bottom: 16px;
+      display: block;
+    }
+
+    .hero-h1 {
+      font-family: var(--sc-font-display);
+      font-size: clamp(2.1rem, 5.2vw, 4.7rem);
+      font-weight: 700;
+      line-height: 1.02;
+      letter-spacing: -0.035em;
+      text-transform: uppercase;
+      margin: 0;
+    }
+    .hero-h1 .fire { color: var(--sc-accent); }
+
+    .hero-subline {
+      margin: 20px 0 24px;
+      font-size: clamp(0.98rem, 1.2vw, 1.12rem);
+      line-height: 1.56;
+      color: var(--sc-ink-soft);
+      max-width: 48ch;
+    }
+
+    .hero-cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 12px 16px;
+      margin-bottom: 26px;
+    }
+
+    .hero-fact-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 12px 26px;
+      padding-top: 18px;
+      border-top: 1px solid rgba(243, 239, 233, 0.16);
+      font-family: var(--sc-font-mono);
+      font-size: 12px;
+      color: var(--sc-ink);
+    }
+    .hero-fact-bar b { color: var(--sc-accent); font-weight: 600; }
+
+    /* ACT 2: INTERACTIVE SYMPTOM HELPER ("ЧТО БЕСПОКОИТ В МАШИНЕ?") */
+    @keyframes silkySwap {
+      from { opacity: 0; transform: translate3d(0, 10px, 0); }
+      to { opacity: 1; transform: translate3d(0, 0, 0); }
+    }
+
+    .symptom-act {
+      padding: clamp(5.5rem, 10vw, 9rem) 0;
+      border-top: 1px solid var(--sc-hairline);
+    }
+
+    .sec-head {
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+      gap: 18px 56px;
+      align-items: end;
+      margin-bottom: clamp(28px, 4vw, 44px);
+    }
+    .sec-title {
+      margin: 0;
+      font-family: var(--sc-font-display);
+      font-size: clamp(1.7rem, 3.3vw, 2.9rem);
+      font-weight: 700;
+      line-height: 1.08;
+      letter-spacing: -0.03em;
+      text-transform: uppercase;
+    }
+    .sec-title span { color: var(--sc-accent); }
+    .sec-note { margin: 0; font-size: 15px; line-height: 1.56; color: var(--sc-ink-soft); max-width: 46ch; }
+
+    .symptom-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.04fr) minmax(0, 0.96fr);
+      gap: 22px;
+      align-items: stretch;
+    }
+
+    .symptom-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .sym-btn {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 18px 20px;
+      border-radius: var(--sc-r-md);
+      border: 1px solid var(--sc-hairline);
+      background: rgba(21, 21, 23, 0.82);
+      color: var(--sc-ink);
+      text-align: left;
+      cursor: pointer;
+      transition: border-color 0.28s var(--ease), background-color 0.28s var(--ease), transform 0.28s var(--ease-silky);
+    }
+    .sym-btn:hover {
+      border-color: rgba(243, 239, 233, 0.34);
+      transform: translateY(-2px);
+    }
+    .sym-btn.is-active {
+      border-color: var(--sc-accent);
+      background: rgba(226, 99, 36, 0.14);
+    }
+    .sym-tag {
+      font-family: var(--sc-font-mono);
+      font-size: 11px;
+      text-transform: uppercase;
+      color: var(--sc-brass);
+    }
+    .sym-btn.is-active .sym-tag { color: var(--sc-accent); }
+    .sym-name {
+      font-family: var(--sc-font-display);
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 1.32;
+    }
+    .sym-sub { font-size: 12.5px; color: var(--sc-ink-soft); line-height: 1.4; }
+
+    .sym-card {
+      background: rgba(21, 21, 23, 0.90);
+      border: 1px solid rgba(226, 99, 36, 0.32);
+      border-radius: var(--sc-r-md);
+      padding: clamp(24px, 3vw, 34px);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 320px;
+    }
+    .sym-card-inner {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 18px;
+      flex: 1;
+      animation: silkySwap 0.38s var(--ease-silky) both;
+    }
+    .sc-badge {
+      font-family: var(--sc-font-mono);
+      font-size: 11.5px;
+      color: var(--sc-accent);
+      text-transform: uppercase;
+      margin-bottom: 8px;
+      display: block;
+    }
+    .sym-card h3 {
+      margin: 0 0 10px;
+      font-family: var(--sc-font-display);
+      font-size: clamp(18px, 2vw, 22px);
+      font-weight: 600;
+      line-height: 1.25;
+    }
+    .sym-card p { margin: 0 0 14px; font-size: 14.5px; line-height: 1.56; color: var(--sc-ink-soft); }
+    .sc-checks {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      gap: 8px;
+    }
+    .sc-checks li { font-size: 13.5px; color: var(--sc-ink); display: flex; gap: 10px; }
+    .sc-checks li::before { content: '+'; font-family: var(--sc-font-mono); color: var(--sc-accent); font-weight: 700; }
+
+    .sc-foot {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      padding-top: 16px;
+      border-top: 1px solid var(--sc-hairline);
+    }
+    .sc-meta span { display: block; font-family: var(--sc-font-mono); font-size: 11.5px; color: var(--sc-ink-soft); }
+    .sc-meta strong { font-family: var(--sc-font-display); font-size: 16.5px; color: var(--sc-ink); }
+
+    /* ACT 3: ENGINEERED PEAK — IRIS REVEAL ON TIMING GEARS & ГБЦ */
+    .peak-media {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      overflow: hidden;
+    }
+    .peak-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: 50% 50%;
+      filter: brightness(0.84) contrast(1.06);
+    }
+
+    .peak-overlay-ui {
+      position: absolute;
+      inset: 0;
+      z-index: 25;
+      pointer-events: none;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: clamp(5.5rem, 9vh, 7rem) var(--sc-gutter) clamp(2rem, 5vh, 3.5rem);
+    }
+    .peak-overlay-ui > * { pointer-events: auto; }
+
+    .peak-head { max-width: 44rem; }
+    .peak-title {
+      font-family: var(--sc-font-display);
+      font-size: clamp(1.9rem, 4.1vw, 3.8rem);
+      font-weight: 700;
+      line-height: 1.04;
+      letter-spacing: -0.035em;
+      text-transform: uppercase;
+      margin: 0 0 12px;
+    }
+    .peak-sub { margin: 0; font-size: 15px; color: var(--sc-ink-soft); max-width: 48ch; }
+
+    .cnc-inspector {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(280px, 430px);
+      gap: 20px;
+      align-items: end;
+    }
+    .cnc-nodes { display: flex; flex-wrap: wrap; gap: 10px; }
+    .cnc-pin {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      min-height: 44px;
+      padding: 0 16px;
+      border-radius: var(--sc-r-pill);
+      border: 1px solid rgba(243, 239, 233, 0.22);
+      background: rgba(13, 13, 14, 0.80);
+      color: var(--sc-ink);
+      font-family: var(--sc-font-mono);
+      font-size: 12px;
+      cursor: pointer;
+      transition: border-color 0.25s var(--ease), background-color 0.25s var(--ease), transform 0.25s var(--ease-silky);
+    }
+    .cnc-pin:hover { border-color: var(--sc-accent); transform: translateY(-2px); }
+    .cnc-pin.is-active { background: var(--sc-accent); border-color: var(--sc-accent); color: var(--sc-ink); font-weight: 600; }
+
+    .cnc-readout {
+      background: rgba(13, 13, 14, 0.88);
+      border: 1px solid rgba(226, 99, 36, 0.34);
+      border-radius: var(--sc-r-md);
+      padding: 20px 22px;
+    }
+    .cnc-readout-code { font-family: var(--sc-font-mono); font-size: 11px; text-transform: uppercase; color: var(--sc-brass); margin-bottom: 6px; }
+    .cnc-readout h3 { margin: 0 0 6px; font-family: var(--sc-font-display); font-size: 16px; font-weight: 600; }
+    .cnc-readout p { margin: 0; font-size: 13.5px; line-height: 1.5; color: var(--sc-ink-soft); }
+
+    /* ACT 4: LATERAL RANGE — HORIZONTAL PAN RAIL */
+    .pan-stage {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: clamp(5rem, 8vh, 6.5rem) 0 clamp(2.5rem, 5vh, 4rem);
+      background: transparent;
+    }
+    .pan-head {
+      margin-bottom: clamp(24px, 3.5vh, 40px);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 16px 36px;
+    }
+    .pan-title {
+      margin: 0;
+      font-family: var(--sc-font-display);
+      font-size: clamp(1.8rem, 3.4vw, 3.1rem);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: -0.03em;
+    }
+    .pan-note { margin: 0; font-size: 14.5px; color: var(--sc-ink-soft); max-width: 42ch; }
+
+    .rail-viewport { overflow: hidden; width: 100%; }
+    .service-rail { display: flex; gap: 20px; padding-inline: var(--sc-gutter); width: max-content; }
+    .rail-card {
+      width: clamp(290px, 30vw, 410px);
+      min-height: 310px;
+      padding: 28px;
+      border-radius: var(--sc-r-md);
+      background: rgba(21, 21, 23, 0.88);
+      border: 1px solid var(--sc-hairline);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 22px;
+      transition: border-color 0.25s var(--ease), transform 0.25s var(--ease-silky);
+    }
+    .rail-card:hover { border-color: rgba(226, 99, 36, 0.5); transform: translateY(-3px); }
+    .rc-meta { display: flex; justify-content: space-between; gap: 12px; font-family: var(--sc-font-mono); font-size: 11.5px; color: var(--sc-brass); }
+    .rc-title { margin: 12px 0 8px; font-family: var(--sc-font-display); font-size: 18px; font-weight: 600; line-height: 1.25; }
+    .rc-desc { margin: 0; font-size: 14px; line-height: 1.55; color: var(--sc-ink-soft); }
+    .rc-foot { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-top: 16px; border-top: 1px solid var(--sc-hairline); }
+    .rc-price { font-family: var(--sc-font-mono); font-size: 14.5px; font-weight: 600; color: var(--sc-ink); }
+    .rc-btn {
+      min-height: 38px;
+      padding: 0 16px;
+      border-radius: var(--sc-r-pill);
+      border: 1px solid var(--sc-hairline-strong);
+      background: transparent;
+      color: var(--sc-ink);
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.22s var(--ease), color 0.22s var(--ease), border-color 0.22s var(--ease);
+    }
+    .rc-btn:hover { background: var(--sc-accent); border-color: var(--sc-accent); color: var(--sc-ink); }
+
+    /* ACT 5: RESOLUTION — MASTERS + BOOKING */
+    .close-act {
+      padding: clamp(5rem, 9vw, 8.5rem) 0 clamp(4rem, 7vw, 6rem);
+      border-top: 1px solid var(--sc-hairline);
+      background: rgba(13, 13, 14, 0.94);
+    }
+    .close-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+      gap: clamp(32px, 5vw, 72px);
+      align-items: start;
+    }
+
+    .master-tabs { display: flex; flex-wrap: wrap; gap: 8px; margin: 22px 0 20px; }
+    .m-pill {
+      min-height: 38px;
+      padding: 0 15px;
+      border-radius: var(--sc-r-pill);
+      border: 1px solid var(--sc-hairline-strong);
+      background: transparent;
+      color: var(--sc-ink-soft);
+      font-size: 12.5px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.22s var(--ease), color 0.22s var(--ease), border-color 0.22s var(--ease);
+    }
+    .m-pill:hover { border-color: var(--sc-ink); color: var(--sc-ink); }
+    .m-pill.is-active { background: var(--sc-accent); border-color: var(--sc-accent); color: var(--sc-ink); }
+
+    .zoon-box {
+      background: var(--sc-surface);
+      border: 1px solid var(--sc-hairline);
+      border-radius: var(--sc-r-md);
+      padding: 24px 26px;
+      min-height: 220px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .zb-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+    .zb-name { font-family: var(--sc-font-display); font-size: 18px; font-weight: 600; }
+    .zb-badge { font-family: var(--sc-font-mono); font-size: 12px; color: var(--sc-accent); }
+    .zb-role { font-size: 13.5px; color: var(--sc-ink-soft); margin-top: 4px; }
+    .zb-quote { margin: 0; padding-top: 14px; border-top: 1px solid var(--sc-hairline); font-size: 15px; line-height: 1.56; color: var(--sc-ink); }
+    .zb-author { font-size: 12.5px; color: var(--sc-ink-soft); }
+
+    .contact-strip { margin-top: 26px; border-top: 1px solid var(--sc-hairline); }
+    .cs-row { display: flex; justify-content: space-between; gap: 16px; padding: 12px 0; border-bottom: 1px solid var(--sc-hairline); font-size: 13.5px; }
+    .cs-row span:first-child { color: var(--sc-ink-soft); }
+    .cs-row span:last-child { color: var(--sc-ink); text-align: right; }
+
+    .phone-line { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-top: 24px; }
+    .phone-link { font-family: var(--sc-font-display); font-size: clamp(1.3rem, 2.2vw, 1.85rem); font-weight: 700; transition: color 0.18s var(--ease); }
+    .phone-link:hover { color: var(--sc-accent); }
+    .copy-chip {
+      min-height: 32px;
+      padding: 0 13px;
+      border-radius: var(--sc-r-pill);
+      border: 1px solid var(--sc-hairline-strong);
+      background: transparent;
+      color: var(--sc-ink-soft);
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .copy-chip.is-copied { background: var(--sc-accent); color: var(--sc-ink); border-color: var(--sc-accent); }
+
+    .booking-panel {
+      background: var(--sc-surface);
+      border: 1px solid var(--sc-hairline);
+      border-radius: var(--sc-r-md);
+      padding: clamp(24px, 3vw, 36px);
+    }
+    .booking-panel h2 { margin: 0 0 20px; font-family: var(--sc-font-display); font-size: clamp(1.4rem, 2.2vw, 2rem); font-weight: 700; text-transform: uppercase; }
+    .form-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+    .field { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+    .field-full { grid-column: 1 / -1; }
+    .field label { font-size: 12px; color: var(--sc-ink-soft); }
+    .field input, .field select, .field textarea {
+      width: 100%;
+      min-height: 46px;
+      padding: 10px 14px;
+      border-radius: 8px;
+      border: 1px solid var(--sc-hairline-strong);
+      background: var(--sc-canvas);
+      color: var(--sc-ink);
+      font-size: 14px;
+    }
+    .field textarea { min-height: 76px; resize: vertical; }
+    .field input:focus, .field select:focus, .field textarea:focus { outline: none; border-color: var(--sc-accent); }
+    .field-err { font-size: 12px; color: var(--sc-accent); min-height: 15px; }
+
+    @keyframes fieldPulse {
+      0% { border-color: var(--sc-accent); box-shadow: 0 0 0 3px rgba(226, 99, 36, 0.35); }
+      100% { border-color: var(--sc-hairline-strong); box-shadow: 0 0 0 0 rgba(226, 99, 36, 0); }
+    }
+    .field-pulse { animation: fieldPulse 0.9s var(--ease-silky); }
+
+    .form-foot { margin-top: 16px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px; }
+    .form-note { margin: 0; font-size: 12px; color: var(--sc-ink-soft); max-width: 32ch; }
+
+    .booking-ok { display: none; }
+    .booking-ok.is-visible { display: block; animation: silkySwap 0.35s var(--ease-silky) both; }
+    .booking-ok h3 { margin: 0 0 8px; font-family: var(--sc-font-display); font-size: 20px; }
+    .booking-ok p { margin: 0 0 20px; font-size: 14px; color: var(--sc-ink-soft); }
+
+    .site-foot {
+      border-top: 1px solid var(--sc-hairline);
+      padding: 24px 0 34px;
+      font-family: var(--sc-font-mono);
+      font-size: 11.5px;
+      color: var(--sc-ink-soft);
+      background: var(--sc-canvas);
+    }
+    .site-foot-row { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px 24px; }
+
+    @media (max-width: 960px) {
+      .hud-links, .vernier-rail { display: none; }
+      .sec-head, .symptom-layout, .cnc-inspector, .close-grid { grid-template-columns: 1fr; }
+      .sc-act--pinned[data-sc-act="pan"] { height: auto !important; }
+      .sc-act--pinned[data-sc-act="pan"] .sc-stage { position: static; height: auto; overflow: visible; }
+      .rail-viewport { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+      .service-rail { transform: none !important; padding-bottom: 12px; }
+    }
+
+    @media (max-width: 640px) {
+      .symptom-grid, .form-grid { grid-template-columns: 1fr; }
+      .cs-row { flex-direction: column; gap: 4px; }
+      .cs-row span:last-child { text-align: left; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .mech-rotor, .mech-gear-a, .mech-gear-b, .mech-svg { transform: none !important; }
+    }
+  </style>
+<style>@media(max-width:740px){img,video{max-width:100%}input,select,textarea{max-width:100%;font-size:16px!important}.form-grid>*{min-width:0}.hero-h1,.hero-title{overflow-wrap:break-word}.booking-form{min-width:0}}</style></head>
+<body>
+  <div data-sc-progress aria-hidden="true"></div>
+  <div class="sc-grain" aria-hidden="true"></div>
+
+  <!-- SILKY INERTIAL VECTOR AUTOMOTIVE BLUEPRINT BACKGROUND -->
+  <div class="mech-bg" aria-hidden="true">
+    <svg class="mech-svg" viewBox="0 0 1440 900" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+      <line x1="120" y1="0" x2="120" y2="900" stroke="#F3EFE9" stroke-width="0.6" stroke-dasharray="4 8"/>
+      <line x1="1320" y1="0" x2="1320" y2="900" stroke="#F3EFE9" stroke-width="0.6" stroke-dasharray="4 8"/>
+      <line x1="0" y1="450" x2="1440" y2="450" stroke="#F3EFE9" stroke-width="0.5" stroke-dasharray="6 10"/>
+
+      <g class="mech-rotor" id="mechRotor" stroke="#F3EFE9">
+        <circle cx="1170" cy="480" r="300" stroke-width="1.2"/>
+        <circle cx="1170" cy="480" r="276" stroke-width="0.7" stroke-dasharray="10 8"/>
+        <circle cx="1170" cy="480" r="168" stroke-width="1"/>
+        <circle cx="1170" cy="480" r="108" stroke-width="1.2"/>
+        <circle cx="1170" cy="480" r="46" stroke-width="0.9"/>
+        <circle cx="1170" cy="402" r="10" stroke-width="1"/>
+        <circle cx="1244" cy="456" r="10" stroke-width="1"/>
+        <circle cx="1216" cy="543" r="10" stroke-width="1"/>
+        <circle cx="1124" cy="543" r="10" stroke-width="1"/>
+        <circle cx="1096" cy="456" r="10" stroke-width="1"/>
+        <line x1="1170" y1="196" x2="1205" y2="296" stroke="#E26324" stroke-width="1.4"/>
+        <line x1="1371" y1="279" x2="1320" y2="372" stroke="#E26324" stroke-width="1.4"/>
+        <line x1="1454" y1="480" x2="1354" y2="515" stroke="#E26324" stroke-width="1.4"/>
+        <line x1="1371" y1="681" x2="1278" y2="630" stroke="#E26324" stroke-width="1.4"/>
+        <line x1="1170" y1="764" x2="1135" y2="664" stroke="#E26324" stroke-width="1.4"/>
+        <line x1="969" y1="681" x2="1020" y2="588" stroke="#E26324" stroke-width="1.4"/>
+        <line x1="886" y1="480" x2="986" y2="445" stroke="#E26324" stroke-width="1.4"/>
+        <line x1="969" y1="279" x2="1062" y2="330" stroke="#E26324" stroke-width="1.4"/>
+      </g>
+
+      <g class="mech-gear-a" id="mechGearA" stroke="#D4A564">
+        <circle cx="230" cy="210" r="118" stroke-width="1.2" stroke-dasharray="14 7"/>
+        <circle cx="230" cy="210" r="96" stroke-width="0.9"/>
+        <circle cx="230" cy="210" r="34" stroke-width="1.1"/>
+        <circle cx="230" cy="144" r="16" stroke-width="0.9"/>
+        <circle cx="287" cy="243" r="16" stroke-width="0.9"/>
+        <circle cx="173" cy="243" r="16" stroke-width="0.9"/>
+      </g>
+
+      <g class="mech-gear-b" id="mechGearB" stroke="#E26324">
+        <circle cx="412" cy="282" r="78" stroke-width="1.2" stroke-dasharray="11 6"/>
+        <circle cx="412" cy="282" r="60" stroke-width="0.8"/>
+        <circle cx="412" cy="282" r="22" stroke-width="1"/>
+        <line x1="412" y1="222" x2="412" y2="342" stroke-width="0.7"/>
+        <line x1="352" y1="282" x2="472" y2="282" stroke-width="0.7"/>
+      </g>
+
+      <line x1="252" y1="94" x2="438" y2="208" stroke="#F3EFE9" stroke-width="0.7" stroke-dasharray="5 5"/>
+      <line x1="176" y1="316" x2="390" y2="358" stroke="#F3EFE9" stroke-width="0.7" stroke-dasharray="5 5"/>
+    </svg>
+  </div>
+
+  <!-- RIGHT-EDGE VERNIER TELEMETRY -->
+  <div class="vernier-rail" aria-hidden="true">
+    <span id="vernierVal">0.00 MM</span>
+    <div class="vernier-track">
+      <div class="vernier-needle"></div>
+    </div>
+    <span>ГБЦ·76</span>
+  </div>
+
+  <header class="hud-nav">
+    <a class="hud-brand" href="#arrival">
+      <span class="hud-dot" aria-hidden="true"></span>
+      <span>АВТОВЭЛТ</span>
+    </a>
+
+    <nav class="hud-links" aria-label="Навигация">
+      <a href="#symptoms">Поломки</a>
+      <a href="#peak">Цех ГБЦ</a>
+      <a href="#range">Услуги</a>
+      <a href="#resolve">Мастера</a>
+      <a href="#resolve">Запись</a>
+    </nav>
+
+    <a class="hud-cta" href="#resolve" data-sc-magnet="0.25">Запись в бокс →</a>
+  </header>
+
+  <main id="main-content">
+    <!-- ACT 1: LAYERED AUTO SERVICE BAY HERO -->
+    <section id="arrival" data-sc-act="pin" data-sc-span="1.65" data-sc-drift="#0D0D0E">
+      <div class="sc-stage hero-stage" data-sc-stage>
+        <div class="hero-plate" data-sc-parallax="-0.10">
+          <img src="../media/5e95076111e95316b9db82.jpg" alt="Кроссовер на двухстоечном подъёмнике в ремзоне автосервиса с диагностическим сканером">
+        </div>
+        <div class="hero-scrim-service" aria-hidden="true"></div>
+
+        <div class="sc-copy sc-copy--lead hero-hud-copy" data-sc-cue="0 0.92 0 0.25">
+          <span class="hud-coord" id="scrambleCoord">АВТОСЕРВИС В КРАСНОЯРСКЕ · КРАСНОМОСКОВСКАЯ, 76</span>
+          <h1 class="hero-h1">ПОЧИНИМ ВАШ АВТО <span class="fire">БЕЗ ЛИШНИХ</span> РАБОТ</h1>
+          <p class="hero-subline">
+            Осмотр на подъёмнике при вас, фиксированная смета до начала ремонта, фотоотчёт в мессенджер и возврат старых деталей. Берём сложную электрику и двигатели.
+          </p>
+          <div class="hero-cta-row">
+            <a class="hud-cta" href="#resolve" data-sc-magnet="0.22">Записаться на осмотр →</a>
+            <a class="hud-ghost" href="#symptoms">Подобрать по поломке ↓</a>
+          </div>
+          <div class="hero-fact-bar nowrap-num">
+            <span>ZOON <b>5,0 · №2</b> ПО ЭЛЕКТРИКЕ</span>
+            <span>ГБЦ <b>1,5–24 Ч</b></span>
+            <span>ДВИГАТЕЛИ <b>ОТ 5 000 ₽</b></span>
+            <span>КОЛОДКИ <b>ОТ 800 ₽</b></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ACT 2: INTERACTIVE SYMPTOM HELPER ("ЧТО БЕСПОКОИТ В МАШИНЕ?") -->
+    <section id="symptoms" class="symptom-act" data-sc-act="flow" data-sc-drift="#111114">
+      <div class="sc-wrap">
+        <div class="sec-head" data-sc-in>
+          <h2 class="sec-title">Что беспокоит <span>в машине?</span></h2>
+          <p class="sec-note">
+            Выберите симптом: покажем, с чего начнём диагностику на подъёмнике, сколько времени займёт ремонт и какой мастер возьмёт автомобиль.
+          </p>
+        </div>
+
+        <div class="symptom-layout" data-sc-in>
+          <div class="symptom-grid" id="symptomGrid" role="tablist" aria-label="Симптомы поломки">
+            <button type="button" class="sym-btn is-active" role="tab" aria-selected="true" data-sym="0">
+              <span class="sym-tag">Электрика · №2 Zoon</span>
+              <span class="sym-name">Горит Check Engine, троит или не заводится</span>
+              <span class="sym-sub">Плавающие ошибки, обрывы, датчики, ЭБУ</span>
+            </button>
+            <button type="button" class="sym-btn" role="tab" aria-selected="false" data-sym="1">
+              <span class="sym-tag">Двигатель и ГБЦ</span>
+              <span class="sym-name">Перегрев, уходит антифриз или ест масло</span>
+              <span class="sym-sub">Прокладка ГБЦ, ГРМ, кольца, опрессовка</span>
+            </button>
+            <button type="button" class="sym-btn" role="tab" aria-selected="false" data-sym="2">
+              <span class="sym-tag">Тормоза · от 800 ₽</span>
+              <span class="sym-name">Скрип при торможении или бьёт руль</span>
+              <span class="sym-sub">Колодки, диски, направляющие суппортов</span>
+            </button>
+            <button type="button" class="sym-btn" role="tab" aria-selected="false" data-sym="3">
+              <span class="sym-tag">Ходовая и KDSS</span>
+              <span class="sym-name">Стук на ямах, люфт руля или тянет в сторону</span>
+              <span class="sym-sub">Подвеска, рейки, ШРУСы, развал-схождение</span>
+            </button>
+            <button type="button" class="sym-btn" role="tab" aria-selected="false" data-sym="4">
+              <span class="sym-tag">АКПП и ТО</span>
+              <span class="sym-name">Пинки коробки или пора на плановое ТО</span>
+              <span class="sym-sub">Масла, фильтры, вариаторы, диагностика</span>
+            </button>
+            <button type="button" class="sym-btn" role="tab" aria-selected="false" data-sym="5">
+              <span class="sym-tag">Защита кузова</span>
+              <span class="sym-name">Антикор днища и порогов от ржавчины</span>
+              <span class="sym-sub">Снятие обвесов и фото скрытых полостей</span>
+            </button>
+          </div>
+
+          <div class="sym-card" id="symptomCard" aria-live="polite"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ACT 3: ENGINEERED PEAK — IRIS REVEAL ON TIMING GEARS & ГБЦ -->
+    <section id="peak" data-sc-act="pin" data-sc-span="2.4" data-sc-dwell="0.48" data-sc-drift="#0B0B0C">
+      <div class="sc-stage" data-sc-stage>
+        <div class="peak-media" data-sc-reveal="iris" data-sc-reveal-at="0.04 0.50">
+          <img src="../media/08a350ddf67e6312320db7.jpg" alt="Алюминиевая ГБЦ с распредвалами и цепью ГРМ на слесарном столе">
+        </div>
+        <div class="sc-scrim sc-scrim--band"></div>
+        <div class="sc-scrim sc-scrim--vignette"></div>
+
+        <div class="peak-overlay-ui" data-sc-cue="0.14 0.96 0.18 0.18">
+          <div class="peak-head">
+            <h2 class="peak-title" data-sc-kinetic="lines">Собственный цех ГБЦ</h2>
+            <p class="peak-sub">
+              Вся станочная обработка, промер и ультразвуковая мойка проходят внутри нашего сервиса за 1,5–24 часа без посредников. Выберите операцию.
+            </p>
+          </div>
+
+          <div class="cnc-inspector">
+            <div class="cnc-nodes" id="cncNodes" role="tablist" aria-label="Операции цеха ГБЦ">
+              <button type="button" class="cnc-pin is-active" role="tab" aria-selected="true" data-cnc="0">01 · Опрессовка</button>
+              <button type="button" class="cnc-pin" role="tab" aria-selected="false" data-cnc="1">02 · Фрезеровка</button>
+              <button type="button" class="cnc-pin" role="tab" aria-selected="false" data-cnc="2">03 · Ультразвук</button>
+              <button type="button" class="cnc-pin" role="tab" aria-selected="false" data-cnc="3">04 · Расточка блока</button>
+            </div>
+
+            <div class="cnc-readout" id="cncReadout" aria-live="polite"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ACT 4: LATERAL RANGE — HORIZONTAL PAN RAIL -->
+    <section id="range" data-sc-act="pan" data-sc-span="2.2" data-sc-drift="#111113">
+      <div class="sc-stage pan-stage" data-sc-stage>
+        <div class="sc-wrap pan-head">
+          <h2 class="pan-title">Услуги и цены</h2>
+          <p class="pan-note">
+            Прокручивайте ленту направлений. Нажмите «Выбрать», чтобы сразу подставить услугу в форму записи.
+          </p>
+        </div>
+
+        <div class="rail-viewport">
+          <div class="service-rail" id="serviceRail" data-sc-pan="0.08"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ACT 5: RESOLUTION — MASTERS + BOOKING -->
+    <section id="resolve" class="close-act" data-sc-act="flow" data-sc-drift="#0D0D0E">
+      <div class="sc-wrap close-grid">
+        <div data-sc-in>
+          <span class="sc-label">Мастера и реальные отзывы Zoon 2026</span>
+          <div class="master-tabs" id="masterTabs" role="tablist" aria-label="Мастера АвтоВэлт">
+            <button type="button" class="m-pill is-active" role="tab" aria-selected="true" data-idx="0">Эдгард Дерксен</button>
+            <button type="button" class="m-pill" role="tab" aria-selected="false" data-idx="1">Сергей Сенич</button>
+            <button type="button" class="m-pill" role="tab" aria-selected="false" data-idx="2">Константин Черных</button>
+            <button type="button" class="m-pill" role="tab" aria-selected="false" data-idx="3">Игорь Овсянников</button>
+            <button type="button" class="m-pill" role="tab" aria-selected="false" data-idx="4">Олеся Дерксен</button>
+          </div>
+
+          <div class="zoon-box" id="masterCard" aria-live="polite"></div>
+
+          <div class="phone-line">
+            <a class="phone-link nowrap-num" href="tel:+79135107505">+7&nbsp;(913)&nbsp;510-75-05</a>
+            <button type="button" class="copy-chip" id="copyPhoneBtn">Скопировать</button>
+          </div>
+
+          <div class="contact-strip">
+            <div class="cs-row"><span>Адрес</span><span>Красноярск, Красномосковская, 76</span></div>
+            <div class="cs-row"><span>Режим</span><span class="nowrap-num">Пн–Пт 09:00–19:00 · Сб 09:00–15:00 · Вс вых.</span></div>
+            <div class="cs-row"><span>Оплата</span><span>Карта, QR-код, наличные, перевод, безнал</span></div>
+          </div>
+        </div>
+
+        <div class="booking-panel" data-sc-in>
+          <h2>Запись в бокс</h2>
+          <form id="bookingForm" novalidate>
+            <div class="form-grid">
+              <div class="field field-full">
+                <label for="fService">Направление</label>
+                <select id="fService" name="service">
+                  <option value="Сложная автоэлектрика и ЭБУ">Сложная автоэлектрика и диагностика</option>
+                  <option value="Цех ГБЦ и ультразвуковая мойка">Цех ГБЦ и ультразвуковая мойка (1,5–24 ч)</option>
+                  <option value="Ремонт двигателя (от 5 000 ₽)">Ремонт двигателя бензин/дизель (от 5 000 ₽)</option>
+                  <option value="Тормозная система и колодки (от 800 ₽)">Тормозная система и колодки (от 800 ₽)</option>
+                  <option value="Подвеска, рулевые рейки и KDSS">Подвеска, рулевые рейки и KDSS</option>
+                  <option value="АКПП, вариаторы, ТО и антикор">АКПП, вариаторы, плановое ТО и антикор</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="fCar">Автомобиль</label>
+                <input type="text" id="fCar" name="car" placeholder="Volvo XC60 / Toyota" autocomplete="off">
+                <span class="field-err" id="errCar"></span>
+              </div>
+              <div class="field">
+                <label for="fTime">Когда удобно</label>
+                <select id="fTime" name="time">
+                  <option value="Ближайшее окно">Ближайшее свободное окно</option>
+                  <option value="Сегодня до 19:00">Сегодня до 19:00</option>
+                  <option value="Завтра утром (09:00–12:00)">Завтра утром (09:00–12:00)</option>
+                  <option value="В субботу (09:00–15:00)">В субботу (09:00–15:00)</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="fName">Ваше имя</label>
+                <input type="text" id="fName" name="name" placeholder="Имя" autocomplete="name">
+                <span class="field-err" id="errName"></span>
+              </div>
+              <div class="field">
+                <label for="fPhone">Телефон</label>
+                <input type="tel" id="fPhone" name="phone" placeholder="+7 (9__) ___-__-__" autocomplete="tel">
+                <span class="field-err" id="errPhone"></span>
+              </div>
+              <div class="field field-full">
+                <label for="fComment">Симптомы (необязательно)</label>
+                <textarea id="fComment" name="comment" placeholder="Опишите поломку или нужные работы"></textarea>
+              </div>
+            </div>
+            <div class="form-foot">
+              <button type="submit" class="hud-cta" data-sc-magnet="0.22">Подготовить заявку →</button>
+              <p class="form-note">Данные остаются на этой странице. Для записи позвоните в сервис.</p>
+            </div>
+          </form>
+
+          <div class="booking-ok" id="bookingOk" role="status" aria-live="polite">
+            <h3>Черновик заявки готов</h3>
+            <p id="okSummary"></p><a href="tel:+79135107505">Позвонить в сервис ↗</a>
+            <button type="button" class="hud-cta" id="resetBtn">Новая заявка</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-foot">
+    <div class="sc-wrap site-foot-row">
+      <span>АВТОВЭЛТ · АВТОСЕРВИС · КРАСНОЯРСК, КРАСНОМОСКОВСКАЯ, 76</span>
+      <span>© 2026 · autowelt-auto.ru · Фото: редакционные стенд-ины</span>
+    </div>
+  </footer>
+
+  <script>
+/* ============================================================================
+   scrollcraft: a scroll-driven interaction runtime
+   ----------------------------------------------------------------------------
+   Vanilla JS. Zero dependencies. Zero DOM generation.
+
+   The engine does NOT build your page. You author real, semantic HTML and mark
+   it up with data-sc-* attributes; the engine reads them and drives them from a
+   single scroll value on a single rAF loop. That is deliberate: a runtime that
+   generates its own DOM from a config object makes every site it touches look
+   identical, which is the failure mode this replaces.
+
+   ---------------------------------------------------------------------------
+   ACTS: the unit of scroll time
+   ---------------------------------------------------------------------------
+     <section data-sc-act="pin" data-sc-span="2.5"> ... </section>
+
+     data-sc-act   scrub | pin | pan | flow   (default: flow)
+     data-sc-clip-map="travel" opts a pinned act OUT of full-life clip mapping.
+                   By DEFAULT a scrub clip is mapped across the stage's entire
+                   on-screen life, not across its pinned travel, because a pinned
+                   stage is visible for a viewport BEFORE the pin begins (sliding
+                   up into view) and a viewport AFTER it ends (sliding off the
+                   top). Mapped to pinned travel, the clip sits on its first
+                   frame through the whole entry and its last frame through the
+                   whole exit: the reader watches a still photograph while the
+                   page moves. Pair it with data-sc-dwell, which moves quickly at
+                   the edges and settles in the middle, so the fast motion lands
+                   on the two slides and the settle lands inside the pin where
+                   the copy is. data-sc-runout is accepted and ignored; it named
+                   the old opt-in for the exit half of this.
+     data-sc-span  viewport-heights of scroll this act owns. Pinned devices only
+                   (scrub/pin/pan). Default 1.5. The engine sets the outer
+                   height and sticks the first .sc-stage / [data-sc-stage] child.
+
+     Every act exposes a normalized progress p (0..1):
+       pinned  p = (y - top) / (height - vh)
+       flow    p = (y + vh - top) / (height + vh)
+     and publishes it as --sc-p on the act element, so CSS can read it too.
+
+   ---------------------------------------------------------------------------
+   DEVICES: what p drives
+   ---------------------------------------------------------------------------
+     data-sc-scrub            on <video>. p scrubs currentTime. Blob-loaded, so
+                              it seeks without needing HTTP range support.
+     data-sc-sequence="a/{i}.webp:120:1"
+                              on <canvas>. p scrubs an image sequence
+                              (path template : frameCount : startIndex).
+     data-sc-pan="0.6"        on a wide rail inside data-sc-act="pan". p drives
+                              horizontal travel. Value = extra travel multiplier.
+     data-sc-parallax="-0.2"  translateY by rate * act-progress * viewport.
+                              Negative = moves up faster than scroll (recedes).
+     data-sc-cue="0.1 0.5"    opacity/rise keyed to p. One value = enter+hold.
+                              Two = enter..leave. Add a third for the hold point.
+     data-sc-kinetic="lines"  lines | words | chars. Splits the element and
+                              staggers its reveal across the cue window.
+     data-sc-reveal="up"      up | down | left | right | iris. clip-path wipe.
+     data-sc-count="0 4200"   number bloom across the cue window. Outside any
+                              act it ticks up once on entry instead, over
+                              data-sc-count-ms (default 1400).
+     data-sc-in               flow-section reveal, fires once on entry via
+                              IntersectionObserver (cheaper, and content that
+                              re-hides on scroll-up is a defect, not an effect).
+                              data-sc-stagger="60" on the parent staggers kids.
+     data-sc-drift="#07090c"  page background interpolates toward this colour
+                              while the act is on screen.
+
+   ---------------------------------------------------------------------------
+   WORLDFLIGHT: the page mode for one continuous flight
+   ---------------------------------------------------------------------------
+     <div data-sc-mode="worldflight" data-sc-seam="0.12">
+       <div data-sc-world>
+         <div data-sc-segment data-sc-w="1.4" data-sc-linger="0.3"
+              data-sc-waypoint="Approach">
+           <img class="sc-world__poster" src="p1.webp" alt="">
+           <video data-sc-src="leg1.mp4" data-sc-src-mobile="leg1-m.mp4"></video>
+         </div>
+         ... more segments, in flight order ...
+       </div>
+       <div data-sc-world-copy>
+         <div class="sc-world__scrim sc-scrim sc-scrim--band"></div>
+         <div data-sc-copy data-sc-window="hero"> ... </div>
+         <div data-sc-copy data-sc-window="0.34 0.56"> ... </div>
+         <div data-sc-copy data-sc-window="finale"> ... </div>
+       </div>
+       <div data-sc-spacer aria-hidden="true"></div>
+     </div>
+
+   Acts cut the page into pinned blocks, which is the right shape for a page of
+   chapters and the wrong shape for one continuous camera move: the reader hits
+   the end of an act, the stage unsticks, a static page slides past, and the next
+   act starts the whole thing again. Worldflight removes the seams by removing
+   the blocks. There is ONE fixed stage for the entire page. The only element in
+   document flow is a spacer, whose height the engine sets to the sum of the
+   segment weights plus one viewport so the last flight can finish. Scroll drives
+   the film timeline and the overlay opacity. Nothing else moves.
+
+     data-sc-w        viewport-heights this segment owns. Default 1.3.
+     data-sc-linger   dwell remap for this leg only (see lingerEase). Max 0.6.
+     data-sc-seam     crossfade band, in viewport-heights of scroll. Default 0.12.
+     data-sc-waypoint label published on --sc-seg / the sc:waypoint event, so a
+                      page can draw its own route rail. The engine draws none.
+     data-sc-window   on a copy block: "hero" | "finale" | "from to [in [out]]"
+                      as fractions of the WHOLE track.
+
+   Every clip stays mounted for the life of the page. Segments crossfade by
+   opacity over the seam band; nothing ever swaps a src, because a src swap is a
+   black frame and a black frame is the cut this mode exists to avoid.
+
+   ---------------------------------------------------------------------------
+   POINTER: interactivity that isn't scroll
+   ---------------------------------------------------------------------------
+     data-sc-tilt="8"         3D tilt toward the pointer, spring-damped, degrees.
+     data-sc-magnet="0.35"    element drifts toward the pointer inside its bounds.
+     data-sc-spotlight        publishes --sc-mx/--sc-my (0..1) for a light that
+                              follows the pointer across the surface.
+   All three are gated to (hover: hover) and (pointer: fine) and disabled under
+   prefers-reduced-motion. Touch never fires them.
+
+   ---------------------------------------------------------------------------
+   REDUCED MOTION
+   ---------------------------------------------------------------------------
+   Fewer and gentler, not zero. Cues still fade (comprehension survives), but
+   translation collapses, video clips are never fetched (the poster holds), and
+   pointer devices are inert. A worldflight still tells its whole story: the
+   posters cross-dissolve through the same seams and the same copy windows.
+
+   ---------------------------------------------------------------------------
+   THE PLAYHEAD
+   ---------------------------------------------------------------------------
+   Every scrub clip on the page, act or worldflight, is driven by one smoothed
+   playhead. Scroll only ever writes a TARGET; a standalone rAF loop walks the
+   current time toward it at a fixed fraction per frame (data-sc-lerp, default
+   0.18; 1.0 under reduced motion, which is no smoothing at all). Writes are
+   gated by a deadband and skipped while the decoder is still seeking. Without
+   the smoothing a trackpad flick reads as a stutter, because wheel events do
+   not arrive at a constant rate and a 1:1 write reproduces every gap in them.
+   ========================================================================== */
+
+(function (global) {
+  'use strict';
+
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var fineMQ = matchMedia('(hover: hover) and (pointer: fine)');
+  var smallMQ = matchMedia('(max-width: 860px)');
+  var coarse = matchMedia('(hover: none) and (pointer: coarse)').matches;
+  var isMobile = function () { return coarse || smallMQ.matches; };
+
+  var clamp = function (x, a, b) { return x < a ? a : x > b ? b : x; };
+  var clamp01 = function (x) { return clamp(x, 0, 1); };
+  var smooth = function (x) { x = clamp01(x); return x * x * (3 - 2 * x); };
+  var lerp = function (a, b, t) { return a + (b - a) * t; };
+
+  // Monotone dwell remap. Settles the camera mid-act (where the copy peaks) and
+  // moves quicker at the edges. f(0)=0 and f(1)=1 always, so seam frames between
+  // consecutive clips are untouched and the chain stays invisible.
+  function dwell(x, L) {
+    if (!L) return x;
+    L = clamp01(L);
+    var c = x - 0.5;
+    return (1 - L) * x + L * (4 * c * c * c + 0.5);
+  }
+
+  // Same curve, capped harder, and used per worldflight segment. Above ~0.6 the
+  // derivative at the midpoint gets low enough that the camera visibly stops
+  // dead mid-leg, which reads as a stall rather than a hold. The endpoints are
+  // fixed by construction: f(0)=0, f(1)=1, so the first and last frames of every
+  // leg are still exactly the frames the seam law matched, and the chain between
+  // legs stays invisible no matter how much dwell a leg asks for.
+  function lingerEase(x, L) {
+    if (!L) return x;
+    L = clamp(L, 0, 0.6);
+    var c = x - 0.5;
+    return (1 - L) * x + L * (4 * c * c * c + 0.5);
+  }
+
+  // The lerp is a mechanism, not a taste knob. It is exposed so a page whose
+  // clips are unusually short (where 0.18 lags behind the pointer) can tighten
+  // it, and it is never read as 0: a 0 lerp is a playhead that never moves.
+  function lerpRate(el) {
+    var v = parseFloat(el && el.getAttribute && el.getAttribute('data-sc-lerp'));
+    return isNaN(v) || v <= 0 ? 0 : clamp(v, 0.02, 1);
+  }
+
+  // ---- colour -------------------------------------------------------------
+  function parseColor(str) {
+    str = (str || '').trim();
+    var m = str.match(/^#([0-9a-f]{3}|[0-9a-f]{6})$/i);
+    if (m) {
+      var h = m[1];
+      if (h.length === 3) h = h[0] + h[0] + h[1] + h[1] + h[2] + h[2];
+      return [parseInt(h.slice(0, 2), 16), parseInt(h.slice(2, 4), 16), parseInt(h.slice(4, 6), 16)];
+    }
+    m = str.match(/rgba?\(([^)]+)\)/i);
+    if (m) {
+      var p = m[1].split(/[,\s/]+/).filter(Boolean).map(parseFloat);
+      return [p[0], p[1], p[2]];
+    }
+    return null;
+  }
+  function mixColor(a, b, t) {
+    return 'rgb(' + Math.round(lerp(a[0], b[0], t)) + ',' +
+                    Math.round(lerp(a[1], b[1], t)) + ',' +
+                    Math.round(lerp(a[2], b[2], t)) + ')';
+  }
+
+  // ---- text splitting -----------------------------------------------------
+  // Wraps each unit in a masked span so the reveal can slide from behind a clean
+  // edge instead of just fading. Lines are measured after layout, so this must
+  // run once fonts are ready or the line boxes are wrong.
+  function splitText(el, mode) {
+    if (el.__scSplit) return el.__scSplit;
+    var text = el.textContent;
+    var units = [];
+
+    if (mode === 'chars' || mode === 'words') {
+      var parts = mode === 'chars' ? Array.from(text) : text.split(/(\s+)/);
+      el.textContent = '';
+      parts.forEach(function (t) {
+        if (/^\s+$/.test(t)) { el.appendChild(document.createTextNode(t)); return; }
+        var mask = document.createElement('span');
+        mask.className = 'sc-split';
+        var inner = document.createElement('span');
+        inner.className = 'sc-split__i';
+        inner.textContent = t;
+        mask.appendChild(inner);
+        el.appendChild(mask);
+        units.push(inner);
+      });
+    } else {
+      // lines: wrap every word, measure offsetTop, regroup words into line spans
+      var words = text.split(/\s+/).filter(Boolean);
+      el.textContent = '';
+      var probes = words.map(function (w, i) {
+        var s = document.createElement('span');
+        s.textContent = w;
+        el.appendChild(s);
+        if (i < words.length - 1) el.appendChild(document.createTextNode(' '));
+        return s;
+      });
+      var lines = [], cur = null, lastTop = null;
+      probes.forEach(function (s) {
+        var top = s.offsetTop;
+        if (lastTop === null || Math.abs(top - lastTop) > 1) { cur = []; lines.push(cur); lastTop = top; }
+        cur.push(s.textContent);
+      });
+      el.textContent = '';
+      lines.forEach(function (words, li) {
+        var mask = document.createElement('span');
+        mask.className = 'sc-split sc-split--line';
+        var inner = document.createElement('span');
+        inner.className = 'sc-split__i';
+        inner.textContent = words.join(' ');
+        mask.appendChild(inner);
+        el.appendChild(mask);
+        // Whitespace between the line spans. Without it the line boxes abut in
+        // the text layer, so selecting and copying the heading yields
+        // "even whenbreakfast" and a screen reader hears the same.
+        if (li < lines.length - 1) el.appendChild(document.createTextNode(' '));
+        units.push(inner);
+      });
+    }
+    el.classList.add('sc-is-split');
+    el.__scSplit = units;
+    return units;
+  }
+
+  // ---- number formatting --------------------------------------------------
+  function formatNum(v, template) {
+    var decimals = 0;
+    var dot = template.indexOf('.');
+    if (dot > -1) decimals = template.length - dot - 1;
+    var s = v.toFixed(decimals);
+    if (/,/.test(template) || Math.abs(v) >= 10000) {
+      var bits = s.split('.');
+      bits[0] = bits[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+      s = bits.join('.');
+    }
+    return s;
+  }
+
+  // =========================================================================
+  function mount(root, opts) {
+    root = typeof root === 'string' ? document.querySelector(root) : (root || document);
+    opts = opts || {};
+
+    // Teardown for client-side routers (issue #6). mount() registers window
+    // listeners, starts two self-rescheduling rAF loops, and pushes onto
+    // ScrollCraft.instances, so without destroy() every re-mount leaves the old
+    // instance running for the life of the tab. `on` records what it registered
+    // and the two loops keep their live handle, so destroy() can undo exactly
+    // what this mount did and nothing else: its window listeners, both rAF
+    // loops, both IntersectionObservers, and every clip blob it created. A page
+    // that never calls destroy() behaves exactly as before.
+    var scListeners = [];
+    var scDead = false;
+    var scTickFrame = 0, scPointerFrame = 0;
+    function on(type, fn, o) {
+      addEventListener(type, fn, o);
+      scListeners.push([type, fn, o]);
+    }
+
+    var acts = [];
+    var worlds = [];
+    var drifts = [];
+    var playheads = [];
+    var scrollEls = [];
+    var vh = innerHeight, vw = innerWidth;
+    var y = 0, needsLayout = true;
+    var progressBar = root.querySelector('[data-sc-progress]');
+    var docEl = document.documentElement;
+
+    // One rate for the page, overridable per clip. Read from the mount root, the
+    // document element, or the option bag, in that order.
+    var LERP = lerpRate(root.nodeType === 1 ? root : null) ||
+               lerpRate(docEl) ||
+               (opts.lerp > 0 ? clamp(opts.lerp, 0.02, 1) : 0) ||
+               0.18;
+
+    // Every scrub clip on the page lives here, whatever drives it. tick() walks
+    // this one list, so an act clip and a worldflight leg get the same playhead.
+    function makeClip(v, host) {
+      var rec = {
+        el: v, host: host || v,
+        ready: false, loading: false, painted: false,
+        cur: 0, target: 0, live: false, stuckAt: 0,
+        lerp: lerpRate(v) || LERP
+      };
+      v.muted = true; v.playsInline = true; v.preload = 'none';
+      v.setAttribute('muted', ''); v.setAttribute('playsinline', '');
+      playheads.push(rec);
+      return rec;
+    }
+
+    // ---- collect acts -----------------------------------------------------
+    Array.prototype.forEach.call(root.querySelectorAll('[data-sc-act]'), function (el) {
+      var device = el.getAttribute('data-sc-act') || 'flow';
+      var pinned = device === 'scrub' || device === 'pin' || device === 'pan';
+      var act = {
+        el: el,
+        device: device,
+        pinned: pinned,
+        span: parseFloat(el.getAttribute('data-sc-span')) || (pinned ? 1.5 : 0),
+        dwell: parseFloat(el.getAttribute('data-sc-dwell')) || 0,
+        clipTravel: pinned && el.getAttribute('data-sc-clip-map') === 'travel',
+        p: 0, raw: 0, top: 0, height: 0, live: false,
+        cues: [], parallax: [], reveals: [], counts: [],
+        video: null, seq: null, rail: null
+      };
+
+      if (pinned) {
+        act.stage = el.querySelector('[data-sc-stage]') || el.querySelector('.sc-stage');
+        if (act.stage) act.stage.classList.add('sc-stage');
+        el.classList.add('sc-act--pinned');
+      }
+
+      // scrub video
+      var v = el.querySelector('video[data-sc-scrub]');
+      if (v) act.video = makeClip(v, el);
+
+      // image sequence
+      var cv = el.querySelector('canvas[data-sc-sequence]');
+      if (cv) {
+        var spec = cv.getAttribute('data-sc-sequence').split(':');
+        act.seq = {
+          el: cv, ctx: cv.getContext('2d', { alpha: false }),
+          tpl: spec[0], count: parseInt(spec[1], 10) || 1, start: parseInt(spec[2], 10) || 0,
+          frames: [], loaded: 0, drawn: -1
+        };
+      }
+
+      // horizontal rail
+      act.rail = el.querySelector('[data-sc-pan]');
+      if (act.rail) act.railExtra = parseFloat(act.rail.getAttribute('data-sc-pan')) || 0;
+
+      // cues
+      Array.prototype.forEach.call(el.querySelectorAll('[data-sc-cue]'), function (c) {
+        var nums = (c.getAttribute('data-sc-cue') || '').trim().split(/\s+/).map(parseFloat);
+        // from [to [rampIn [rampOut]]]
+        // rampIn/rampOut are fractions OF THE WINDOW, defaulting to 0.3 each.
+        // That leaves a ~40% plateau at full opacity in the middle. Without a
+        // plateau a cue is a triangle: it touches opacity 1 for a single
+        // instant, so the reader has to stop on exactly the right pixel to see
+        // the line at full strength, and every heading reads as slightly faded.
+        var cue = {
+          el: c,
+          from: isNaN(nums[0]) ? 0 : nums[0],
+          to: nums.length > 1 && !isNaN(nums[1]) ? nums[1] : null,
+          rIn: nums.length > 2 && !isNaN(nums[2]) ? clamp01(nums[2]) : 0.3,
+          rOut: nums.length > 3 && !isNaN(nums[3]) ? clamp01(nums[3]) : null,
+          rise: parseFloat(c.getAttribute('data-sc-rise')),
+          kinetic: c.getAttribute('data-sc-kinetic'),
+          units: null, state: -1
+        };
+        if (cue.rOut === null) cue.rOut = (nums.length > 2 && !isNaN(nums[2])) ? 0.3 : 0.3;
+        if (isNaN(cue.rise)) cue.rise = 1;
+        act.cues.push(cue);
+      });
+
+      // parallax
+      Array.prototype.forEach.call(el.querySelectorAll('[data-sc-parallax]'), function (c) {
+        act.parallax.push({ el: c, rate: parseFloat(c.getAttribute('data-sc-parallax')) || 0 });
+      });
+
+      // reveals
+      Array.prototype.forEach.call(el.querySelectorAll('[data-sc-reveal]'), function (c) {
+        var nums = (c.getAttribute('data-sc-reveal-at') || '0 0.5').trim().split(/\s+/).map(parseFloat);
+        act.reveals.push({ el: c, dir: c.getAttribute('data-sc-reveal') || 'up', from: nums[0] || 0, to: nums[1] || 0.5 });
+      });
+
+      // counters
+      Array.prototype.forEach.call(el.querySelectorAll('[data-sc-count]'), function (c) {
+        var nums = (c.getAttribute('data-sc-count') || '').trim().split(/\s+/);
+        var at = (c.getAttribute('data-sc-count-at') || '0.1 0.55').trim().split(/\s+/).map(parseFloat);
+        // Strip separators before parsing so the author can write the target
+        // exactly as it should render. Without this, "0 3,500" parses the target
+        // as 3 (the comma stops parseFloat) and "0 3500" renders "3500", because
+        // formatNum only adds separators above 10,000. So any real figure between
+        // 1,000 and 9,999 could not be shown the way it is written everywhere
+        // else on the page. The template still drives the formatting.
+        var num = function (s) { return parseFloat(String(s).replace(/,/g, '')) || 0; };
+        act.counts.push({
+          el: c, a: num(nums[0]), b: num(nums[1]),
+          tpl: nums[1] || '0', from: at[0], to: at[1], last: null
+        });
+      });
+
+      acts.push(act);
+
+      var d = el.getAttribute('data-sc-drift');
+      if (d) { var rgb = parseColor(d); if (rgb) drifts.push({ act: act, rgb: rgb }); }
+    });
+
+    // ---- collect worldflights --------------------------------------------
+    Array.prototype.forEach.call(root.querySelectorAll('[data-sc-mode="worldflight"]'), function (el) {
+      var W = {
+        el: el,
+        stage: el.querySelector('[data-sc-world]') || el.querySelector('.sc-world'),
+        copyLayer: el.querySelector('[data-sc-world-copy]') || el.querySelector('.sc-world__copy'),
+        spacer: el.querySelector('[data-sc-spacer]') || el.querySelector('.sc-world__spacer'),
+        seam: 0, segs: [], copies: [], total: 0, top: 0, index: -1, checked: false
+      };
+      var seam = parseFloat(el.getAttribute('data-sc-seam'));
+      // A seam wider than the shortest leg would have three clips dissolving at
+      // once and no leg ever fully present. Cap it well under that.
+      W.seam = isNaN(seam) || seam <= 0 ? 0.12 : clamp(seam, 0.02, 0.4);
+      if (W.stage) W.stage.classList.add('sc-world');
+      if (W.copyLayer) W.copyLayer.classList.add('sc-world__copy');
+      if (W.spacer) W.spacer.classList.add('sc-world__spacer');
+
+      Array.prototype.forEach.call(el.querySelectorAll('[data-sc-segment]'), function (s) {
+        var seg = {
+          el: s,
+          w: parseFloat(s.getAttribute('data-sc-w')) || 1.3,
+          linger: clamp(parseFloat(s.getAttribute('data-sc-linger')) || 0, 0, 0.6),
+          label: s.getAttribute('data-sc-waypoint') || '',
+          poster: s.querySelector('[data-sc-poster]') || s.querySelector('.sc-world__poster') || s.querySelector('img'),
+          c0: 0, c1: 0, local: 0, op: -1, z: -1, clip: null
+        };
+        s.classList.add('sc-world__seg');
+        if (seg.poster) seg.poster.classList.add('sc-world__poster');
+        var v = s.querySelector('video');
+        if (v) {
+          // Mark it as a scrub clip whether or not the author did. Everything
+          // downstream, the stylesheet and the verification harness included,
+          // finds scrub media by this attribute.
+          v.setAttribute('data-sc-scrub', '');
+          seg.clip = makeClip(v, s);
+        }
+        W.segs.push(seg);
+      });
+
+      var run = 0;
+      W.segs.forEach(function (s) { s.c0 = run; run += Math.max(s.w, 0.1); s.c1 = run; });
+      W.total = Math.max(run, 0.001);
+
+      Array.prototype.forEach.call(el.querySelectorAll('[data-sc-copy]'), function (cEl) {
+        var spec = (cEl.getAttribute('data-sc-window') || '').trim();
+        var q = { el: cEl, from: 0, to: 1, rIn: 0.3, rOut: 0.3, state: -1 };
+        var first = W.segs[0], last = W.segs[W.segs.length - 1];
+        if (spec === 'hero') {
+          // Present the instant the reader lands. A hero that fades IN has to
+          // fade in from nothing over an empty first screen, which is the one
+          // moment on the page where there is nothing else to look at.
+          q.from = 0;
+          q.to = first ? (0.62 * first.w) / W.total : 0.3;
+          q.rIn = 0; q.rOut = 0.65;
+        } else if (spec === 'finale') {
+          q.from = last ? (last.c0 + 0.4 * last.w) / W.total : 0.7;
+          q.to = 1; q.rIn = 0.55; q.rOut = 0;
+        } else {
+          var n = spec.split(/\s+/).map(parseFloat);
+          q.from = isNaN(n[0]) ? 0 : clamp01(n[0]);
+          q.to = (n.length > 1 && !isNaN(n[1])) ? clamp01(n[1]) : clamp01(q.from + 0.18);
+          if (n.length > 2 && !isNaN(n[2])) q.rIn = clamp01(n[2]);
+          if (n.length > 3 && !isNaN(n[3])) q.rOut = clamp01(n[3]);
+        }
+        if (q.to <= q.from) q.to = clamp01(q.from + 0.05);
+        W.copies.push(q);
+      });
+
+      worlds.push(W);
+    });
+
+    // ---- flow reveals (fire once) ----------------------------------------
+    // `cio` is assigned inside the counters IIFE below; it is declared here so
+    // destroy() can disconnect it. An IntersectionObserver holds a strong ref to
+    // every observed target, and unobserve only runs on first intersection, so a
+    // never-revealed element in a removed subtree is retained for the life of the
+    // tab, once per re-mount.
+    var io = null, cio = null;
+    if ('IntersectionObserver' in window) {
+      io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (!e.isIntersecting) return;
+          var el = e.target;
+          el.classList.add('sc-in');
+          var stagger = parseFloat(el.getAttribute('data-sc-stagger'));
+          if (!isNaN(stagger)) {
+            Array.prototype.forEach.call(el.children, function (kid, i) {
+              kid.style.transitionDelay = (i * stagger) + 'ms';
+              kid.classList.add('sc-in');
+            });
+          }
+          io.unobserve(el);
+        });
+      }, { rootMargin: '0px 0px -12% 0px', threshold: 0.01 });
+      Array.prototype.forEach.call(root.querySelectorAll('[data-sc-in]'), function (el) { io.observe(el); });
+    } else {
+      Array.prototype.forEach.call(root.querySelectorAll('[data-sc-in]'), function (el) { el.classList.add('sc-in'); });
+    }
+
+    // ---- entry counters (fire once) --------------------------------------
+    // A [data-sc-count] outside any pinned act is not scrubbed by scroll; it
+    // ticks up once when it enters view, over data-sc-count-ms (default 1400).
+    // Same formatting rules as the act counter: write the target as it should
+    // render. Reduced motion writes the final value and never animates.
+    (function () {
+      var ease = function (t) { return 1 - Math.pow(1 - t, 3); };
+      var num = function (s) { return parseFloat(String(s).replace(/,/g, '')) || 0; };
+      var spec = function (c) { return (c.getAttribute('data-sc-count') || '').trim().split(/\s+/); };
+      var els = Array.prototype.filter.call(root.querySelectorAll('[data-sc-count]'), function (c) {
+        return !c.closest('[data-sc-act]');
+      });
+      if (!els.length) return;
+      function run(c) {
+        var nums = spec(c);
+        var a = num(nums[0]), b = num(nums[1]), tpl = nums[1] || '0';
+        var ms = parseFloat(c.getAttribute('data-sc-count-ms')) || 1400;
+        if (reduce || ms <= 0) { c.textContent = formatNum(b, tpl); return; }
+        var t0 = null, last = null;
+        function frame(now) {
+          if (scDead) return;
+          if (t0 === null) t0 = now;
+          var t = Math.min((now - t0) / ms, 1);
+          var out = formatNum(a + (b - a) * ease(t), tpl);
+          if (out !== last) { c.textContent = out; last = out; }
+          if (t < 1) requestAnimationFrame(frame);
+        }
+        requestAnimationFrame(frame);
+      }
+      els.forEach(function (c) { var n = spec(c); c.textContent = formatNum(num(n[0]), n[1] || '0'); });
+      if ('IntersectionObserver' in window) {
+        cio = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) {
+            if (!e.isIntersecting) return;
+            run(e.target); cio.unobserve(e.target);
+          });
+        }, { rootMargin: '0px 0px -10% 0px', threshold: 0.5 });
+        els.forEach(function (c) { cio.observe(c); });
+      } else {
+        els.forEach(run);
+      }
+    })();
+
+    // ---- layout -----------------------------------------------------------
+    function layout() {
+      // layout() and read() are both on the returned api, so a framework's
+      // updated() arriving after destroyed() enters them directly.
+      if (scDead) return;
+      vh = innerHeight; vw = innerWidth;
+      acts.forEach(function (a) {
+        if (a.pinned) a.el.style.height = (a.span * 100) + 'vh';
+      });
+      // The spacer is the whole document flow of a worldflight. Its height is
+      // the sum of the leg weights plus one viewport: without that extra screen
+      // the track runs out at the moment the last leg reaches p=1, so the last
+      // leg's final second is a place the reader can never actually stop.
+      // Set in pixels, not vh, because .sc-world is sized in svh on phones and a
+      // vh/svh mismatch would put the track and the stage on different rulers.
+      worlds.forEach(function (W) {
+        if (W.spacer) W.spacer.style.height = Math.round((W.total + 1) * vh) + 'px';
+      });
+      acts.forEach(function (a) {
+        var r = a.el.getBoundingClientRect();
+        a.top = r.top + scrollY;
+        a.height = r.height;
+      });
+      if (acts.length) {
+        acts.forEach(function (a) {
+          if (a.seq && a.seq.el) {
+            var box = a.seq.el.getBoundingClientRect();
+            var dpr = Math.min(devicePixelRatio || 1, 2);
+            a.seq.el.width = Math.round(box.width * dpr);
+            a.seq.el.height = Math.round(box.height * dpr);
+            a.seq.drawn = -1;
+          }
+        });
+      }
+      // A pinned act whose stage is not actually sticky fails silently: the
+      // stage just scrolls by, the copy cues correctly against a frame nobody
+      // can see, and every automated check passes. Any author rule that sets
+      // `position` on the stage causes it. Say so.
+      acts.forEach(function (a) {
+        if (!a.pinned || !a.stage || a.stageChecked) return;
+        a.stageChecked = true;
+        var pos = getComputedStyle(a.stage).position;
+        if (pos !== 'sticky' && pos !== '-webkit-sticky') {
+          console.warn('[scrollcraft] act "' + (a.el.id || a.device) + '" will not pin: its stage computes ' +
+            'position:' + pos + ', not sticky. Something is overriding .sc-stage.', a.stage);
+        }
+      });
+
+      worlds.forEach(function (W) {
+        W.top = W.el.getBoundingClientRect().top + scrollY;
+        if (W.checked) return;
+        W.checked = true;
+        if (!W.stage) {
+          console.warn('[scrollcraft] worldflight has no [data-sc-world] stage; nothing will fly.', W.el);
+          return;
+        }
+        if (!W.spacer) {
+          console.warn('[scrollcraft] worldflight has no [data-sc-spacer]; the page has no scroll track.', W.el);
+        }
+        // The same silent failure as an unpinned act, one level worse: a stage
+        // that is not fixed scrolls away and takes the whole page with it, while
+        // every progress number still reads correctly.
+        var wp = getComputedStyle(W.stage).position;
+        if (wp !== 'fixed') {
+          console.warn('[scrollcraft] worldflight stage computes position:' + wp + ', not fixed. ' +
+            'Something is overriding .sc-world, and the flight will scroll off screen.', W.stage);
+        }
+      });
+
+      needsLayout = false;
+      read();
+    }
+
+    // ---- video ------------------------------------------------------------
+    function loadVideo(a) { loadClip(a.video); }
+    function loadClip(V) {
+      // Under reduced motion the clip is never fetched. The poster holds the
+      // frame and the copy still cues, so the page reads without the decode.
+      if (reduce || !V || V.loading) return;
+      var src = V.el.getAttribute('data-sc-src') ||
+                (isMobile() && V.el.getAttribute('data-sc-src-mobile')) ||
+                V.el.currentSrc || V.el.src;
+      if (isMobile() && V.el.getAttribute('data-sc-src-mobile')) src = V.el.getAttribute('data-sc-src-mobile');
+      if (!src) return;
+      V.loading = true;
+      fetch(src).then(function (r) { if (!r.ok) throw new Error(r.status); return r.blob(); })
+        .then(function (blob) {
+          // A fetch in flight when destroy() ran resolves anyway. Without this
+          // it attaches loadedmetadata/seeked to a detached element, calls
+          // read(), arms primeClip's 2s timer and assigns a blob URL nothing
+          // will ever revoke, all after teardown reported success.
+          if (scDead) return;   // the Blob is unreferenced from here and is collected
+          // Listeners and preload BEFORE src. Assigning src starts the load, so
+          // attaching afterwards and then calling load() restarts it and aborts
+          // the first request (visible as ERR_ABORTED on the blob URL).
+          V.el.addEventListener('loadedmetadata', function () {
+            V.ready = true;
+            // Force one seek even when the target is already 0. The reveal is
+            // gated on a 'seeked' event, and the raf loop only seeks when the
+            // time actually needs to change, so a clip sitting at the very top
+            // of its act would never seek, never fire 'seeked', and never
+            // replace its poster until the reader scrolled it off zero.
+            try { V.el.currentTime = Math.max(V.target * (V.el.duration || 1), 0.001); } catch (e) {}
+            read();
+            // Prime the decoder the moment the clip can be primed, without
+            // waiting for a gesture. A muted inline play() is allowed with no
+            // user activation on every platform except a restricted one (Low
+            // Power Mode, data saver), and there the rejection is harmless: the
+            // gesture listeners below retry on the next real touch.
+            primeClip(V);
+          });
+          // Reveal only once a real frame has painted. iOS keeps a seeked-but-
+          // never-played muted video blank, so hiding the poster on metadata
+          // alone flashes an empty stage.
+          var reveal = function () {
+            if (V.painted) return;
+            V.painted = true;
+            V.host.classList.add('sc-has-clip');
+            V.el.classList.add('sc-has-clip');
+          };
+          V.el.addEventListener('seeked', reveal, { once: true });
+          // Never let visibility depend only on an event that may not arrive.
+          // On iOS a clip that has not been played can accept a seek and never
+          // fire 'seeked', which leaves the element at opacity 0 for the life of
+          // the page: the poster stays up, the act looks frozen, and every later
+          // act is fine because by then the reader has touched the screen and
+          // the decoder is live. Reveal on a timer as well. A stage that is
+          // briefly blank is a smaller fault than one that never shows its clip.
+          setTimeout(reveal, 2500);
+          V.el.preload = 'auto';
+          V.el.muted = true;            // as a property, not only an attribute
+          V.el.playsInline = true;
+          V.objectURL = URL.createObjectURL(blob);
+          V.el.src = V.objectURL;
+        })
+        .catch(function () { V.loading = false; });
+    }
+
+    // ---- image sequence ---------------------------------------------------
+    function loadSeq(a) {
+      var S = a.seq;
+      if (!S || S.frames.length) return;
+      for (var i = 0; i < S.count; i++) {
+        (function (i) {
+          var img = new Image();
+          img.decoding = 'async';
+          img.src = S.tpl.replace('{i}', String(S.start + i))
+                         .replace('{ii}', String(S.start + i).padStart(2, '0'))
+                         .replace('{iii}', String(S.start + i).padStart(3, '0'))
+                         .replace('{iiii}', String(S.start + i).padStart(4, '0'));
+          img.onload = function () { S.loaded++; if (S.loaded === 1) S.drawn = -1; };
+          S.frames[i] = img;
+        })(i);
+      }
+    }
+    function drawSeq(a) {
+      var S = a.seq;
+      if (!S || !S.frames.length) return;
+      var idx = clamp(Math.round(a.p * (S.count - 1)), 0, S.count - 1);
+      if (idx === S.drawn) return;
+      var img = S.frames[idx];
+      if (!img || !img.complete || !img.naturalWidth) return;
+      var cw = S.el.width, ch = S.el.height;
+      // cover fit
+      var scale = Math.max(cw / img.naturalWidth, ch / img.naturalHeight);
+      var w = img.naturalWidth * scale, h = img.naturalHeight * scale;
+      S.ctx.drawImage(img, (cw - w) / 2, (ch - h) / 2, w, h);
+      S.drawn = idx;
+    }
+
+    // ---- worldflight ------------------------------------------------------
+    // t is the position along the flight, measured in viewport-heights of
+    // scroll, so every number here is in the same unit the author wrote the
+    // weights in. There is no per-segment geometry to read: the stage never
+    // moves, so nothing needs measuring on scroll.
+    function readWorld(W) {
+      if (!W.segs.length) return;
+      var S = W.seam;
+      var t = clamp((y - W.top) / Math.max(vh, 1), 0, W.total);
+      var pr = t / W.total;
+      var i, s;
+
+      // The current leg is the last one whose crossfade has begun.
+      var k = 0;
+      for (i = 0; i < W.segs.length; i++) if (t >= W.segs[i].c0 - S / 2) k = i;
+
+      for (i = 0; i < W.segs.length; i++) {
+        s = W.segs[i];
+        var local = clamp01((t - s.c0) / Math.max(s.w, 0.001));
+        s.local = local;
+
+        // Fetch a leg only while it is within reach. Loading the whole flight up
+        // front is tens of megabytes before the first frame paints; loading it
+        // on arrival means arriving at a poster.
+        if (s.clip && t > s.c0 - 1.6 && t < s.c1 + 1.6) loadClip(s.clip);
+
+        // Opacity. The incoming leg fades UP over the outgoing one, which holds
+        // at full strength underneath until it is completely covered. Fading
+        // both halves of a crossfade is what puts the page ground through the
+        // middle of the seam and reads as a flash.
+        var op;
+        if (i > k) op = 0;
+        else if (i === k) op = i === 0 ? 1 : smooth((t - (s.c0 - S / 2)) / S);
+        else op = t < s.c1 + S / 2 ? 1 : 0;
+
+        var z = i === k ? 120 : Math.round(100 + op * 10);
+        if (op !== s.op) {
+          s.el.style.opacity = op.toFixed(3);
+          // A leg at zero must stop compositing entirely. Six full-bleed video
+          // layers all painting at opacity 0 costs the same as painting them.
+          s.el.style.visibility = op > 0.002 ? 'visible' : 'hidden';
+          s.op = op;
+        }
+        if (z !== s.z) { s.el.style.zIndex = String(z); s.z = z; }
+
+        if (s.clip) {
+          s.clip.live = op > 0.002;
+          s.clip.target = lingerEase(local, s.linger);
+        }
+        // Until a real frame has painted, the poster carries the move. A still
+        // that sits perfectly still while the page scrolls announces itself as a
+        // placeholder; a slow push in reads as the camera already flying.
+        if (s.poster && !reduce && !(s.clip && s.clip.painted) && op > 0.002) {
+          s.poster.style.transform = 'scale(' + (1.03 + local * 0.14).toFixed(4) + ')';
+        }
+      }
+
+      for (var c = 0; c < W.copies.length; c++) {
+        var q = W.copies[c];
+        var win = Math.max(q.to - q.from, 0.001);
+        var inEnd = q.from + win * q.rIn;
+        var outStart = q.to - win * q.rOut;
+        var vis;
+        // A hero declares rIn 0, so inEnd sits exactly on `from` and the ramp
+        // branch is skipped: the block is simply present from the first pixel.
+        if (pr < q.from) vis = 0;
+        else if (pr < inEnd) vis = smooth((pr - q.from) / Math.max(inEnd - q.from, 0.001));
+        else if (pr <= outStart) vis = 1;
+        else vis = smooth(1 - (pr - outStart) / Math.max(q.to - outStart, 0.001));
+        vis = clamp01(vis);
+
+        // The ONLY transform on the copy side, and it is capped at 4vh across
+        // the whole window. Anything larger stops reading as a parallax layer
+        // over a moving world and starts reading as a second page scrolling at a
+        // different speed, which is the exact cheapness this mode replaces.
+        var wp = clamp01((pr - q.from) / win);
+        q.el.style.opacity = vis.toFixed(3);
+        q.el.style.transform = reduce ? 'none'
+          : 'translate3d(0,' + ((0.5 - wp) * 4).toFixed(2) + 'vh,0)';
+        var on = vis > 0.5;
+        if (on !== (q.state === 1)) { q.state = on ? 1 : 0; q.el.style.pointerEvents = on ? 'auto' : 'none'; }
+      }
+
+      // Publish the route, draw none of it. A gauge, a map, a leg counter and a
+      // set of chapter dots are all the same two numbers, and a runtime that
+      // ships one of them ships it to every page that uses this mode.
+      var cur = W.segs[k];
+      W.el.style.setProperty('--sc-seg', String(k));
+      W.el.style.setProperty('--sc-segp', cur.local.toFixed(4));
+      docEl.style.setProperty('--sc-seg', String(k));
+      docEl.style.setProperty('--sc-segp', cur.local.toFixed(4));
+      if (k !== W.index) {
+        W.index = k;
+        try {
+          W.el.dispatchEvent(new CustomEvent('sc:waypoint', {
+            bubbles: true,
+            detail: { index: k, count: W.segs.length, label: cur.label, el: cur.el, progress: pr }
+          }));
+        } catch (e) {}
+      }
+    }
+
+    // ---- per-frame scroll read -------------------------------------------
+    function read() {
+      if (scDead) return;
+      y = scrollY || pageYOffset;
+      var driftA = null, driftB = null, driftT = 0;
+      var maxY = Math.max((document.documentElement.scrollHeight || 0) - vh, 1);
+
+      for (var i = 0; i < acts.length; i++) {
+        var a = acts[i];
+        var raw;
+        if (a.pinned) {
+          var travel = Math.max(a.height - vh, 1);
+          raw = clamp01((y - a.top) / travel);
+        } else {
+          raw = clamp01((y + vh - a.top) / (a.height + vh));
+        }
+        a.raw = raw;
+        a.p = a.dwell ? dwell(raw, a.dwell) : raw;
+
+        // Clip time is NOT cue time. Cues belong to the pin, so they keep using
+        // `p`. The clip belongs to the stage, and the stage is on screen for one
+        // viewport before the pin starts and one after it ends. Driving the clip
+        // from `p` therefore parks it on frame one for the whole entry slide and
+        // on its last frame for the whole exit slide, which is a still
+        // photograph moving up the screen under the reader's hand.
+        //
+        // So map the clip across the stage's entire visible life instead. Both
+        // ends are clamped to scroll that actually exists: an act at the top of
+        // the document has no entry slide and must still start on frame one, and
+        // an act near the bottom must still reach its last frame while the page
+        // can still scroll.
+        a.vp = a.p;
+        if (a.pinned && !a.clipTravel) {
+          var startY = a.top - Math.min(vh, a.top);
+          var endY = Math.min(a.top + a.height, maxY);
+          var vraw = clamp01((y - startY) / Math.max(endY - startY, 1));
+          a.vp = a.dwell ? dwell(vraw, a.dwell) : vraw;
+        }
+        a.live = (y > a.top - vh * 1.25) && (y < a.top + a.height + vh * 1.25);
+        a.el.style.setProperty('--sc-p', a.p.toFixed(4));
+
+        // Fetch earlier than we drive. A 1080p clip is megabytes, and a reader
+        // who scrolls briskly will otherwise arrive at a stage that is still
+        // downloading and see a poster where the camera move should be.
+        var warm = (y > a.top - vh * 3) && (y < a.top + a.height + vh * 1.5);
+        if (warm) {
+          if (a.video) loadVideo(a);
+          if (a.seq) loadSeq(a);
+        }
+        if (a.live && a.seq) drawSeq(a);
+        if (a.video) { a.video.live = a.live; if (a.video.ready) a.video.target = a.vp; }
+
+        // horizontal rail
+        if (a.rail) {
+          var over = a.rail.scrollWidth - vw;
+          if (over > 0) {
+            var extra = over * (a.railExtra || 0);
+            a.rail.style.transform = 'translate3d(' + (-(over + extra) * a.p).toFixed(2) + 'px,0,0)';
+          }
+        }
+
+        if (!a.live) {
+          // An act that scrolls out of range must release its cues rather than
+          // freezing them at whatever they last were. A "hold" cue left at
+          // opacity 1 keeps its element hit-testable and paintable long after
+          // its act is gone, which shows up as a stray headline over a later
+          // section. Zero once, then leave it alone.
+          if (a.parked !== true) {
+            for (var z = 0; z < a.cues.length; z++) {
+              var pq = a.cues[z];
+              pq.el.style.opacity = '0';
+              pq.el.style.pointerEvents = 'none';
+              pq.state = 0;
+              if (pq.units) for (var zu = 0; zu < pq.units.length; zu++) pq.units[zu].style.opacity = '0';
+            }
+            a.parked = true;
+          }
+          continue;
+        }
+        a.parked = false;
+
+        // cues
+        for (var c = 0; c < a.cues.length; c++) {
+          var q = a.cues[c];
+          var vis;
+          if (q.to === null) {
+            vis = smooth((a.p - q.from) / 0.18);
+          } else {
+            var win = Math.max(q.to - q.from, 0.001);
+            var inEnd = q.from + win * q.rIn;        // full opacity from here
+            var outStart = q.to - win * q.rOut;      // starts leaving here
+            if (a.p < inEnd) vis = smooth((a.p - q.from) / Math.max(inEnd - q.from, 0.001));
+            else if (a.p <= outStart) vis = 1;       // the plateau
+            else vis = smooth(1 - (a.p - outStart) / Math.max(q.to - outStart, 0.001));
+          }
+          vis = clamp01(vis);
+
+          if (q.kinetic) {
+            if (!q.units) q.units = splitText(q.el, q.kinetic);
+            var n = q.units.length;
+            // Stagger across the reveal window. 0.62 spread leaves the tail of
+            // the window for the last unit to finish, so the line lands together
+            // rather than trickling.
+            for (var u = 0; u < n; u++) {
+              var uStart = (u / Math.max(n, 1)) * 0.62;
+              var uv = clamp01((vis - uStart) / (1 - 0.62 + 0.001));
+              uv = smooth(uv);
+              q.units[u].style.opacity = uv.toFixed(3);
+              q.units[u].style.transform = reduce ? 'none'
+                : 'translate3d(0,' + ((1 - uv) * 100).toFixed(2) + '%,0)';
+            }
+            q.el.style.opacity = '1';
+          } else {
+            q.el.style.opacity = vis.toFixed(3);
+            q.el.style.transform = reduce ? 'none'
+              : 'translate3d(0,' + ((1 - vis) * 2.4 * q.rise).toFixed(2) + 'vh,0)';
+          }
+          var on = vis > 0.5;
+          if (on !== (q.state === 1)) { q.state = on ? 1 : 0; q.el.style.pointerEvents = on ? 'auto' : 'none'; }
+        }
+
+        // parallax
+        if (!reduce) {
+          for (var pz = 0; pz < a.parallax.length; pz++) {
+            var pp = a.parallax[pz];
+            pp.el.style.transform = 'translate3d(0,' + (pp.rate * (a.p - 0.5) * 100).toFixed(2) + 'px,0)';
+          }
+        }
+
+        // reveals
+        for (var rv = 0; rv < a.reveals.length; rv++) {
+          var R = a.reveals[rv];
+          var t = smooth((a.p - R.from) / Math.max(R.to - R.from, 0.001));
+          var pct = ((1 - t) * 100).toFixed(2);
+          R.el.style.clipPath =
+            R.dir === 'down' ? 'inset(' + pct + '% 0 0 0)' :
+            R.dir === 'left' ? 'inset(0 ' + pct + '% 0 0)' :
+            R.dir === 'right' ? 'inset(0 0 0 ' + pct + '%)' :
+            R.dir === 'iris' ? 'circle(' + (t * 78).toFixed(2) + '% at 50% 50%)' :
+                               'inset(0 0 ' + pct + '% 0)';
+        }
+
+        // counters
+        for (var ct = 0; ct < a.counts.length; ct++) {
+          var K = a.counts[ct];
+          var kt = smooth((a.p - K.from) / Math.max(K.to - K.from, 0.001));
+          var val = lerp(K.a, K.b, kt);
+          var out = formatNum(val, K.tpl);
+          if (out !== K.last) { K.el.textContent = out; K.last = out; }
+        }
+      }
+
+      for (var w = 0; w < worlds.length; w++) readWorld(worlds[w]);
+
+      // background drift
+      for (var d = 0; d < drifts.length; d++) {
+        var D = drifts[d];
+        if (D.act.raw > 0 && D.act.raw < 1) {
+          driftA = D; driftT = smooth(D.act.raw / 0.35);
+          driftB = drifts[d - 1] || D;
+          break;
+        }
+        if (D.act.raw >= 1) { driftA = D; driftB = D; driftT = 1; }
+      }
+      if (driftA) {
+        docEl.style.setProperty('--sc-canvas', mixColor(driftB.rgb, driftA.rgb, driftT));
+      }
+
+      if (progressBar) {
+        var max = Math.max(document.body.scrollHeight - vh, 1);
+        progressBar.style.transform = 'scaleX(' + clamp01(y / max).toFixed(4) + ')';
+      }
+    }
+
+    // ---- video seek loop --------------------------------------------------
+    // Split from read() on purpose: seeking is asynchronous and rate-limited by
+    // the decoder, while read() must stay cheap enough to run on every scroll
+    // event. The lerp here is also what turns a jittery wheel into a glide.
+    function tick() {
+      if (scDead) return;
+      // Deadband. A phone decoder cannot service a seek every frame, so asking
+      // for one costs more than it shows; 20ms of clip is under a frame of
+      // footage anyway.
+      var eps = isMobile() ? 0.02 : 0.008;
+      for (var i = 0; i < playheads.length; i++) {
+        var V = playheads[i];
+        if (!V.ready) continue;
+        // Never queue a seek while the decoder is still resolving the last one.
+        // On a phone a fast flick otherwise piles seeks up and freezes the clip.
+        // But a seek that never completes would freeze the clip for the life of
+        // the page through this very guard, so a seek stuck past 700ms is
+        // re-issued rather than waited on forever.
+        if (V.el.seeking) {
+          var nw = performance.now();
+          if (!V.stuckAt) V.stuckAt = nw;
+          else if (nw - V.stuckAt > 700) {
+            V.stuckAt = nw;
+            try { V.el.currentTime = V.el.currentTime + 0.001; } catch (e) {}
+          }
+          continue;
+        }
+        V.stuckAt = 0;
+        // An offscreen clip that has already arrived stops costing anything.
+        if (!V.live && Math.abs(V.cur - V.target) < 0.002) continue;
+        V.cur += (V.target - V.cur) * (reduce ? 1 : V.lerp);
+        var dur = V.el.duration || 1;
+        var t = clamp(V.cur, 0, 0.999) * dur;
+        if (Math.abs(V.el.currentTime - t) > eps) { try { V.el.currentTime = t; } catch (e) {} }
+      }
+      scTickFrame = requestAnimationFrame(tick);
+    }
+
+    // iOS will not paint a muted video that has never been handed a user
+    // gesture, so a clip can be loaded, seeked and still show nothing.
+    //
+    // This used to fire once, on the first touch, across every playhead. That
+    // loses a race it cannot win. The first act's clip is still being fetched
+    // when the reader's first touch arrives (they touch the screen in order to
+    // scroll, and the clip is megabytes) so play() is called on a video with
+    // no source, does nothing, and the one shot is spent. Every later act loads
+    // long after that touch, with user activation already granted, and works
+    // without ever needing this. That is the exact shape of the bug: the hero
+    // frozen, everything below it fine.
+    //
+    // So: keep listening, prime each clip once it actually has a source, and
+    // stop only when they are all done. And force a seek afterwards, because a
+    // primed decoder still shows the stale frame until something asks it for a
+    // different time, and the deadband in tick() will not ask if the playhead is
+    // already where it should be.
+    var primedCount = 0;
+    function primeClip(V) {
+      // priming guards the retry: play() is a promise, and calling it again
+      // while the last one is unsettled produces "interrupted by pause" and can
+      // leave the element playing.
+      if (V.primed || V.priming || !V.el.src) return;
+      V.priming = true;
+      var done = function () {
+        V.priming = false;
+        if (!V.primed) { V.primed = true; primedCount++; }
+        try { V.el.pause(); } catch (e) {}
+        // repaint: nudge past the deadband so the next tick writes for real
+        try {
+          var dur = V.el.duration || 1;
+          V.cur = clamp(V.cur, 0, 0.999);
+          V.el.currentTime = clamp(V.cur * dur + 0.05, 0, dur * 0.999);
+        } catch (e) {}
+      };
+      var fail = function () { V.priming = false; };
+      // A play() promise is allowed to stay pending forever (iOS does this to a
+      // video it has decided not to start). If that happened here, `priming`
+      // would jam and no gesture could ever retry, so the flag is released on a
+      // timer as well. A late resolution after the release still lands in
+      // done(), which is idempotent.
+      setTimeout(function () { if (V.priming) fail(); }, 2000);
+      var pr;
+      try { pr = V.el.play(); } catch (e) { fail(); return; }
+      if (pr && pr.then) pr.then(done, fail);
+      else done();
+    }
+    function prime() {
+      for (var i = 0; i < playheads.length; i++) primeClip(playheads[i]);
+      if (playheads.length && primedCount >= playheads.length) {
+        removeEventListener('touchstart', prime);
+        removeEventListener('touchend', prime);
+        removeEventListener('pointerdown', prime);
+        removeEventListener('click', prime);
+        removeEventListener('scroll', prime);
+      }
+    }
+    // touchend and click are here because the HTML spec's list of activation-
+    // triggering events includes touchend but NOT touchstart. A restricted
+    // device (Low Power Mode) that rejects the touchstart prime for lacking
+    // activation gets a second, valid chance the moment the finger lifts.
+    on('touchstart', prime, { passive: true });
+    on('touchend', prime, { passive: true });
+    on('pointerdown', prime, { passive: true });
+    on('click', prime, { passive: true });
+    on('scroll', prime, { passive: true });
+
+    // ---- pointer devices --------------------------------------------------
+    var tilts = [], magnets = [], spots = [];
+    function initPointer() {
+      if (reduce || !fineMQ.matches) return;
+      Array.prototype.forEach.call(root.querySelectorAll('[data-sc-tilt]'), function (el) {
+        tilts.push({ el: el, max: parseFloat(el.getAttribute('data-sc-tilt')) || 6, x: 0, ty: 0, tx: 0, y: 0 });
+      });
+      Array.prototype.forEach.call(root.querySelectorAll('[data-sc-magnet]'), function (el) {
+        magnets.push({ el: el, k: parseFloat(el.getAttribute('data-sc-magnet')) || 0.3, x: 0, y: 0, tx: 0, ty: 0 });
+      });
+      Array.prototype.forEach.call(root.querySelectorAll('[data-sc-spotlight]'), function (el) {
+        spots.push(el);
+      });
+      if (!tilts.length && !magnets.length && !spots.length) return;
+
+      on('pointermove', function (e) {
+        if (e.pointerType !== 'mouse') return;
+        for (var i = 0; i < tilts.length; i++) {
+          var T = tilts[i], r = T.el.getBoundingClientRect();
+          if (r.bottom < -200 || r.top > vh + 200) { T.tx = 0; T.ty = 0; continue; }
+          var nx = (e.clientX - (r.left + r.width / 2)) / (r.width / 2);
+          var ny = (e.clientY - (r.top + r.height / 2)) / (r.height / 2);
+          var inside = Math.abs(nx) < 1.6 && Math.abs(ny) < 1.6;
+          T.tx = inside ? clamp(ny, -1, 1) * -T.max : 0;
+          T.ty = inside ? clamp(nx, -1, 1) * T.max : 0;
+        }
+        for (var m = 0; m < magnets.length; m++) {
+          var M = magnets[m], mr = M.el.getBoundingClientRect();
+          var dx = e.clientX - (mr.left + mr.width / 2);
+          var dy = e.clientY - (mr.top + mr.height / 2);
+          var near = Math.abs(dx) < mr.width && Math.abs(dy) < mr.height * 2.5;
+          M.tx = near ? dx * M.k : 0;
+          M.ty = near ? dy * M.k : 0;
+        }
+        for (var s = 0; s < spots.length; s++) {
+          var sr = spots[s].getBoundingClientRect();
+          spots[s].style.setProperty('--sc-mx', clamp01((e.clientX - sr.left) / sr.width).toFixed(3));
+          spots[s].style.setProperty('--sc-my', clamp01((e.clientY - sr.top) / sr.height).toFixed(3));
+        }
+      }, { passive: true });
+
+      (function pointerTick() {
+        if (scDead) return;
+        // Interpolate toward the target rather than tracking the pointer
+        // directly. Direct tracking reads as artificial because it carries no
+        // momentum; the lerp gives it weight.
+        for (var i = 0; i < tilts.length; i++) {
+          var T = tilts[i];
+          T.x += (T.tx - T.x) * 0.09; T.y += (T.ty - T.y) * 0.09;
+          if (Math.abs(T.x) > 0.001 || Math.abs(T.y) > 0.001) {
+            T.el.style.transform = 'perspective(1100px) rotateX(' + T.x.toFixed(3) + 'deg) rotateY(' + T.y.toFixed(3) + 'deg)';
+          }
+        }
+        for (var m = 0; m < magnets.length; m++) {
+          var M = magnets[m];
+          M.x += (M.tx - M.x) * 0.12; M.y += (M.ty - M.y) * 0.12;
+          M.el.style.transform = 'translate3d(' + M.x.toFixed(2) + 'px,' + M.y.toFixed(2) + 'px,0)';
+        }
+        scPointerFrame = requestAnimationFrame(pointerTick);
+      })();
+    }
+
+    // ---- wiring -----------------------------------------------------------
+    var ticking = false;
+    on('scroll', function () {
+      if (scDead) return;
+      if (!ticking) { ticking = true; requestAnimationFrame(function () { if (!scDead) read(); ticking = false; }); }
+    }, { passive: true });
+
+    // Keyboard focus on a pinned or panning act. The browser's own
+    // scroll-into-view parks the focused element barely on screen, which is
+    // exactly the scroll position at which its cue has not opened yet, so focus
+    // lands on a control nobody can see and every automated opacity check still
+    // passes. Centring the act instead is a position where the cue is lit by
+    // definition. behavior:'instant' on purpose: scrollcraft.css sets
+    // scroll-behavior:smooth, so the default animates the jump and focus sits
+    // off screen for the whole of a multi-screen glide.
+    on('focusin', function (e) {
+      var el = e.target;
+      if (!el || !el.closest) return;
+      var act = el.closest('[data-sc-act]');
+      if (!act || !root.contains(act)) return;
+      var cue = el.closest('[data-sc-cue]');
+      if (!cue) return;
+      if (parseFloat(getComputedStyle(cue).opacity || '1') > 0.85) return;
+      el.scrollIntoView({ block: 'center', inline: 'nearest', behavior: 'instant' });
+    });
+
+    var lastW = innerWidth;
+    on('resize', function () {
+      // Ignore URL-bar-only height changes on phones. Relaying out on those
+      // makes the page jump under the reader's thumb for no reason.
+      if (scDead) return;
+      if (innerWidth === lastW && isMobile()) { vh = innerHeight; return; }
+      lastW = innerWidth;
+      layout();
+    }, { passive: true });
+
+    if (document.fonts && document.fonts.ready) {
+      // Line splitting measures line boxes, so it has to wait for the real face.
+      document.fonts.ready.then(function () {
+        if (scDead) return;
+        acts.forEach(function (a) { a.cues.forEach(function (q) { if (q.kinetic && q.units) { q.el.__scSplit = null; q.units = null; } }); });
+        layout();
+      });
+    }
+
+    layout();
+    initPointer();
+    scTickFrame = requestAnimationFrame(tick);
+    document.documentElement.classList.add('sc-ready');
+
+    var api = { layout: layout, read: read, acts: acts, worlds: worlds, clips: playheads, lerp: LERP };
+    // Idempotent: a second call is a no-op, because a framework's teardown hook
+    // can run after the element is already gone.
+    api.destroy = function () {
+      if (scDead) return;
+      scDead = true;
+      for (var i = 0; i < scListeners.length; i++) {
+        removeEventListener(scListeners[i][0], scListeners[i][1], scListeners[i][2]);
+      }
+      scListeners.length = 0;
+      if (scTickFrame) { cancelAnimationFrame(scTickFrame); scTickFrame = 0; }
+      if (scPointerFrame) { cancelAnimationFrame(scPointerFrame); scPointerFrame = 0; }
+      // Both observers, or every element they still watch stays reachable.
+      if (io) { io.disconnect(); io = null; }
+      if (cio) { cio.disconnect(); cio = null; }
+      // A blob URL is a document-lifetime reference to a whole decoded clip, so
+      // an unreleased one is the largest thing a re-mount can leak. Detaching
+      // the source needs the removeAttribute + load() pair: revoking alone
+      // leaves the element holding the resource.
+      for (var v = 0; v < playheads.length; v++) {
+        var V = playheads[v];
+        try { V.el.pause(); } catch (e) {}
+        if (V.objectURL) {
+          try { V.el.removeAttribute('src'); V.el.load(); } catch (e) {}
+          URL.revokeObjectURL(V.objectURL);
+          V.objectURL = null;
+        }
+      }
+      var at = global.ScrollCraft.instances.indexOf(api);
+      if (at !== -1) global.ScrollCraft.instances.splice(at, 1);
+      // Document-global, while the instance is not: only the last one out drops
+      // it, or a second stage on the page loses its no-transition guard.
+      if (!global.ScrollCraft.instances.length) {
+        document.documentElement.classList.remove('sc-ready');
+      }
+    };
+    global.ScrollCraft.instances.push(api);
+    return api;
+  }
+
+  // The instance list is not an API for the page. It is how the verification
+  // harness reads the real playhead records: a screenshot taken mid-lerp is a
+  // frame the page never actually holds, so the harness has to be able to ask
+  // whether the playhead has arrived rather than guess with a timeout.
+  global.ScrollCraft = { mount: mount, reduce: reduce, instances: [] };
+})(window);
+
+  </script>
+  <script>
+    (function () {
+      const reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const root = document.documentElement;
+      const vernierVal = document.getElementById('vernierVal');
+      const mechRotor = document.getElementById('mechRotor');
+      const mechGearA = document.getElementById('mechGearA');
+      const mechGearB = document.getElementById('mechGearB');
+
+      // 1. Mount real ScrollCraft engine
+      if (window.ScrollCraft && typeof window.ScrollCraft.mount === 'function') {
+        window.ScrollCraft.mount(document);
+      }
+
+      // 2. Silky damped inertial loop for vector brake rotor, camshaft gears & vernier gauge
+      let targetSp = 0;
+      let smoothSp = 0;
+      function readScroll() {
+        const maxS = Math.max(1, root.scrollHeight - window.innerHeight);
+        targetSp = Math.min(1, Math.max(0, (window.scrollY || 0) / maxS));
+      }
+      window.addEventListener('scroll', readScroll, { passive: true });
+      readScroll();
+
+      function tickMech() {
+        if (reduced) {
+          smoothSp = targetSp;
+        } else {
+          smoothSp += (targetSp - smoothSp) * 0.08;
+        }
+        root.style.setProperty('--sp', smoothSp.toFixed(4));
+        if (vernierVal) vernierVal.textContent = (smoothSp * 100).toFixed(2) + ' MM';
+        if (!reduced && mechRotor && mechGearA && mechGearB) {
+          mechRotor.style.transform = 'rotate(' + (smoothSp * 220).toFixed(2) + 'deg)';
+          mechGearA.style.transform = 'rotate(' + (smoothSp * 320).toFixed(2) + 'deg)';
+          mechGearB.style.transform = 'rotate(' + (-smoothSp * 480).toFixed(2) + 'deg)';
+        }
+        requestAnimationFrame(tickMech);
+      }
+      requestAnimationFrame(tickMech);
+
+      // 3. Pointer parallax for hero bay & vector blueprint
+      if (!reduced && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+        window.addEventListener('pointermove', function (e) {
+          root.style.setProperty('--mx', (e.clientX / Math.max(1, window.innerWidth)).toFixed(4));
+          root.style.setProperty('--my', (e.clientY / Math.max(1, window.innerHeight)).toFixed(4));
+        }, { passive: true });
+      }
+
+      // 4. Crisp telemetry glyph scramble on arrival line
+      const coordEl = document.getElementById('scrambleCoord');
+      if (coordEl && !reduced) {
+        const finalTxt = coordEl.textContent;
+        const glyphs = '0123456789АБВГДЕКМПРСТ·';
+        let frame = 0;
+        const total = 24;
+        function scramble() {
+          frame++;
+          const revealCount = Math.floor((frame / total) * finalTxt.length);
+          let out = '';
+          for (let i = 0; i < finalTxt.length; i++) {
+            const ch = finalTxt[i];
+            if (i < revealCount || ch === ' ') out += ch;
+            else out += glyphs[Math.floor(Math.random() * glyphs.length)];
+          }
+          coordEl.textContent = out;
+          if (frame < total) requestAnimationFrame(scramble);
+          else coordEl.textContent = finalTxt;
+        }
+        requestAnimationFrame(scramble);
+      }
+
+      // Shared booking prefill
+      const fService = document.getElementById('fService');
+      const fCar = document.getElementById('fCar');
+      const fName = document.getElementById('fName');
+      const fPhone = document.getElementById('fPhone');
+      const fTime = document.getElementById('fTime');
+      const errCar = document.getElementById('errCar');
+      const errName = document.getElementById('errName');
+      const errPhone = document.getElementById('errPhone');
+      const bookingForm = document.getElementById('bookingForm');
+      const bookingOk = document.getElementById('bookingOk');
+      const okSummary = document.getElementById('okSummary');
+      const resetBtn = document.getElementById('resetBtn');
+      const resolveSec = document.getElementById('resolve');
+
+      function pickService(val) {
+        if (bookingOk.classList.contains('is-visible')) {
+          bookingOk.classList.remove('is-visible');
+          bookingForm.style.display = '';
+        }
+        for (let i = 0; i < fService.options.length; i++) {
+          if (fService.options[i].value === val) { fService.selectedIndex = i; break; }
+        }
+        resolveSec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        fService.classList.remove('field-pulse');
+        void fService.offsetWidth;
+        fService.classList.add('field-pulse');
+        setTimeout(function () { fCar.focus(); }, 380);
+      }
+
+      // 5. Interactive Symptom Helper
+      const SYMPTOMS = [
+        {
+          badge: 'Автоэлектрика · №2 на Zoon',
+          title: 'Найдём обрыв или плавающую ошибку без гадания',
+          desc: 'Подключаем диагностический сканер, проверяем цепи под нагрузкой, датчики, генератор, стартер и блоки ЭБУ. Не меняем исправные узлы наугад.',
+          checks: ['Берём случаи, когда в других сервисах развели руками', 'Прямая связь с диагностом Эдгардом Дерксеном (5,0 Zoon)', 'Точный вердикт и смета до начала ремонта'],
+          time: 'от 1 часа',
+          price: 'по расчёту',
+          val: 'Сложная автоэлектрика и ЭБУ'
+        },
+        {
+          badge: 'Двигатели и собственный цех ГБЦ',
+          title: 'Ремонт двигателя и обработка ГБЦ за 1,5–24 часа',
+          desc: 'Выполняем замену ГРМ, прокладок, поршневых колец, опрессовку, фрезеровку плоскости, расточку блока и ультразвуковую мойку на своих станках.',
+          checks: ['Собственный станочный цех без посредников', 'Фотоотчёт скрытых узлов в мессенджер', 'Профильный мастер Сергей Сенич (5,0 Zoon)'],
+          time: '1,5–24 ч (ГБЦ) · от 1 дня (ДВС)',
+          price: 'от\u00A05\u00A0000\u00A0₽',
+          val: 'Ремонт двигателя (от 5 000 ₽)'
+        },
+        {
+          badge: 'Тормозная система',
+          title: 'Обслужим тормоза и вернём чёткое замедление',
+          desc: 'Меняем передние и задние колодки, диски, чистим и смазываем закисшие направляющие суппортов, проверяем магистрали.',
+          checks: ['Проверка остатка дисков на подъёмнике при вас', 'Запчасти в наличии и под заказ от 1 ₽', 'Возврат старых деталей и акт с печатью'],
+          time: '40–90 мин',
+          price: 'от\u00A0800\u00A0₽',
+          val: 'Тормозная система и колодки (от 800 ₽)'
+        },
+        {
+          badge: 'Ходовая часть и система KDSS',
+          title: 'Устраним стуки и восстановим управляемость',
+          desc: 'Осматриваем подвеску при владельце, меняем стойки, ШРУСы, сайлентблоки, ремонтируем рулевые рейки и систему KDSS, делаем развал-схождение.',
+          checks: ['Честно говорим, какие узлы ещё походят', 'Предупреждаем о прикипевших болтах заранее', 'Мастер Константин Черных (5,0 Zoon)'],
+          time: '1–4 часа',
+          price: 'по расчёту',
+          val: 'Подвеска, рулевые рейки и KDSS'
+        },
+        {
+          badge: 'АКПП, вариаторы и плановое ТО',
+          title: 'Плавная работа коробки и регулярное обслуживание',
+          desc: 'Диагностируем и ремонтируем АКПП и вариаторы, меняем масла, фильтры и жидкости, обслуживаем европейские и японские авто.',
+          checks: ['Подбор масел и фильтров под ваш бюджет', 'Замена ГРМ и ТО в день обращения', 'Мастер Игорь Овсянников (5,0 Zoon)'],
+          time: 'от 1 часа',
+          price: 'по расчёту',
+          val: 'АКПП, вариаторы, ТО и антикор'
+        },
+        {
+          badge: 'Антикоррозийная обработка',
+          title: 'Защита днища и скрытых полостей с фотоотчётом',
+          desc: 'Снимаем пластиковые обвесы и подкрылки, очищаем очаги коррозии, обрабатываем днище и скрытые полости с фотоотчётом в мессенджер.',
+          checks: ['Обязательное снятие пластиковых обвесов', 'Фото скрытых полостей до и после обработки', 'Без навязывания лишних услуг'],
+          time: '1–2 дня',
+          price: 'по расчёту',
+          val: 'АКПП, вариаторы, ТО и антикор'
+        }
+      ];
+
+      const symptomGrid = document.getElementById('symptomGrid');
+      const symptomCard = document.getElementById('symptomCard');
+      function renderSymptom(idx) {
+        const s = SYMPTOMS[idx] || SYMPTOMS[0];
+        symptomGrid.querySelectorAll('.sym-btn').forEach(function (b, i) {
+          b.classList.toggle('is-active', i === idx);
+          b.setAttribute('aria-selected', String(i === idx));
+        });
+        symptomCard.innerHTML =
+          '<div class="sym-card-inner">' +
+            '<div>' +
+              '<span class="sc-badge">' + s.badge + '</span>' +
+              '<h3>' + s.title + '</h3>' +
+              '<p>' + s.desc + '</p>' +
+              '<ul class="sc-checks">' + s.checks.map(function (c) { return '<li>' + c + '</li>'; }).join('') + '</ul>' +
+            '</div>' +
+            '<div class="sc-foot">' +
+              '<div class="sc-meta"><span>Срок: ' + s.time + '</span><strong class="nowrap-num">' + s.price + '</strong></div>' +
+              '<button type="button" class="hud-cta" data-pick="' + s.val + '">Записаться →</button>' +
+            '</div>' +
+          '</div>';
+      }
+      symptomGrid.addEventListener('click', function (e) {
+        const b = e.target.closest('.sym-btn');
+        if (b) renderSymptom(Number(b.getAttribute('data-sym')));
+      });
+      symptomCard.addEventListener('click', function (e) {
+        const b = e.target.closest('[data-pick]');
+        if (b) pickService(b.getAttribute('data-pick'));
+      });
+      renderSymptom(0);
+
+      // 6. CNC Inspection Readout
+      const CNC_OPS = [
+        { code: 'PROTOCOL · 01 · ОПРЕССОВКА ГБЦ', title: 'Проверка герметичности под давлением', text: 'Выявляем микротрещины рубашки охлаждения до сборки двигателя. Срок выполнения 1,5–24 ч на собственном стенде.' },
+        { code: 'PROTOCOL · 02 · ФРЕЗЕРОВКА И ШЛИФОВКА', title: 'Выведение идеальной плоскости ГБЦ', text: 'Снимаем деформацию после перегрева на прецизионном станке без отправки детали подрядчикам.' },
+        { code: 'PROTOCOL · 03 · УЛЬТРАЗВУКОВАЯ МОЙКА', title: 'Очистка каналов и коллекторов до металла', text: 'Удаляем стойкий нагар, масло и отложения из впускных коллекторов и масляных каналов ГБЦ.' },
+        { code: 'PROTOCOL · 04 · БЛОК И КОЛЕНВАЛ', title: 'Расточка блока, перепрессовка поршней', text: 'Полный цикл станочной мехобработки и промера с фотоотчётом в мессенджер перед сборкой.' }
+      ];
+      const cncNodes = document.getElementById('cncNodes');
+      const cncReadout = document.getElementById('cncReadout');
+      function setCnc(idx) {
+        const op = CNC_OPS[idx] || CNC_OPS[0];
+        cncNodes.querySelectorAll('.cnc-pin').forEach(function (b, i) {
+          b.classList.toggle('is-active', i === idx);
+          b.setAttribute('aria-selected', String(i === idx));
+        });
+        cncReadout.innerHTML =
+          '<div class="cnc-readout-code">' + op.code + '</div>' +
+          '<h3>' + op.title + '</h3>' +
+          '<p>' + op.text + '</p>';
+      }
+      cncNodes.addEventListener('click', function (e) {
+        const b = e.target.closest('.cnc-pin');
+        if (b) setCnc(Number(b.getAttribute('data-cnc')));
+      });
+      setCnc(0);
+
+      // 7. Horizontal Pan Rail Services
+      const RAIL_ITEMS = [
+        { tag: 'ДВС · БЕНЗИН / ДИЗЕЛЬ', time: 'от 1 дня', title: 'Ремонт двигателя и замена ГРМ', desc: 'Замена ГРМ, прокладок клапанной крышки, поршневых колец, частичный и капитальный ремонт.', price: 'от\u00A05\u00A0000\u00A0₽', val: 'Ремонт двигателя (от 5 000 ₽)' },
+        { tag: 'ЦЕХ ГБЦ · БЕЗ ПОСРЕДНИКОВ', time: '1,5–24 ч', title: 'Мехобработка ГБЦ и ультразвук', desc: 'Опрессовка, фрезеровка, шлифовка, расточка блока и коленвала, очистка впуска.', price: 'по расчёту', val: 'Цех ГБЦ и ультразвуковая мойка' },
+        { tag: 'ZOON №2 · ИЗ 429 СЕРВИСОВ', time: 'от 1 часа', title: 'Сложная автоэлектрика и ЭБУ', desc: 'Поиск плавающих ошибок и обрывов проводки, ремонт генераторов, стартеров и датчиков.', price: 'по расчёту', val: 'Сложная автоэлектрика и ЭБУ' },
+        { tag: 'ТОРМОЗНАЯ СИСТЕМА', time: '40–90 мин', title: 'Замена колодок и суппортов', desc: 'Передние и задние колодки, диски, обслуживание направляющих и тормозных магистралей.', price: 'от\u00A0800\u00A0₽', val: 'Тормозная система и колодки (от 800 ₽)' },
+        { tag: 'ШАССИ · KDSS · РЕЙКИ', time: '1–4 часа', title: 'Подвеска, рулевые рейки и KDSS', desc: 'Осмотр при владельце на подъёмнике, ШРУСы, стойки, ремонт реек и развал-схождение.', price: 'по расчёту', val: 'Подвеска, рулевые рейки и KDSS' },
+        { tag: 'АКПП · АНТИКОР · ТО', time: '1–2 дня', title: 'АКПП, антикор днища и запчасти', desc: 'Ремонт АКПП/вариаторов, антикор со снятием обвесов и фото полостей, запчасти от 1 ₽.', price: 'по расчёту', val: 'АКПП, вариаторы, ТО и антикор' }
+      ];
+      const serviceRail = document.getElementById('serviceRail');
+      serviceRail.innerHTML = RAIL_ITEMS.map(function (it) {
+        return (
+          '<article class="rail-card" data-sc-spotlight>' +
+            '<div>' +
+              '<div class="rc-meta"><span>' + it.tag + '</span><span class="nowrap-num">' + it.time + '</span></div>' +
+              '<h3 class="rc-title">' + it.title + '</h3>' +
+              '<p class="rc-desc">' + it.desc + '</p>' +
+            '</div>' +
+            '<div class="rc-foot">' +
+              '<span class="rc-price nowrap-num">' + it.price + '</span>' +
+              '<button type="button" class="rc-btn" data-pick="' + it.val + '">Выбрать →</button>' +
+            '</div>' +
+          '</article>'
+        );
+      }).join('');
+      serviceRail.addEventListener('click', function (e) {
+        const b = e.target.closest('[data-pick]');
+        if (b) pickService(b.getAttribute('data-pick'));
+      });
+
+      // 8. Real 2026 Zoon Masters & Reviews
+      const MASTERS = [
+        { name: 'Эдгард Дерксен', badge: 'ZOON 5,0', role: 'Сложная диагностика, автоэлектрика, ремонт', quote: '«В трёх других сервисах не могли провести диагностику, а Эдгард добрался до сути: оказался клапан, отошёл проводок. Не опустил руки и постоянно был на связи.»', author: 'Виталий · 1 апреля 2026 · Zoon' },
+        { name: 'Сергей Сенич', badge: 'ZOON 5,0', role: 'Двигатели, цех ГБЦ и агрегатный ремонт', quote: '«Привёз ГБЦ на опрессовку и фрезеровку вечером, а на следующий день после обеда уже забрал. Всё ровно, меньше суток.»', author: 'Николай · 22 июня 2026 · Zoon' },
+        { name: 'Константин Черных', badge: 'ZOON 5,0', role: 'Ходовая часть, тормоза, антикор и KDSS', quote: '«При антикоре на Mazda CX-5 сняли пластиковые обвесы, сфотографировали скрытые полости и всё показали. Ничего лишнего не навязывают.»', author: 'Константин · 19 марта 2026 · Zoon' },
+        { name: 'Игорь Овсянников', badge: 'ZOON 5,0', role: 'Обслуживание европейских и японских авто', quote: '«Один из немногих сервисов в Красноярске, кто берёт европейские машины. Замену ГРМ на Volvo сделали в тот же день за 6 часов.»', author: 'Анастасия · 2 апреля 2026 · Zoon' },
+        { name: 'Олеся Дерксен', badge: 'ПРИЁМКА', role: 'Администратор, подбор и доставка запчастей', quote: '«Сотрудники сами подбирают запчасти под бюджет, присылают фото процесса в мессенджер и отдают старую деталь вместе с документами.»', author: 'Павел · 2 апреля 2026 · Zoon' }
+      ];
+      const masterTabs = document.getElementById('masterTabs');
+      const masterCard = document.getElementById('masterCard');
+      function renderMaster(idx) {
+        const m = MASTERS[idx] || MASTERS[0];
+        masterTabs.querySelectorAll('.m-pill').forEach(function (b, i) {
+          b.classList.toggle('is-active', i === idx);
+          b.setAttribute('aria-selected', String(i === idx));
+        });
+        masterCard.innerHTML =
+          '<div>' +
+            '<div class="zb-head"><span class="zb-name">' + m.name + '</span><span class="zb-badge">' + m.badge + '</span></div>' +
+            '<div class="zb-role">' + m.role + '</div>' +
+          '</div>' +
+          '<p class="zb-quote">' + m.quote + '</p>' +
+          '<div class="zb-author">' + m.author + '</div>';
+      }
+      masterTabs.addEventListener('click', function (e) {
+        const b = e.target.closest('.m-pill');
+        if (b) renderMaster(Number(b.getAttribute('data-idx')));
+      });
+      renderMaster(0);
+
+      // 9. Copy phone + Russian phone mask + Booking form
+      const copyPhoneBtn = document.getElementById('copyPhoneBtn');
+      copyPhoneBtn.addEventListener('click', function () {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText('+7 (913) 510-75-05').catch(function () {});
+        }
+        copyPhoneBtn.textContent = 'Скопировано ✓';
+        copyPhoneBtn.classList.add('is-copied');
+        setTimeout(function () {
+          copyPhoneBtn.textContent = 'Скопировать';
+          copyPhoneBtn.classList.remove('is-copied');
+        }, 1800);
+      });
+
+      fPhone.addEventListener('input', function () {
+        let d = fPhone.value.replace(/\D/g, '');
+        if (!d) { fPhone.value = ''; return; }
+        if (d[0] === '8') d = '7' + d.slice(1);
+        if (d[0] !== '7') d = '7' + d;
+        d = d.slice(0, 11);
+        let out = '+7';
+        if (d.length > 1) out += ' (' + d.slice(1, 4);
+        if (d.length >= 4) out += ') ' + d.slice(4, 7);
+        if (d.length >= 7) out += '-' + d.slice(7, 9);
+        if (d.length >= 9) out += '-' + d.slice(9, 11);
+        fPhone.value = out;
+      });
+
+      bookingForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+        let ok = true;
+        errCar.textContent = ''; errName.textContent = ''; errPhone.textContent = '';
+        const carVal = fCar.value.trim();
+        const nameVal = fName.value.trim();
+        const digits = fPhone.value.replace(/\D/g, '');
+        if (carVal.length < 2) { errCar.textContent = 'Укажите автомобиль'; ok = false; }
+        if (nameVal.length < 2) { errName.textContent = 'Укажите имя'; ok = false; }
+        if (digits.length < 10) { errPhone.textContent = 'Введите номер (10+ цифр)'; ok = false; }
+        if (!ok) return;
+        okSummary.textContent = nameVal + ', заявка на «' + fService.options[fService.selectedIndex].text + '» для ' + carVal + ' (' + fTime.value + ') сформирована. Телефон сервиса: +7\u00A0(913)\u00A0510-75-05.';
+        bookingForm.style.display = 'none';
+        bookingOk.classList.add('is-visible');
+      });
+
+      resetBtn.addEventListener('click', function () {
+        bookingForm.reset();
+        bookingOk.classList.remove('is-visible');
+        bookingForm.style.display = '';
+      });
+    })();
+  </script>
+<aside style="background:#182323;color:#fff;padding:18px max(18px,5vw) calc(18px + env(safe-area-inset-bottom));font:600 14px system-ui"><a style="color:inherit;text-decoration:underline" href="../index.html">← Все шесть версий</a></aside></body>
+</html>

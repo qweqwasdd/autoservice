@@ -1,0 +1,104 @@
+:root {
+  --bg:#f7f7f4; --surface:#e8e8e4; --ink:#191a19; --muted:#595a58; --line:#cecfca;
+  --action:#242524; --action-hover:#363734; --flare:#ff4d13; --gutter:clamp(18px,3.15vw,65px); --max:1640px;
+  scrollbar-color:#a2a29f var(--bg);
+}
+::selection {background:#ffb293;color:#141413}
+:focus-visible {outline:3px solid #cd3900;outline-offset:4px}
+.header-grid {min-height:75px}
+.site-header {border-bottom:0}
+.brand {gap:10px;font-size:29px;letter-spacing:-.07em;font-weight:650}
+.brand-mark {width:31px;height:31px;background:var(--flare);display:inline-block;clip-path:polygon(50% 0,57% 21%,75% 7%,74% 30%,96% 24%,83% 43%,100% 51%,79% 58%,92% 76%,69% 74%,76% 96%,57% 83%,49% 100%,42% 79%,24% 93%,26% 70%,4% 76%,17% 57%,0 49%,21% 42%,8% 24%,31% 26%,24% 4%,43% 17%)}
+.header-phone,.menu-toggle {border:1px solid #7b7c76;border-radius:50px;padding:0 19px;background:transparent;font-weight:500}
+.header-phone .icon {width:15px;height:15px}
+.site-nav {gap:clamp(15px,2.4vw,38px)}
+.site-nav a,.header-phone {font-size:14px}
+.kinetic {min-height:0;padding:0 0 clamp(28px,4vw,70px)}
+.poster {display:grid;grid-template-columns:minmax(0,1fr) minmax(215px,24%);gap:5%;align-items:end;border-top:1px solid var(--line);padding:clamp(28px,4.1vh,62px) 0 clamp(25px,3.8vh,54px)}
+h1,h2 {font-weight:450;letter-spacing:-.067em}
+.poster h1 {font-size:clamp(76px,8vw,146px);line-height:.9;animation:text-arrive .6s ease-out both}
+.soft {color:#74746e}
+.poster-aside {max-width:295px;justify-self:end;padding-bottom:3px}
+.poster-aside p {font-size:clamp(15px,1.18vw,19px);line-height:1.35;letter-spacing:-.025em}
+.hero-actions {margin-top:18px}
+.button {border-radius:999px;min-height:47px;font-size:15px;font-weight:500;background:var(--ink);border-color:var(--ink)}
+.call {padding:5px 6px 5px 20px;gap:14px}
+.arrow-disc {width:33px;height:33px;display:grid;place-items:center;border-radius:50%;background:var(--flare);color:#150b05;font-size:21px}
+.road {position:relative;isolation:isolate;overflow:hidden;border-radius:clamp(16px,1.8vw,32px);background:#555;height:clamp(315px,calc(100svh - 24vw - 68px),62vh)}
+.road picture,.road img {width:100%;height:100%;display:block}
+.road img {object-fit:cover;object-position:center 51%;animation:photo-arrive .9s ease-out both}
+.route,.jump {position:absolute;bottom:24px;z-index:1;min-height:46px;display:flex;align-items:center;transition:transform .18s ease}
+.route {left:24px;padding:13px 16px;gap:12px;background:#1a1a19;color:#fff;border-radius:16px;font-size:17px;line-height:1.2}
+.route>.icon {color:#ff8257}
+.route small {display:block;color:#cecfc9;font-size:12px;margin-top:5px}
+.route-arrow {margin-left:8px;align-self:flex-start}
+.jump {right:24px;padding:8px 15px;background:#f7f7f4;gap:18px;border-radius:100px;font-size:14px}
+.jump span {font-size:19px}
+.route:hover,.jump:hover {transform:translateY(-2px)}
+.section {padding-block:clamp(56px,6.6vw,104px);border:0}
+.section-head {align-items:center}
+h2 {font-size:clamp(42px,5.6vw,96px);line-height:.99}
+.text-link {font-weight:500;letter-spacing:-.025em}
+.text-link .icon {width:17px}
+.services {min-height:0;background:#1a1a19;color:#f5f5f0;--line:#484846;--muted:#bdbeb8}
+.filters {gap:7px;margin-block:0 35px}
+.filters button {border-radius:40px;border-color:#62625e;color:#eee;background:transparent;padding-inline:18px;font-size:14px}
+.filters button:hover {border-color:#ff8358}
+.filters button[aria-pressed=true] {background:#ff6939;color:#18110d;border-color:#ff6939}
+.service-layout {gap:5%;grid-template-columns:1.12fr 1fr;align-items:start}
+.service-image,.visit-grid img,.gallery img {border-radius:18px}
+.service-image {aspect-ratio:1.22;filter:saturate(.65)}
+.price-table td {font-weight:500}
+.price-table tr:hover {background:#242423}
+.workshop {background:var(--bg)}
+.gallery {gap:14px;grid-template-rows:repeat(2,clamp(130px,13vw,220px))}
+.mo-wh__text {max-width:29ch;margin-left:auto;font-weight:450;letter-spacing:-.05em}
+.mo-wh__text strong {color:#b73a0a}
+.workshop .text-link {margin-top:10px}
+.reviews {background:#e5e5df;border-radius:28px 28px 0 0}
+.score {font-weight:450;color:#242422}
+.score span {font-weight:400}
+.review-quotes blockquote {font-weight:400;letter-spacing:-.035em}
+.visit {min-height:0;background:#181817;color:#f7f7f3;--line:#484843;--muted:#babbb4}
+.visit-grid {gap:12px}
+.visit-info {background:#252523;border-radius:18px}
+.visit .button {background:#ff6a39;color:#17110c}
+.visit address {font-weight:450}
+.site-footer {background:#181817;color:#ededeb;border-color:#464641}
+footer .brand-mark {width:23px;height:23px}
+.actionbar .secondary {background:white;color:#1a1a19;border-color:#b6b6b3}
+@media(min-width:731px) and (max-width:1030px) {
+ .header-grid {gap:10px}.brand {font-size:24px}.header-phone {padding:0 10px}.site-nav {gap:13px}
+ .poster {gap:24px;grid-template-columns:1fr 210px}.poster h1 {font-size:8.1vw}
+}
+@media(max-width:730px){
+ .header-grid {min-height:62px}.brand {font-size:25px}.brand-mark {width:26px;height:26px}
+ .site-nav.is-open {padding-bottom:12px}
+ .kinetic {padding:0 0 25px}
+ .poster {display:block;padding:29px 0 20px}
+ .poster h1 {font-size:clamp(44px,11.15vw,78px);line-height:.95}
+ .poster-aside {max-width:none;padding:0;margin-top:22px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+ .poster-aside p {font-size:13px;max-width:24ch;line-height:1.35}
+ .hero-actions {margin:0;flex-shrink:0}
+ .call {font-size:13px;padding:5px 7px 5px 13px;gap:8px}
+ .arrow-disc {width:25px;height:25px;font-size:18px}
+ .road {height:clamp(290px,51svh,435px);border-radius:17px}
+ .road img {object-position:70% center}
+ .route {left:12px;bottom:12px;gap:9px;font-size:15px;padding:12px;border-radius:12px}
+ .route small {font-size:11px}.jump {display:none}
+ .service-layout,.visit-grid {grid-template-columns:1fr;gap:21px}
+ .filters {margin-bottom:22px}.filters button {font-size:13px;padding-inline:13px}
+ .service-image {aspect-ratio:1.55}
+ .section-head {margin-bottom:24px}
+ .gallery {grid-template-rows:auto auto;gap:8px}
+ .service-image,.visit-grid img,.gallery img,.visit-info {border-radius:12px}
+ .review-grid {gap:20px}.visit-grid {gap:8px}
+}
+@media(max-width:420px){
+ .poster-aside {display:block;margin-top:18px}
+ .poster-aside p {max-width:35ch;font-size:14px}.poster-aside p br {display:none}
+ .hero-actions {margin-top:14px}
+ .cover .hero-actions .button,.hero-actions .call {width:auto}
+ .road {height:clamp(260px,45svh,380px)}
+}
+@media(prefers-reduced-motion:reduce){.poster h1,.road img {animation:none}}
