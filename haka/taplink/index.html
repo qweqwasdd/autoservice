@@ -6,8 +6,14 @@
   <meta name="theme-color" content="#17120e">
   <meta name="description" content="Хака. Мужские стрижки в Красноярске. Запись к Тимуру, прайс и маршрут.">
   <title>Хака · Запись к Тимуру</title>
+  <script>
+    if (!matchMedia('(prefers-reduced-motion: reduce)').matches && location.hash !== '#links') {
+      document.documentElement.classList.add('scene-gated');
+      window.sceneLoadFallback = setTimeout(() => document.documentElement.classList.remove('scene-gated'), 12000);
+    }
+  </script>
   <link rel="preload" as="image" href="img/overgrown.webp">
-  <link rel="stylesheet" href="tap-saga.css?v=wordmark">
+  <link rel="stylesheet" href="tap-saga.css?v=scene-gate1">
 </head>
 <body>
   <main>
@@ -18,28 +24,12 @@
           <img class="poster" src="img/groomed.webp" width="1254" height="1254" alt="Северянин в барберской накидке. За круглым окном корабль в море.">
           <svg class="portrait" viewBox="0 0 1000 1000" aria-hidden="true">
             <defs>
-              <filter id="soft-edge"><feGaussianBlur stdDeviation="10"/></filter>
               <linearGradient id="back-sweep" x1="0" y1="1100" x2="0" y2="1170" gradientUnits="userSpaceOnUse"><stop stop-color="#000"/><stop offset="1" stop-color="#fff"/></linearGradient>
               <linearGradient id="side-sweep" x1="1100" y1="0" x2="1170" y2="0" gradientUnits="userSpaceOnUse"><stop stop-color="#000"/><stop offset="1" stop-color="#fff"/></linearGradient>
               <linearGradient id="beard-sweep" x1="900" y1="350" x2="960" y2="415" gradientUnits="userSpaceOnUse"><stop stop-color="#000"/><stop offset="1" stop-color="#fff"/></linearGradient>
               <mask id="back-progress" maskUnits="userSpaceOnUse" x="0" y="0" width="1000" height="1000"><rect width="1000" height="1000" fill="url(#back-sweep)"/></mask>
               <mask id="side-progress" maskUnits="userSpaceOnUse" x="0" y="0" width="1000" height="1000"><rect width="1000" height="1000" fill="url(#side-sweep)"/></mask>
               <mask id="beard-progress" maskUnits="userSpaceOnUse" x="0" y="0" width="1000" height="1000"><rect width="1000" height="1000" fill="url(#beard-sweep)"/></mask>
-              <mask id="back-region" maskUnits="userSpaceOnUse" x="0" y="0" width="1000" height="1000">
-                <path d="M656 167Q900 145 949 340L944 747 585 746Q572 690 581 634L595 570 620 492 628 404Z" fill="#fff" filter="url(#soft-edge)"/>
-              </mask>
-              <mask id="side-region" maskUnits="userSpaceOnUse" x="0" y="0" width="1000" height="1000">
-                <path d="M245 233Q298 58 573 49Q810 30 951 226L952 738 587 731Q570 670 590 608L607 519Q595 503 548 454L507 390 506 325Q432 321 366 345Q317 379 265 345Z" fill="#fff" filter="url(#soft-edge)"/>
-              </mask>
-              <mask id="beard-region" maskUnits="userSpaceOnUse" x="0" y="0" width="1000" height="1000">
-                <path d="M248 448Q292 422 358 423L425 408Q459 381 501 388Q557 387 592 439L601 509 570 624Q539 675 475 694L266 706 229 637Z" fill="#fff" filter="url(#soft-edge)"/>
-              </mask>
-              <mask id="sea-patch" maskUnits="userSpaceOnUse" x="0" y="0" width="1000" height="1000">
-                <path d="M61 385Q147 372 222 387L227 505 58 512Z" fill="#fff" filter="url(#soft-edge)"/>
-              </mask>
-              <mask id="moving-water" maskUnits="userSpaceOnUse" x="0" y="0" width="1000" height="1000">
-                <path d="M46 505Q119 496 235 503L231 615Q185 635 123 628 77 591 46 505Z" fill="#fff" filter="url(#soft-edge)"/>
-              </mask>
               <clipPath id="porthole-motion">
                 <path d="M20 383H257L267 475 247 528 244 605Q191 641 113 630Q48 579 25 503Z"/>
               </clipPath>
@@ -53,13 +43,13 @@
               <path id="fragment" d="M0 0q12 0 18 8t13 12q-15-1-23-10T0 0Z"/>
             </defs>
             <image id="portrait-before" href="img/overgrown.webp" width="1000" height="1000"/>
-            <g mask="url(#back-region)"><image href="img/rough-cut.webp" width="1000" height="1000" mask="url(#back-progress)"/></g>
-            <g mask="url(#side-region)"><image href="img/groomed.webp" width="1000" height="1000" mask="url(#side-progress)"/></g>
-            <g mask="url(#beard-region)"><image href="img/groomed.webp" width="1000" height="1000" mask="url(#beard-progress)"/></g>
+            <image href="img/cut-nape.webp" x="552" y="139" width="423" height="633" mask="url(#back-progress)"/>
+            <image href="img/cut-sides.webp" x="221" y="22" width="757" height="741" mask="url(#side-progress)"/>
+            <image href="img/cut-beard.webp" x="205" y="361" width="421" height="370" mask="url(#beard-progress)"/>
             <image id="portrait-finish" href="img/groomed.webp" width="1000" height="1000" opacity="0"/>
-            <image href="img/cleared-sea.webp" width="1000" height="1000" mask="url(#sea-patch)"/>
+            <image href="img/cut-sea.webp" x="33" y="353" width="220" height="184"/>
             <g class="sea" clip-path="url(#porthole-motion)">
-              <g mask="url(#moving-water)"><image class="sea-water" href="img/cleared-sea.webp" width="1000" height="1000"/></g>
+              <image href="img/cut-water.webp" x="23" y="474" width="238" height="181" class="sea-water"/>
               <g id="ship-track" transform="translate(138 488)">
                 <g class="ship-rock">
                   <g fill="url(#ship-ink)" stroke="#332418" stroke-linecap="round" stroke-linejoin="round">
@@ -118,7 +108,7 @@
             </g>
           </svg>
         </div>
-        <div class="stage-shade" aria-hidden="true"></div>
+
 <svg class="stage-logo" viewBox="0 0 400 140" role="img" aria-label="Хака">
       <defs>
         <filter id="wear" x="-5%" y="-10%" width="110%" height="120%">
@@ -152,10 +142,10 @@
         </div></header>
         <p class="tap-address">Красноярск, Киренского, 56а · 1 этаж</p>
         <div class="tap-actions">
-          <a class="tap-primary" href="https://t.me/domnashtam" target="_blank" rel="noopener">Записаться в Telegram <span aria-hidden="true">↗</span></a>
-          <a href="tel:+79232803641">Позвонить <small>+7 923 280-36-41</small><span aria-hidden="true">↗</span></a>
-          <a href="https://vk.com/domubee" target="_blank" rel="noopener">ВКонтакте <span aria-hidden="true">↗</span></a>
-          <a href="https://2gis.ru/krasnoyarsk/directions/points/%7C92.801819%2C56.001845%3B70000001113650553" target="_blank" rel="noopener">Маршрут в 2ГИС <span aria-hidden="true">↗</span></a>
+          <a class="tap-primary" href="https://t.me/domnashtam" target="_blank" rel="noopener">Записаться в Telegram <span aria-hidden="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false"><path d="M3 13 12 4M4 4h8v8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+          <a href="tel:+79232803641">Позвонить <small>+7 923 280-36-41</small><span aria-hidden="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false"><path d="M3 13 12 4M4 4h8v8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+          <a href="https://vk.com/domubee" target="_blank" rel="noopener">ВКонтакте <span aria-hidden="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false"><path d="M3 13 12 4M4 4h8v8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+          <a href="https://2gis.ru/krasnoyarsk/directions/points/%7C92.801819%2C56.001845%3B70000001113650553" target="_blank" rel="noopener">Маршрут в 2ГИС <span aria-hidden="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false"><path d="M3 13 12 4M4 4h8v8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
         </div>
         <details class="prices">
           <summary>Прайс <span aria-hidden="true">+</span></summary>
@@ -172,10 +162,10 @@
             <li><span>Пробор</span><strong>100 ₽</strong></li>
           </ul>
         </details>
-        <a class="reviews" href="https://2gis.ru/krasnoyarsk/firm/70000001113650553/tab/reviews" target="_blank" rel="noopener">Отзывы в 2ГИС <span aria-hidden="true">↗</span></a>
+        <a class="reviews" href="https://2gis.ru/krasnoyarsk/firm/70000001113650553/tab/reviews" target="_blank" rel="noopener">Отзывы в 2ГИС <span aria-hidden="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false"><path d="M3 13 12 4M4 4h8v8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
       </div>
     </section>
   </main>
-  <script src="tap-saga.js"></script>
+  <script src="tap-saga.js?v=scene-gate1"></script>
 </body>
 </html>

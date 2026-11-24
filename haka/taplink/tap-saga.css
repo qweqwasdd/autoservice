@@ -63,7 +63,7 @@ button { cursor: pointer; }
   isolation: isolate;
   background: #19130f;
 }
-.stage-shade, .projection { position: absolute; pointer-events: none; }
+.projection { position: absolute; pointer-events: none; }
 .stage-logo {
   position:absolute;
   left:50%;
@@ -82,9 +82,6 @@ button { cursor: pointer; }
   translate: -54% -43%;
   transform: translate(var(--camera-x, 0), var(--camera-y, 0)) scale(var(--camera, 1));
   transform-origin: 56% 46%;
-  mask-image: linear-gradient(90deg, transparent, #000 13%, #000 92%, transparent),
-              linear-gradient(180deg, transparent, #000 10%, #000 90%, transparent);
-  mask-composite: intersect;
 }
 .poster, .portrait { position: absolute; inset: 0; display: block; width: 100%; height: 100%; }
 .portrait, .scene-ready .poster { visibility: hidden; }
@@ -111,11 +108,7 @@ button { cursor: pointer; }
   0%, 100% { transform: translate(-6px, 2px); opacity: .57; }
   51% { transform: translate(7px, -3px); opacity: .83; }
 }
-.stage-shade {
-  inset: 0;
-  background: linear-gradient(180deg, #140e0bc9, transparent 21%, transparent 72%, #130d0ad9 100%),
-              linear-gradient(90deg, #130d0a82, transparent 23%, transparent 77%, #130d0a8c);
-}
+
 .stage-head, .stage-footer { position: absolute; inset-inline: var(--gutter); }
 .stage-head {
   top: max(21px, env(safe-area-inset-top));
@@ -189,9 +182,8 @@ button { cursor: pointer; }
     top: 49%;
     translate: -49% -43%;
     transform: translate(calc(var(--camera-x, 0px) + var(--nape-pan, 0px)), var(--camera-y, 0px)) scale(var(--camera, 1));
-    mask-image: linear-gradient(180deg, transparent, #000 13%, #000 89%, transparent);
-  }
-  .stage-shade { background: linear-gradient(180deg, #130d0aab, transparent 25%, transparent 72%, #130d0ad7 100%); }
+    }
+  
 }
 @media (max-width: 370px) {
   .tap-actions a { padding-inline: 12px; }
@@ -231,3 +223,10 @@ button { cursor: pointer; }
 .tap :focus-visible { outline-color:var(--rust); }
 @media (max-aspect-ratio:4/5) { .saga.scene-ready { --travel:clamp(1050px,172svh,1600px); } }
 @media (prefers-reduced-motion:reduce) { .saga.scene-ready { --travel:0px; } }
+
+.stage { height:100dvh; }
+html.scene-gated .saga { --travel:clamp(1250px,185svh,2050px); }
+html.scene-gated .tap { display:none; }
+html.scene-gated .saga:not(.scene-ready) .poster { visibility:hidden; }
+html.scene-gated .saga:not(.scene-ready) .projection { background:center / contain no-repeat url(img/overgrown.webp); }
+@media (max-aspect-ratio:4/5) { html.scene-gated .saga { --travel:clamp(1050px,172svh,1600px); } }

@@ -47,6 +47,12 @@
   let ready = false;
   let progress = 0;
   let scrollTarget = 0;
+  const page = document.documentElement;
+  let releaseTimer;
+  function unlock() {
+    clearTimeout(releaseTimer);
+    page.classList.remove('scene-gated');
+  }
   let velocity = 0;
   let lastFrameTime = null;
   let frame = 0;
@@ -130,6 +136,7 @@
     if (Math.abs(gap) <= .00015 && Math.abs(velocity) < .000005) {
       velocity = 0;
       draw(scrollTarget);
+      if (scrollTarget === 1) releaseTimer = setTimeout(unlock, 320);
       frame = 0;
       lastFrameTime = null;
       return;
@@ -141,20 +148,24 @@
     const slope = velocity + rate * offset;
     const next = scrollTarget + (offset + slope * elapsed) * decay;
     velocity = (velocity - rate * slope * elapsed) * decay;
-    draw(next);
+    const step = Math.max(-elapsed / 3200, Math.min(elapsed / 3200, next - progress));
+    draw(progress + step);
     lastFrameTime = now;
     frame = requestAnimationFrame(scrollFrame);
   }
 
   function pageProgress() {
     const travel = scene.offsetHeight - stage.offsetHeight;
-    return travel > 0 ? clamp((window.scrollY - scene.offsetTop) / travel) : 0;
+    const distance = window.scrollY - scene.offsetTop;
+    return travel <= 0 ? 0 : distance >= travel - 2 ? 1 : clamp(distance / travel);
   }
 
   function followScroll() {
     if (!enabled) return;
     const next = pageProgress();
     if (next === scrollTarget) return;
+    clearTimeout(releaseTimer);
+    if (next === 0 && location.hash !== '#links') page.classList.add('scene-gated');
     scrollTarget = next;
     if (!frame) frame = requestAnimationFrame(scrollFrame);
   }
@@ -180,13 +191,18 @@
     enabled = ready && !preference.matches;
     scene.classList.toggle('scene-ready', enabled);
     footer.hidden = !enabled;
+    if (!enabled || location.hash === '#links') unlock();
     if (location.hash === '#links') byId('links').scrollIntoView({ behavior: 'instant' });
-    if (enabled) draw(pageProgress());
-    scrollTarget = progress;
+    if (enabled) {
+      draw(page.classList.contains('scene-gated') ? 0 : pageProgress());
+      scrollTarget = progress;
+      followScroll();
+    }
   }
 
   scene.querySelector('.jump').addEventListener('click', () => {
     cancelScroll();
+    unlock();
     requestAnimationFrame(() => byId('tap-title').focus({ preventScroll: true }));
   });
   document.querySelector('.prices').addEventListener('toggle', (event) => {
@@ -197,15 +213,17 @@
     );
   });
   preference.addEventListener('change', configure);
-  const fileNames = ['overgrown.webp', 'rough-cut.webp', 'groomed.webp', 'cleared-sea.webp'];
+  const fileNames = ['overgrown.webp', 'groomed.webp', 'cut-nape.webp', 'cut-sides.webp', 'cut-beard.webp', 'cut-water.webp', 'cut-sea.webp'];
   Promise.all(fileNames.map((name) => {
     const image = new Image();
     image.src = `img/${name}`;
     return image.decode();
   })).then(() => {
+    clearTimeout(window.sceneLoadFallback);
     ready = true;
     configure();
   }).catch(() => {
+    unlock();
     // The contact links and the static poster remain usable if a plate fails.
   });
 })();
