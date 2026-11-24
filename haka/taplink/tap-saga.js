@@ -125,7 +125,7 @@
   }
 
   function scrollFrame(now) {
-    const elapsed = lastFrameTime === null ? 16 : Math.min(32, now - lastFrameTime);
+    const elapsed = lastFrameTime === null ? 16 : Math.min(22, now - lastFrameTime);
     const gap = scrollTarget - progress;
     if (Math.abs(gap) <= .00015 && Math.abs(velocity) < .000005) {
       velocity = 0;
@@ -135,7 +135,7 @@
       return;
     }
     // Critically damp the response so wheel steps and reversals have continuous velocity.
-    const rate = .009;
+    const rate = .0073;
     const decay = Math.exp(-rate * elapsed);
     const offset = -gap;
     const slope = velocity + rate * offset;
