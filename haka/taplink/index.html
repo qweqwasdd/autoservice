@@ -13,7 +13,7 @@
   <main>
     <section class="saga" id="scene" aria-label="Стрижка северянина">
       <div class="stage">
-        <div class="stage-back" aria-hidden="true"></div>
+        
         <div class="projection">
           <img class="poster" src="img/groomed.webp" width="1254" height="1254" alt="Северянин в барберской накидке. За круглым окном корабль в море.">
           <svg class="portrait" viewBox="0 0 1000 1000" aria-hidden="true">
@@ -119,6 +119,22 @@
           </svg>
         </div>
         <div class="stage-shade" aria-hidden="true"></div>
+<svg class="stage-logo" viewBox="0 0 400 140" role="img" aria-label="Хака">
+      <defs>
+        <filter id="wear" x="-5%" y="-10%" width="110%" height="120%">
+          <feTurbulence type="fractalNoise" baseFrequency=".03" numOctaves="2" seed="5" result="w"/>
+          <feDisplacementMap in="SourceGraphic" in2="w" scale="1.6" result="d"/>
+          <feTurbulence type="fractalNoise" baseFrequency=".005 .3" numOctaves="3" seed="3" result="st"/>
+          <feColorMatrix in="st" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -30 0 0 0 22.4" result="m1"/>
+          <feTurbulence type="fractalNoise" baseFrequency=".45" numOctaves="2" seed="8" result="n"/>
+          <feColorMatrix in="n" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -30 0 0 0 23.2" result="m2"/>
+          <feComposite in="m1" in2="m2" operator="in" result="m"/>
+          <feComponentTransfer in="m" result="mm"><feFuncA type="linear" slope=".55" intercept=".45"/></feComponentTransfer>
+          <feComposite in="d" in2="mm" operator="in"/>
+        </filter>
+      </defs>
+      <g filter="url(#wear)"><text x="200" y="112" text-anchor="middle" font-family="Oswald" font-weight="700" font-size="132" fill="#DF2225">ХАКА</text></g>
+    </svg>
         <a class="jump" href="#links">К ссылкам</a>
         <div class="stage-footer" hidden>
           <p class="scroll-cue">

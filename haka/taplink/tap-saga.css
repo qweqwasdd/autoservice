@@ -61,13 +61,17 @@ button { cursor: pointer; }
   height: 100svh;
   overflow: clip;
   isolation: isolate;
-  background: #21150d;
+  background: #19130f;
 }
-.stage-back, .stage-shade, .projection { position: absolute; pointer-events: none; }
-.stage-back {
-  inset: -34px;
-  background: url("img/overgrown.webp") center 43% / cover;
-  filter: blur(28px) brightness(.42) saturate(.74);
+.stage-shade, .projection { position: absolute; pointer-events: none; }
+.stage-logo {
+  position:absolute;
+  left:50%;
+  top:max(12px,env(safe-area-inset-top),3svh);
+  transform:translateX(-50%);
+  width:min(44vw,23svh,215px);
+  height:auto;
+  pointer-events:none;
 }
 .projection {
   --art-size: min(127svh, 105vw);
@@ -198,7 +202,6 @@ button { cursor: pointer; }
   .saga.scene-ready .portrait, .stage-footer { visibility: hidden; }
   .projection { transform: none; }
   .stage { position: relative; }
-  .stage-back { background-image: url("img/groomed.webp"); }
   .ship-rock, .sea-ripples, .sea-water { animation: none; }
 }
 /* A studio calling card printed on warm stock. */
