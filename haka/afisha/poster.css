@@ -1,0 +1,18 @@
+@font-face{font-family:Oswald;src:url(headline.woff2) format("woff2");font-weight:200 700;font-display:swap}
+:root{--ink:#162d32;--paper:#f1ecdb;--red:#ad3625;--line:#a8ab99;background:var(--paper);color:var(--ink);font-family:Arial,sans-serif}
+*{box-sizing:border-box}body,h1,h2,h3,p,figure{margin:0}main{max-width:1180px;padding:clamp(14px,3.5vw,52px);margin:auto}
+header,.byline{display:flex;justify-content:space-between;align-items:center}header{border-block:3px solid var(--ink);border-bottom-width:1px;padding:9px 0;font:600 clamp(10px,1.4vw,13px)/1.2 Arial,sans-serif;text-transform:uppercase;letter-spacing:.09em}
+.layout{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(0,1fr);gap:clamp(32px,6vw,78px);align-items:start;margin-top:clamp(18px,4vw,52px)}
+.mast{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:0 0 15px}.mast h1{font:700 clamp(70px,12vw,174px)/1 Oswald,sans-serif;letter-spacing:-.055em}
+.shears{width:25%;max-width:138px;color:var(--red);overflow:visible}.blade{transform-origin:57px 47px}
+@media(prefers-reduced-motion:no-preference){.one{animation:close-one 1.35s .15s both}.two{animation:close-two 1.35s .15s both}.tip{animation:fall 1.35s .15s both}
+@keyframes close-one{0%,100%{transform:rotate(0)}48%,58%{transform:rotate(-16deg)}}
+@keyframes close-two{0%,100%{transform:rotate(0)}48%,58%{transform:rotate(18deg)}}
+@keyframes fall{0%,48%{opacity:1;transform:none}100%{opacity:0;transform:translate(5px,17px) rotate(5deg)}}}
+figure{border:1px solid var(--ink);padding:5px}figure img{display:block;width:100%;height:clamp(290px,38vw,470px);object-fit:cover;object-position:50% 57%}
+.booking{padding-top:6px}.byline{justify-content:flex-start;gap:.35em;font-size:15px}.booking h2{font:600 clamp(38px,4.5vw,68px)/1.05 Oswald,sans-serif;letter-spacing:-.025em;margin:12px 0 22px}
+.service,summary{display:flex;justify-content:space-between;align-items:center;gap:12px;border-top:1px solid var(--line);padding:10px 0}.service b,li strong{white-space:nowrap;font-variant-numeric:tabular-nums}
+a{color:inherit;text-underline-offset:4px}.cta{display:flex;align-items:center;justify-content:space-between;padding:15px 18px;background:var(--red);color:white;text-decoration:none;font-weight:700;min-height:50px;margin:10px 0}.cta:hover{background:#8c3023}
+summary{min-height:46px;cursor:pointer;border:0;list-style:none;font-weight:bold}summary::-webkit-details-marker{display:none}.plus::after{content:"+";font:24px Arial}details[open] .plus::after{content:"−"}details{border-bottom:1px solid var(--ink)}details ul{padding:0;margin:0 0 12px;list-style:none}li{display:flex;justify-content:space-between;gap:12px;padding:8px 0;border-top:1px solid var(--line);font-size:14px}
+.address{margin:24px 0 12px}.address h3{font:600 24px Oswald,sans-serif}.address p{font-size:14px;margin:4px 0}.address a,footer a{display:inline-flex;gap:6px;align-items:center;min-height:44px}footer{border-top:1px solid var(--line);display:flex;gap:0 16px;flex-wrap:wrap;font-size:14px}:focus-visible{outline:3px solid var(--red);outline-offset:3px}
+@media(max-width:700px){.layout{display:block;margin-top:12px}.mast{margin-bottom:10px}.mast h1{font-size:clamp(62px,23vw,112px)}figure img{height:clamp(96px,23svh,220px)}.booking{padding-top:16px}.booking h2{font-size:clamp(26px,7.8vw,43px);margin:5px 0 10px}.booking h2 br{display:none}.booking h2 br::after{content:" "}.service{font-size:14px;padding:8px 0}}
