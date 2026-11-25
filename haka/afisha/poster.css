@@ -16,3 +16,25 @@ a{color:inherit;text-underline-offset:4px}.cta{display:flex;align-items:center;j
 summary{min-height:46px;cursor:pointer;border:0;list-style:none;font-weight:bold}summary::-webkit-details-marker{display:none}.plus::after{content:"+";font:24px Arial}details[open] .plus::after{content:"−"}details{border-bottom:1px solid var(--ink)}details ul{padding:0;margin:0 0 12px;list-style:none}li{display:flex;justify-content:space-between;gap:12px;padding:8px 0;border-top:1px solid var(--line);font-size:14px}
 .address{margin:24px 0 12px}.address h3{font:600 24px Oswald,sans-serif}.address p{font-size:14px;margin:4px 0}.address a,footer a{display:inline-flex;gap:6px;align-items:center;min-height:44px}footer{border-top:1px solid var(--line);display:flex;gap:0 16px;flex-wrap:wrap;font-size:14px}:focus-visible{outline:3px solid var(--red);outline-offset:3px}
 @media(max-width:700px){.layout{display:block;margin-top:12px}.mast{margin-bottom:10px}.mast h1{font-size:clamp(62px,23vw,112px)}figure img{height:clamp(96px,23svh,220px)}.booking{padding-top:16px}.booking h2{font-size:clamp(26px,7.8vw,43px);margin:5px 0 10px}.booking h2 br{display:none}.booking h2 br::after{content:" "}.service{font-size:14px;padding:8px 0}}
+.intro:not([open]){display:none}
+html:has(.intro[open]){overflow:hidden}
+.intro[open]{position:fixed;inset:0;width:100%;height:100%;height:100dvh;max-width:none;max-height:none;border:0;margin:0;padding:0;overflow:hidden;background:#17353c;color:#f1ecdb;animation:open-poster 4.65s linear both}
+.intro::backdrop{background:transparent}
+.waterline{position:absolute;inset:0;background:linear-gradient(#23434c,#789493 55%,#17353c 55%);animation:shore-away 3s both}
+.voyage{position:absolute;left:50%;top:50%;width:min(100vw,90dvh);height:auto;transform:translate(-50%,-50%);overflow:visible}
+.landscape{animation:shore-away 3s both}
+.ship{animation:sail 3s cubic-bezier(.34,.05,.61,.98) both}
+.swell{animation:swell 1.4s ease-in-out alternate 2}
+.wake{stroke-dasharray:420;animation:strand 3.85s both}
+.snip-in{animation:enter-blades 3.9s both}.shear-a,.shear-b{transform-origin:40px 30px}
+.shear-a{animation:blade-a 3.5s both}.shear-b{animation:blade-b 3.5s both}
+.intro-mark{position:absolute;top:50%;left:50%;font:700 clamp(86px,22vw,180px)/1 Oswald,sans-serif;letter-spacing:-.055em;animation:imprint 4.4s both}
+@keyframes sail{0%{transform:translate(36px,229px);opacity:0}13%{opacity:1}76%{opacity:1}100%{transform:translate(321px,225px);opacity:0}}
+@keyframes swell{from{transform:rotate(-2deg)}to{transform:translateY(2px) rotate(2deg)}}
+@keyframes shore-away{0%,63%{opacity:1}100%{opacity:0}}
+@keyframes strand{0%{stroke-dashoffset:420;opacity:0}18%{opacity:.8}67%,82%{stroke-dashoffset:0;opacity:1}100%{stroke-dashoffset:-380;opacity:0}}
+@keyframes enter-blades{0%,58%{transform:translate(-32px,18px);opacity:0}72%,86%{transform:none;opacity:1}100%{transform:translate(-8px,5px);opacity:0}}
+@keyframes blade-a{0%,76%{transform:rotate(6deg)}89%,100%{transform:rotate(-15deg)}}
+@keyframes blade-b{0%,76%{transform:rotate(-5deg)}89%,100%{transform:rotate(18deg)}}
+@keyframes imprint{0%,76%{opacity:0;transform:translate(-50%,-43%)}88%,100%{opacity:1;transform:translate(-50%,-50%)}}
+@keyframes open-poster{0%,90%{opacity:1}100%{opacity:0}}
