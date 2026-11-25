@@ -172,7 +172,7 @@
     if (!enabled) return;
     const next = pageProgress();
     if (completed && next > 0) return;
-    if (next === 0 && location.hash !== '#links') {
+    if (next === 0) {
       completed = false;
       page.classList.add('scene-gated');
     }
