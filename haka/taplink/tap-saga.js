@@ -119,7 +119,10 @@
     projection.style.setProperty('--camera', 1 + (.012 * approach + .016 * closeup) * (1 - settle));
     projection.style.setProperty('--camera-x', `${.65 * closeup * (1 - settle)}vw`);
     projection.style.setProperty('--camera-y', `${-.8 * closeup * (1 - settle)}svh`);
-    projection.style.setProperty('--nape-pan', `${-2.65 * smooth(t, .04, .25) * (1 - smooth(t, .32, .54))}vw`);
+    // Frame the active tool within a tall, edge-to-edge portrait crop.
+    const napeFraming = smooth(t, .015, .19) * (1 - smooth(t, .4, .65));
+    const beardFraming = smooth(t, .68, .85) * (1 - smooth(t, .90, 1));
+    projection.style.setProperty('--portrait-framing', (-51 - 22 * napeFraming + 10 * beardFraming) + '%');
   }
 
   function cancelScroll() {

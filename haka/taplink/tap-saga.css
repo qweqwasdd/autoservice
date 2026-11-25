@@ -178,11 +178,12 @@ button { cursor: pointer; }
 @media (max-aspect-ratio: 4/5) {
   .saga.scene-ready { --travel: clamp(880px, 148svh, 1290px); }
   .projection {
-    --art-size: min(108svh, 129vw);
-    top: 49%;
-    translate: -49% -43%;
-    transform: translate(calc(var(--camera-x, 0px) + var(--nape-pan, 0px)), var(--camera-y, 0px)) scale(var(--camera, 1));
-    }
+    --art-size: max(100vw, 100dvh);
+    top: 50%;
+    translate: clamp(calc(50vw - 100%), var(--portrait-framing, -51%), -50vw) -50%;
+    transform: scale(var(--camera, 1));
+    transform-origin: center;
+  }
   
 }
 @media (max-width: 370px) {
