@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 65 400 250" aria-hidden="true">
+    <rect x="0" y="65" width="400" height="250" fill="#17353c"/><defs>
+      <linearGradient id="sky" x2="0" y2="1" gradientUnits="objectBoundingBox"><stop stop-color="#23434c"/><stop offset="1" stop-color="#789493"/></linearGradient>
+      <pattern id="stripes" width="16" height="16" patternUnits="userSpaceOnUse" patternTransform="rotate(-8)"><rect width="16" height="16" fill="#ac3928"/><rect width="6" height="16" fill="#df7154"/></pattern>
+      <path id="ridge" d="M-35 239V107l25 23 14-19 24 34 15-9 18 29 15-11 21 31 11-4 23 27 26 14 20 17Z"/>
+    </defs>
+    <g class="landscape">
+      <rect x="-600" y="-500" width="1600" height="739" fill="url(#sky)"/>
+      <circle cx="220" cy="141" r="42" fill="#efc79b"/>
+      <use href="#ridge" fill="#789592" transform="translate(30 23)"/>
+      <use href="#ridge" fill="#40626a"/>
+      <use href="#ridge" fill="#577982" transform="translate(394 0) scale(-1 1)"/>
+      <path d="m-15 160 19-29 26 40-12-6-7 3-8-20-9 19Zm59-14 17 24 8-9 17 26-16-14-7 6Zm327-1-20 32 12-7 8-15 9 8 16-25-15 12Z" fill="#bdd0c5"/>
+      <path d="M-600 239v-57l590-34 53 52 33-8 47 35 42 12Zm1600 0v-69l-585-29-34 48-24-8-44 37-34 9-26 12Z" fill="#19373e"/>
+      <g fill="none" stroke="#9cb2aa" stroke-linecap="round"><path d="M42 258h64m6 0h12m178-10h51m-234 29h50m75-13h18m28 26h42m-270 8h31" opacity=".6"/><path d="M172 247h41m10 3h22m-64 6h26" stroke="#e5bb93"/></g>
+    </g>
+    <g class="harbour"><g fill="#142d31" stroke="#b19570" stroke-width="1.5"><path d="M337 226h90v6h-90zM342 232h5v19h-5zM379 232h5v17h-5z"/><path d="M367 225v-23h33v23Z"/><path d="m362 203 22-16 21 16Z"/><path fill="#efbe81" d="M378 208h9v11h-9z"/></g></g>
+    <g transform="translate(209 225)"><g class="swell">
+      <path d="M0 2v-86m0 4 36 4" fill="none" stroke="#e5cc9c" stroke-width="2"/>
+      <path d="M-32-73q35 3 66-2-12 27-2 53-35-6-68 1 13-29 4-52Z" fill="url(#stripes)" stroke="#402f26" stroke-width="1.4"/>
+      <path d="m-32-72-26 63m91-65L55-6" fill="none" stroke="#d7bf92" stroke-width="1"/>
+      <path d="M-65-23q2 23 25 24h69q23-1 28-19l4-17q1-9 9-10 6-1 9 5l-8 1-4 8-3 19Q59 13 34 16h-73q-25-5-29-26Z" fill="#152b31" stroke="#d4b388" stroke-width="2"/>
+      <g fill="#a34733" stroke="#e3c295"><circle cx="-28" cy="3" r="4"/><circle cx="-13" cy="3" r="4"/><circle cx="2" cy="3" r="4"/><circle cx="17" cy="3" r="4"/><circle cx="32" cy="3" r="4"/></g>
+    </g></g>
+  </svg>

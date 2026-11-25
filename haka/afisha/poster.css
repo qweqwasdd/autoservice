@@ -5,10 +5,6 @@ header,.byline{display:flex;justify-content:space-between;align-items:center}hea
 .layout{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(0,1fr);gap:clamp(32px,6vw,78px);align-items:start;margin-top:clamp(18px,4vw,52px)}
 .mast{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:0 0 15px}.mast h1{font:700 clamp(70px,12vw,174px)/1 Oswald,sans-serif;letter-spacing:-.055em}
 .shears{width:25%;max-width:138px;color:var(--red);overflow:visible}.blade{transform-origin:57px 47px}
-@media(prefers-reduced-motion:no-preference){.one{animation:close-one 1.35s .15s both}.two{animation:close-two 1.35s .15s both}.tip{animation:fall 1.35s .15s both}
-@keyframes close-one{0%,100%{transform:rotate(0)}48%,58%{transform:rotate(-16deg)}}
-@keyframes close-two{0%,100%{transform:rotate(0)}48%,58%{transform:rotate(18deg)}}
-@keyframes fall{0%,48%{opacity:1;transform:none}100%{opacity:0;transform:translate(5px,17px) rotate(5deg)}}}
 figure{border:1px solid var(--ink);padding:5px}figure img{display:block;width:100%;height:clamp(290px,38vw,470px);object-fit:cover;object-position:50% 57%}
 .booking{padding-top:6px}.byline{justify-content:flex-start;gap:.35em;font-size:15px}.booking h2{font:600 clamp(38px,4.5vw,68px)/1.05 Oswald,sans-serif;letter-spacing:-.025em;margin:12px 0 22px}
 .service,summary{display:flex;justify-content:space-between;align-items:center;gap:12px;border-top:1px solid var(--line);padding:10px 0}.service b,li strong{white-space:nowrap;font-variant-numeric:tabular-nums}
@@ -25,16 +21,11 @@ html:has(.intro[open]){overflow:hidden}
 .landscape{animation:shore-away 3s both}
 .ship{animation:sail 3s cubic-bezier(.34,.05,.61,.98) both}
 .swell{animation:swell 1.4s ease-in-out alternate 2}
-.wake{stroke-dasharray:420;animation:strand 3.85s both}
-.snip-in{animation:enter-blades 3.9s both}.shear-a,.shear-b{transform-origin:40px 30px}
-.shear-a{animation:blade-a 3.5s both}.shear-b{animation:blade-b 3.5s both}
 .intro-mark{position:absolute;top:50%;left:50%;font:700 clamp(86px,22vw,180px)/1 Oswald,sans-serif;letter-spacing:-.055em;animation:imprint 4.4s both}
-@keyframes sail{0%{transform:translate(36px,229px);opacity:0}13%{opacity:1}76%{opacity:1}100%{transform:translate(321px,225px);opacity:0}}
+@keyframes sail{0%{transform:translate(10px,227px)}72%{transform:translate(255px,225px)}100%{transform:translate(265px,225px)}}
 @keyframes swell{from{transform:rotate(-2deg)}to{transform:translateY(2px) rotate(2deg)}}
 @keyframes shore-away{0%,63%{opacity:1}100%{opacity:0}}
-@keyframes strand{0%{stroke-dashoffset:420;opacity:0}18%{opacity:.8}67%,82%{stroke-dashoffset:0;opacity:1}100%{stroke-dashoffset:-380;opacity:0}}
-@keyframes enter-blades{0%,58%{transform:translate(-32px,18px);opacity:0}72%,86%{transform:none;opacity:1}100%{transform:translate(-8px,5px);opacity:0}}
-@keyframes blade-a{0%,76%{transform:rotate(6deg)}89%,100%{transform:rotate(-15deg)}}
-@keyframes blade-b{0%,76%{transform:rotate(-5deg)}89%,100%{transform:rotate(18deg)}}
 @keyframes imprint{0%,76%{opacity:0;transform:translate(-50%,-43%)}88%,100%{opacity:1;transform:translate(-50%,-50%)}}
 @keyframes open-poster{0%,90%{opacity:1}100%{opacity:0}}
+
+.harbour,.ship{animation-duration:3.6s}.harbour{animation:shore-away 3.6s both}.ship{animation:sail 3.1s cubic-bezier(.35,.05,.22,1) both,shore-away 3.6s both}.waterline,.landscape{animation-duration:3.6s}.poster{border-bottom:1px solid var(--ink)}
