@@ -42,3 +42,15 @@ details .menu-list li {display:block;font:inherit;padding:0;border:0;border-bott
 .service-link svg {color:var(--menu-accent)}
 .booking-note {margin:6px 0 12px}
 .booking{--menu-rule:var(--line);--menu-accent:var(--red)}.portrait-copy{padding:18px 0 24px;border-top:1px solid var(--ink)}.portrait-copy h2{font:italic clamp(23px,3vw,40px)/1.15 Georgia,serif;margin:0 0 10px}.portrait-copy p{max-width:39ch;font-size:16px;line-height:1.5}.address p{line-height:1.55;max-width:45ch}@media(max-width:700px){.portrait-copy{padding:10px 0 14px}.portrait-copy h2{font-size:21px;margin-bottom:4px}.portrait-copy p{font-size:14px}}
+
+.contact-strip {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-block:1px solid var(--contact-line);margin-top:28px}
+.contact-strip a {min-width:0;display:flex;align-items:center;gap:12px;min-height:74px;padding:10px 14px;text-decoration:none;color:inherit}
+.contact-strip a+a {border-inline-start:1px solid var(--contact-line)}
+.contact-strip .contact-icon,.contact-strip .link-out {color:var(--contact-accent);flex:none}
+.contact-strip .link-out {margin-left:auto}
+.contact-strip b,.contact-strip small {display:block}
+.contact-strip b {font:600 15px/1.3 Arial,sans-serif}
+.contact-strip small {font:400 13px/1.5 Arial,sans-serif;margin-top:3px}
+.contact-strip a:hover b {text-decoration:underline;text-underline-offset:3px}
+@media(max-width:740px){.contact-strip{grid-template-columns:1fr;margin-top:20px}.contact-strip a{padding:10px 2px;min-height:56px}.contact-strip a+a{border-inline-start:0;border-top:1px solid var(--contact-line)}.contact-strip a span{display:flex;align-items:baseline;justify-content:space-between;gap:6px;flex:1}.contact-strip small{margin:0}}
+:root{--contact-line:var(--line);--contact-accent:var(--red)}.atelier{min-width:0}.atelier img{display:block;width:100%;height:clamp(164px,21vw,270px);object-fit:cover}.atelier .address{margin:18px 0 0}.atelier h2{font:italic clamp(24px,3vw,36px)/1.12 Georgia,serif;margin:0 0 10px}.atelier .address a{font-weight:600}.poster{border:0}.mast{margin:0}.layout{row-gap:20px}@media(min-width:701px){.poster{grid-area:1/1}.atelier{grid-area:2/1}.booking{grid-area:1/2/3/3;border-left:1px solid var(--line);padding-left:clamp(24px,3vw,40px)}.layout{column-gap:clamp(24px,4vw,48px)}}@media(max-width:700px){.atelier{border-top:1px solid var(--line);padding-top:18px;margin-top:16px}.atelier img{height:clamp(165px,48vw,235px)}.booking{border-top:1px solid var(--ink);margin-top:12px}.service b{font-variant-numeric:tabular-nums}}

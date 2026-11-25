@@ -256,3 +256,15 @@ details .menu-list li {display:block;font:inherit;padding:0;border:0;border-bott
 .service-link svg {color:var(--menu-accent)}
 .booking-note {margin:6px 0 12px}
 .tap{--menu-rule:var(--rule);--menu-accent:var(--rust)}.master-intro,.arrival{margin-top:24px}.master-intro h2,.arrival h2{font:600 28px/1.15 var(--display);margin:0 0 7px}.master-intro p,.arrival p{max-width:46ch;font-size:15px}.master-intro dl{margin:14px 0 0}.master-intro dl div{display:flex;justify-content:space-between;gap:12px;padding:8px 0;border-bottom:1px solid var(--rule)}.master-intro dd{margin:0;font-weight:700}.arrival a,.reviews{display:inline-flex;gap:7px;align-items:center;min-height:44px}.arrival p+p{margin-top:5px}.reviews{margin:0}.tap-actions .booking-note{margin:0 0 6px}
+
+.contact-strip {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-block:1px solid var(--contact-line);margin-top:28px}
+.contact-strip a {min-width:0;display:flex;align-items:center;gap:12px;min-height:74px;padding:10px 14px;text-decoration:none;color:inherit}
+.contact-strip a+a {border-inline-start:1px solid var(--contact-line)}
+.contact-strip .contact-icon,.contact-strip .link-out {color:var(--contact-accent);flex:none}
+.contact-strip .link-out {margin-left:auto}
+.contact-strip b,.contact-strip small {display:block}
+.contact-strip b {font:600 15px/1.3 Arial,sans-serif}
+.contact-strip small {font:400 13px/1.5 Arial,sans-serif;margin-top:3px}
+.contact-strip a:hover b {text-decoration:underline;text-underline-offset:3px}
+@media(max-width:740px){.contact-strip{grid-template-columns:1fr;margin-top:20px}.contact-strip a{padding:10px 2px;min-height:56px}.contact-strip a+a{border-inline-start:0;border-top:1px solid var(--contact-line)}.contact-strip a span{display:flex;align-items:baseline;justify-content:space-between;gap:6px;flex:1}.contact-strip small{margin:0}}
+.tap{--contact-line:var(--rule);--contact-accent:var(--rust)}.tap-inner{width:min(100%,760px)}.studio{min-height:clamp(195px,28vw,330px)}.master-intro dl{display:grid;grid-template-columns:1fr 1fr;gap:18px}.master-intro dl div{display:block;border-top:1px solid var(--rule);border-bottom:0;padding-block:10px}.master-intro dt{font-size:14px}.master-intro dd{font:600 28px/1.25 var(--display);margin-top:3px}.tap .arrival{border-top:1px solid var(--rule);margin-top:24px;padding-top:22px}.tap .contact-strip{margin-top:12px}@media(min-width:741px){.tap .contact-strip a{padding-inline:9px}}
