@@ -32,3 +32,7 @@ details .menu-list li {display:block;font:inherit;padding:0;border:0;border-bott
 .service-link svg {color:var(--menu-accent)}
 .booking-note {margin:6px 0 12px}
 .desk{--menu-rule:#54665d;--menu-accent:var(--gold)}.desk>p.booking-note{display:block;border:0;padding:0;color:#d6d6be}.visit div{max-width:48ch}.visit p+p{margin-top:12px}@media(max-width:560px){.visit{display:block}.visit img{width:100%;height:150px;margin-bottom:12px}}
+
+.visit h2 {font:500 clamp(19px,2vw,25px)/1.25 Arial,sans-serif;margin:0 0 8px}
+.visit p {font:400 15px/1.55 Arial,sans-serif;color:#d1d7cc}
+.visit a {font:400 15px/1.4 Arial,sans-serif;color:var(--gold);margin-top:4px}
