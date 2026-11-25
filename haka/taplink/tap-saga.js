@@ -2,7 +2,6 @@
   const byId = (id) => document.getElementById(id);
   const scene = byId('scene');
   const stage = scene.querySelector('.stage');
-  const projection = scene.querySelector('.projection');
   const footer = scene.querySelector('.stage-footer');
   const comb = byId('comb');
   const scissors = byId('scissors');
@@ -48,9 +47,26 @@
   let progress = 0;
   let scrollTarget = 0;
   const page = document.documentElement;
-  let releaseTimer;
+  let finishedAt = Infinity;
+  let completed = false;
+  let lastWheel = -Infinity;
+  function advance() {
+    if (performance.now() - finishedAt < 240 || progress !== 1) return;
+    completed = true;
+    unlock();
+  }
+  // Keep the document short through the entire finishing gesture, including its inertia.
+  addEventListener('touchstart', advance, { passive: true });
+  addEventListener('pointerdown', event => { if (event.pointerType === 'mouse') advance(); }, { passive: true });
+  addEventListener('wheel', event => {
+    const now = performance.now();
+    if (event.deltaY > 0 && now - lastWheel > 100) advance();
+    lastWheel = now;
+  }, { passive: true });
+  addEventListener('keydown', event => {
+    if (!event.repeat && ['ArrowDown', 'PageDown', 'End', ' '].includes(event.key)) advance();
+  });
   function unlock() {
-    clearTimeout(releaseTimer);
     page.classList.remove('scene-gated');
   }
   let velocity = 0;
@@ -112,17 +128,6 @@
       show(clippings, 0);
     }
 
-    // Camera movement spans whole beats so it never snaps to the next tool.
-    const approach = smooth(t, .025, .42);
-    const closeup = smooth(t, .46, .78);
-    const settle = smooth(t, .79, 1);
-    projection.style.setProperty('--camera', 1 + (.012 * approach + .016 * closeup) * (1 - settle));
-    projection.style.setProperty('--camera-x', `${.65 * closeup * (1 - settle)}vw`);
-    projection.style.setProperty('--camera-y', `${-.8 * closeup * (1 - settle)}svh`);
-    // Frame the active tool within a tall, edge-to-edge portrait crop.
-    const napeFraming = smooth(t, .015, .19) * (1 - smooth(t, .4, .65));
-    const beardFraming = smooth(t, .68, .85) * (1 - smooth(t, .90, 1));
-    projection.style.setProperty('--portrait-framing', (-51 - 22 * napeFraming + 10 * beardFraming) + '%');
   }
 
   function cancelScroll() {
@@ -139,7 +144,7 @@
     if (Math.abs(gap) <= .00015 && Math.abs(velocity) < .000005) {
       velocity = 0;
       draw(scrollTarget);
-      if (scrollTarget === 1) releaseTimer = setTimeout(unlock, 320);
+      if (scrollTarget === 1) finishedAt = performance.now();
       frame = 0;
       lastFrameTime = null;
       return;
@@ -151,7 +156,7 @@
     const slope = velocity + rate * offset;
     const next = scrollTarget + (offset + slope * elapsed) * decay;
     velocity = (velocity - rate * slope * elapsed) * decay;
-    const step = Math.max(-elapsed / 3200, Math.min(elapsed / 3200, next - progress));
+    const step = Math.max(-elapsed / 2400, Math.min(elapsed / 2400, next - progress));
     draw(progress + step);
     lastFrameTime = now;
     frame = requestAnimationFrame(scrollFrame);
@@ -166,9 +171,13 @@
   function followScroll() {
     if (!enabled) return;
     const next = pageProgress();
+    if (completed && next > 0) return;
+    if (next === 0 && location.hash !== '#links') {
+      completed = false;
+      page.classList.add('scene-gated');
+    }
     if (next === scrollTarget) return;
-    clearTimeout(releaseTimer);
-    if (next === 0 && location.hash !== '#links') page.classList.add('scene-gated');
+    finishedAt = Infinity;
     scrollTarget = next;
     if (!frame) frame = requestAnimationFrame(scrollFrame);
   }
@@ -205,6 +214,8 @@
 
   scene.querySelector('.jump').addEventListener('click', () => {
     cancelScroll();
+    completed = true;
+    if (enabled) draw(1);
     unlock();
     requestAnimationFrame(() => byId('tap-title').focus({ preventScroll: true }));
   });
@@ -223,6 +234,8 @@
     return image.decode();
   })).then(() => {
     clearTimeout(window.sceneLoadFallback);
+    if (!preference.matches && location.hash !== '#links' && !page.classList.contains('scene-gated')) return;
+    completed = location.hash === '#links';
     ready = true;
     configure();
   }).catch(() => {
