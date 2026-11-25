@@ -47,25 +47,7 @@
   let progress = 0;
   let scrollTarget = 0;
   const page = document.documentElement;
-  let finishedAt = Infinity;
   let completed = false;
-  let lastWheel = -Infinity;
-  function advance() {
-    if (performance.now() - finishedAt < 240 || progress !== 1) return;
-    completed = true;
-    unlock();
-  }
-  // Keep the document short through the entire finishing gesture, including its inertia.
-  addEventListener('touchstart', advance, { passive: true });
-  addEventListener('pointerdown', event => { if (event.pointerType === 'mouse') advance(); }, { passive: true });
-  addEventListener('wheel', event => {
-    const now = performance.now();
-    if (event.deltaY > 0 && now - lastWheel > 100) advance();
-    lastWheel = now;
-  }, { passive: true });
-  addEventListener('keydown', event => {
-    if (!event.repeat && ['ArrowDown', 'PageDown', 'End', ' '].includes(event.key)) advance();
-  });
   function unlock() {
     page.classList.remove('scene-gated');
   }
@@ -141,10 +123,18 @@
   function scrollFrame(now) {
     const elapsed = lastFrameTime === null ? 16 : Math.min(22, now - lastFrameTime);
     const gap = scrollTarget - progress;
-    if (Math.abs(gap) <= .00015 && Math.abs(velocity) < .000005) {
+    if ((scrollTarget === 1 && gap <= .012) || (Math.abs(gap) <= .00015 && Math.abs(velocity) < .000005)) {
       velocity = 0;
       draw(scrollTarget);
-      if (scrollTarget === 1) finishedAt = performance.now();
+      if (scrollTarget === 1 && !completed && page.classList.contains('scene-gated')) {
+        // Present the final frame before moving the viewport to the contact card.
+        requestAnimationFrame(() => {
+          if (!enabled || completed || pageProgress() !== 1 || document.hidden) return;
+          completed = true;
+          unlock();
+          byId('links').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+      }
       frame = 0;
       lastFrameTime = null;
       return;
@@ -177,7 +167,6 @@
       page.classList.add('scene-gated');
     }
     if (next === scrollTarget) return;
-    finishedAt = Infinity;
     scrollTarget = next;
     if (!frame) frame = requestAnimationFrame(scrollFrame);
   }
@@ -186,7 +175,9 @@
   addEventListener('resize', followScroll);
   document.addEventListener('visibilitychange', () => {
     if (document.hidden) cancelScroll();
-    else followScroll();
+    else if (enabled && !completed && progress === 1 && pageProgress() === 1 && !frame) {
+      frame = requestAnimationFrame(scrollFrame);
+    } else followScroll();
   });
 
   if ('IntersectionObserver' in window) {

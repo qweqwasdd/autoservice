@@ -230,7 +230,7 @@ html.scene-gated .saga:not(.scene-ready) .projection { background:center / conta
 }
 html.scene-gated { overscroll-behavior-y:none; }
 @media (max-aspect-ratio:4/5) and (prefers-reduced-motion:no-preference) {
-  .saga.scene-ready, html.scene-gated .saga { --travel:clamp(560px,100svh,1000px); }
+  .saga.scene-ready, html.scene-gated .saga { --travel:clamp(400px,72svh,720px); }
 }
 @media (max-aspect-ratio:4/5) {
   .projection::before,.projection::after {
